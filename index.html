@@ -6,63 +6,51 @@
   <title>The Fabric Connector — Fabric Sourcing for Design-Driven, Responsible Brands</title>
   <meta name="description" content="The Fabric Connector connects design-driven, responsible brands with natural, next-generation, and deadstock fabrics from trusted mills worldwide." />
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
   <style>
-    /* ── Reset & Base ── */
+    /* ── Reset ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --cream:   #f2ede8;
-      --cream-2: #e8e1d9;
-      --ink:     #1a1a18;
-      --ink-mid: #4a4a46;
-      --ink-light: #8a8a84;
-      --sand:    #c9bfb2;
-      --sage:    #7d8c78;
-      --white:   #faf8f5;
-      --accent:  #2d3a2e;
+      --white:   #ffffff;
+      --off:     #F5F5F3;
+      --black:   #0A0A0A;
+      --mid:     #5C5C5C;
+      --light:   #ABABAB;
+      --border:  #E3E3E3;
+      --accent:  #0A0A0A;
 
-      --font-mono: 'IBM Plex Mono', monospace;
-      --font-serif: 'Cormorant Garamond', serif;
-      --font-sans: 'Inter', sans-serif;
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'Inter', sans-serif;
+      --font-mono:    'Space Mono', monospace;
 
-      --max-w: 1320px;
-      --pad-x: clamp(1.5rem, 5vw, 5rem);
+      --max-w: 1400px;
+      --pad:   clamp(1.5rem, 5vw, 4.5rem);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      background-color: var(--cream);
-      color: var(--ink);
-      font-family: var(--font-sans);
-      font-size: 16px;
+      background: var(--white);
+      color: var(--black);
+      font-family: var(--font-body);
+      font-size: 15px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
 
     img { display: block; width: 100%; height: 100%; object-fit: cover; }
-
     a { color: inherit; text-decoration: none; }
 
-    /* ── Utility ── */
-    .label {
+    .mono {
       font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--ink-light);
-    }
-
-    .section-number {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      color: var(--ink-light);
-      letter-spacing: 0.1em;
+      color: var(--light);
     }
 
     /* ── NAV ── */
@@ -73,21 +61,20 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.4rem var(--pad-x);
-      background: var(--cream);
-      border-bottom: 1px solid var(--cream-2);
-      transition: background 0.3s;
+      padding: 0 var(--pad);
+      height: 60px;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
     }
 
     .nav-logo {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      font-weight: 400;
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
     }
-
-    .nav-logo span { color: var(--ink-light); }
 
     .nav-links {
       display: flex;
@@ -97,247 +84,227 @@
 
     .nav-links a {
       font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--ink-mid);
-      transition: color 0.2s;
+      color: var(--mid);
+      transition: color 0.15s;
     }
 
-    .nav-links a:hover { color: var(--ink); }
+    .nav-links a:hover { color: var(--black); }
 
     .nav-cta {
       font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      border: 1px solid var(--ink);
-      padding: 0.55rem 1.2rem;
-      transition: background 0.2s, color 0.2s;
+      background: var(--black);
+      color: var(--white);
+      padding: 0.55rem 1.25rem;
+      transition: opacity 0.15s;
     }
-
-    .nav-cta:hover { background: var(--ink); color: var(--cream); }
-
-    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-    .nav-hamburger span { display: block; width: 22px; height: 1px; background: var(--ink); }
+    .nav-cta:hover { opacity: 0.75; }
 
     /* ── HERO ── */
     .hero {
-      min-height: 100svh;
+      padding-top: 60px;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      padding-top: 72px;
+      min-height: 100svh;
+      border-bottom: 1px solid var(--border);
     }
 
     .hero-left {
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      padding: 5rem var(--pad-x) 5rem var(--pad-x);
-      border-right: 1px solid var(--cream-2);
+      justify-content: space-between;
+      padding: 4rem var(--pad);
+      border-right: 1px solid var(--border);
     }
 
+    .hero-top { display: flex; flex-direction: column; gap: 2.5rem; }
+
     .hero-eyebrow {
-      font-family: var(--font-mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--ink-light);
-      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hero-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--black);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
     }
 
     .hero-headline {
-      font-family: var(--font-serif);
-      font-size: clamp(3.2rem, 5.5vw, 6rem);
-      font-weight: 300;
-      line-height: 1.05;
-      letter-spacing: -0.01em;
-      color: var(--ink);
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 5.5vw, 6.5rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
     }
 
-    .hero-headline em {
-      font-style: italic;
-      color: var(--ink-mid);
+    .hero-headline .line-2 {
+      display: block;
+      color: var(--light);
     }
 
     .hero-sub {
-      margin-top: 2.5rem;
-      font-family: var(--font-sans);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
+      color: var(--mid);
       line-height: 1.7;
-      color: var(--ink-mid);
       max-width: 38ch;
       font-weight: 300;
     }
 
-    .hero-actions {
-      margin-top: 3rem;
+    .hero-bottom {
       display: flex;
-      gap: 1rem;
-      align-items: center;
+      align-items: flex-end;
+      justify-content: space-between;
     }
 
-    .btn-primary {
+    .hero-actions { display: flex; gap: 0.75rem; }
+
+    .btn-black {
       font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.14em;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      background: var(--ink);
-      color: var(--cream);
-      padding: 0.9rem 2rem;
-      transition: background 0.2s;
+      background: var(--black);
+      color: var(--white);
+      padding: 0.85rem 1.75rem;
+      transition: opacity 0.15s;
+      white-space: nowrap;
     }
+    .btn-black:hover { opacity: 0.7; }
 
-    .btn-primary:hover { background: var(--accent); }
-
-    .btn-ghost {
+    .btn-border {
       font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.14em;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--ink-mid);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: color 0.2s;
+      border: 1px solid var(--border);
+      color: var(--mid);
+      padding: 0.85rem 1.75rem;
+      transition: border-color 0.15s, color 0.15s;
+      white-space: nowrap;
     }
+    .btn-border:hover { border-color: var(--black); color: var(--black); }
 
-    .btn-ghost:hover { color: var(--ink); }
-    .btn-ghost::after { content: '→'; }
+    .hero-meta {
+      text-align: right;
+    }
 
     .hero-right {
       position: relative;
-      background: var(--ink);
+      background: var(--black);
       overflow: hidden;
     }
 
     .hero-right img {
-      opacity: 0.82;
+      filter: grayscale(20%);
       transition: transform 8s ease;
     }
 
-    .hero-right:hover img { transform: scale(1.04); }
+    .hero-right:hover img { transform: scale(1.03); }
 
-    .hero-caption {
+    .hero-img-label {
       position: absolute;
-      bottom: 2rem;
-      right: 2rem;
+      bottom: 1.5rem;
+      right: 1.5rem;
       font-family: var(--font-mono);
-      font-size: 0.58rem;
-      letter-spacing: 0.12em;
+      font-size: 0.52rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
+      color: rgba(255,255,255,0.4);
     }
 
-    .hero-scroll {
-      position: absolute;
-      bottom: 2.5rem;
-      left: var(--pad-x);
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      font-family: var(--font-mono);
-      font-size: 0.58rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--ink-light);
-    }
-
-    .hero-scroll::before {
-      content: '';
-      display: block;
-      width: 1px;
-      height: 40px;
-      background: var(--sand);
-      animation: scrollPulse 2s ease-in-out infinite;
-    }
-
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 1; }
-    }
-
-    /* ── TICKER ── */
-    .ticker {
-      border-top: 1px solid var(--cream-2);
-      border-bottom: 1px solid var(--cream-2);
-      padding: 0.85rem 0;
+    /* ── MARQUEE ── */
+    .marquee {
       overflow: hidden;
-      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      padding: 0.9rem 0;
+      background: var(--white);
     }
 
-    .ticker-track {
+    .marquee-track {
       display: flex;
-      gap: 0;
       white-space: nowrap;
-      animation: ticker 28s linear infinite;
+      animation: marquee 30s linear infinite;
     }
 
-    .ticker-track span {
+    .marquee-track span {
       font-family: var(--font-mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.2em;
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--ink-light);
+      color: var(--light);
       padding: 0 2.5rem;
     }
 
-    .ticker-track .dot {
-      color: var(--sand);
+    .marquee-track .sep {
+      color: var(--border);
       padding: 0;
       letter-spacing: 0;
     }
 
-    @keyframes ticker {
+    @keyframes marquee {
       from { transform: translateX(0); }
       to   { transform: translateX(-50%); }
     }
 
-    /* ── INTRO ── */
-    .intro {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 4rem;
-      padding: 7rem var(--pad-x);
+    /* ── STATEMENT ── */
+    .statement {
+      padding: 8rem var(--pad);
       max-width: var(--max-w);
       margin: 0 auto;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 4rem;
       align-items: start;
+      border-bottom: 1px solid var(--border);
     }
 
-    .intro-label-col {
-      padding-top: 0.4rem;
+    .statement-label-col { padding-top: 0.6rem; }
+
+    .statement-body {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 3.2rem);
+      font-weight: 500;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
     }
 
-    .intro-body {
-      font-family: var(--font-serif);
-      font-size: clamp(1.6rem, 2.2vw, 2.3rem);
-      font-weight: 300;
-      line-height: 1.4;
-      color: var(--ink);
-    }
+    .statement-body .dim { color: var(--light); }
 
-    .intro-body em { font-style: italic; color: var(--ink-mid); }
-
-    .intro-note {
-      margin-top: 2rem;
+    .statement-note {
+      margin-top: 2.5rem;
       font-size: 0.85rem;
-      color: var(--ink-mid);
-      max-width: 52ch;
+      color: var(--mid);
+      max-width: 50ch;
+      line-height: 1.75;
       font-weight: 300;
-      line-height: 1.7;
     }
 
     /* ── PILLARS ── */
     .pillars {
-      border-top: 1px solid var(--cream-2);
+      border-bottom: 1px solid var(--border);
     }
 
     .pillars-header {
       display: flex;
-      align-items: baseline;
+      align-items: center;
       justify-content: space-between;
-      padding: 2.5rem var(--pad-x);
-      border-bottom: 1px solid var(--cream-2);
+      padding: 1.5rem var(--pad);
+      border-bottom: 1px solid var(--border);
     }
 
     .pillars-grid {
@@ -346,54 +313,55 @@
     }
 
     .pillar {
-      padding: 3.5rem var(--pad-x) 4rem;
-      border-right: 1px solid var(--cream-2);
+      padding: 3rem var(--pad) 3.5rem;
+      border-right: 1px solid var(--border);
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
-      transition: background 0.3s;
+      transition: background 0.2s;
     }
 
     .pillar:last-child { border-right: none; }
-    .pillar:hover { background: var(--cream-2); }
+    .pillar:hover { background: var(--off); }
 
-    .pillar-num {
-      font-family: var(--font-mono);
-      font-size: 0.58rem;
-      color: var(--ink-light);
-      letter-spacing: 0.1em;
+    .pillar-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
     }
 
     .pillar-img {
       aspect-ratio: 4/3;
       overflow: hidden;
-      background: var(--cream-2);
+      background: var(--off);
     }
 
-    .pillar-img img { transition: transform 0.6s ease; }
-    .pillar:hover .pillar-img img { transform: scale(1.05); }
+    .pillar-img img { transition: transform 0.5s ease; }
+    .pillar:hover .pillar-img img { transform: scale(1.04); }
 
     .pillar-title {
-      font-family: var(--font-serif);
-      font-size: 1.7rem;
-      font-weight: 300;
-      line-height: 1.2;
+      font-family: var(--font-display);
+      font-size: 1.9rem;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
     }
 
     .pillar-desc {
-      font-size: 0.83rem;
-      color: var(--ink-mid);
+      font-size: 0.82rem;
+      color: var(--mid);
       line-height: 1.7;
       font-weight: 300;
-      max-width: 32ch;
+      max-width: 34ch;
     }
 
     .pillar-link {
       font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.14em;
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--ink);
+      color: var(--black);
       display: flex;
       align-items: center;
       gap: 0.5rem;
@@ -402,13 +370,13 @@
     }
 
     .pillar-link::after { content: '→'; }
-    .pillar:hover .pillar-link { gap: 0.8rem; }
+    .pillar:hover .pillar-link { gap: 0.85rem; }
 
-    /* ── HOW IT WORKS ── */
+    /* ── HOW ── */
     .how {
-      background: var(--ink);
-      color: var(--cream);
-      padding: 7rem var(--pad-x);
+      background: var(--black);
+      color: var(--white);
+      padding: 7rem var(--pad);
     }
 
     .how-inner {
@@ -416,230 +384,231 @@
       margin: 0 auto;
     }
 
-    .how-header {
+    .how-top {
       display: flex;
-      align-items: baseline;
+      align-items: flex-end;
       justify-content: space-between;
-      margin-bottom: 5rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
-
-    .how-header .label { color: rgba(255,255,255,0.4); }
 
     .how-headline {
-      font-family: var(--font-serif);
-      font-size: clamp(2.2rem, 3.5vw, 3.5rem);
-      font-weight: 300;
-      line-height: 1.15;
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 4.5vw, 5rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
     }
 
-    .how-headline em { font-style: italic; color: rgba(255,255,255,0.5); }
+    .how-headline .dim { color: rgba(255,255,255,0.25); }
 
-    .how-steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      margin-top: 4rem;
-    }
-
-    .how-step {
-      padding: 0 3rem 0 0;
-      border-right: 1px solid rgba(255,255,255,0.1);
-      margin-right: 3rem;
-    }
-
-    .how-step:last-child { border-right: none; margin-right: 0; padding-right: 0; }
-
-    .how-step-num {
-      font-family: var(--font-mono);
-      font-size: 0.58rem;
-      color: rgba(255,255,255,0.3);
-      letter-spacing: 0.1em;
-      margin-bottom: 1.5rem;
-    }
-
-    .how-step-title {
-      font-family: var(--font-serif);
-      font-size: 1.35rem;
-      font-weight: 300;
-      margin-bottom: 0.75rem;
-      line-height: 1.2;
-    }
-
-    .how-step-desc {
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.5);
+    .how-sub {
+      max-width: 30ch;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
       line-height: 1.7;
       font-weight: 300;
     }
 
-    /* ── SELECTION PREVIEW ── */
-    .selection {
-      padding: 7rem 0;
-      border-top: 1px solid var(--cream-2);
+    .how-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4rem;
+      margin-top: 4rem;
     }
 
-    .selection-header {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      padding: 0 var(--pad-x) 3rem;
-      max-width: var(--max-w);
-      margin: 0 auto;
+    .step-num {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
     }
 
-    .selection-title {
-      font-family: var(--font-serif);
-      font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.75rem;
+    }
+
+    .step-desc {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.75;
       font-weight: 300;
     }
 
-    .selection-grid {
+    /* ── LIBRARY PREVIEW ── */
+    .library {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .library-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem var(--pad);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .library-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+    }
+
+    .grid-4 {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      border-top: 1px solid var(--cream-2);
     }
 
-    .fabric-card {
-      border-right: 1px solid var(--cream-2);
+    .card {
+      border-right: 1px solid var(--border);
+      transition: background 0.2s;
       cursor: default;
-      transition: background 0.3s;
     }
 
-    .fabric-card:last-child { border-right: none; }
-    .fabric-card:hover { background: var(--cream-2); }
+    .card:last-child { border-right: none; }
+    .card:hover { background: var(--off); }
 
-    .fabric-card-img {
+    .card-img {
       aspect-ratio: 3/4;
-      background: var(--cream-2);
       overflow: hidden;
+      background: var(--off);
     }
 
-    .fabric-card-img img { transition: transform 0.5s ease; }
-    .fabric-card:hover .fabric-card-img img { transform: scale(1.04); }
+    .card-img img { transition: transform 0.5s ease; filter: grayscale(10%); }
+    .card:hover .card-img img { transform: scale(1.03); }
 
-    .fabric-card-meta {
-      padding: 1.2rem 1.5rem 1.5rem;
-      border-top: 1px solid var(--cream-2);
+    .card-meta {
+      padding: 1rem 1.25rem 1.25rem;
+      border-top: 1px solid var(--border);
     }
 
-    .fabric-id {
+    .card-id {
       font-family: var(--font-mono);
-      font-size: 0.55rem;
-      color: var(--ink-light);
-      letter-spacing: 0.12em;
+      font-size: 0.52rem;
+      color: var(--light);
+      letter-spacing: 0.1em;
       margin-bottom: 0.4rem;
     }
 
-    .fabric-name {
-      font-family: var(--font-serif);
-      font-size: 1.05rem;
-      font-weight: 400;
+    .card-name {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
       line-height: 1.2;
     }
 
-    .fabric-origin {
-      font-family: var(--font-mono);
-      font-size: 0.58rem;
-      color: var(--ink-light);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-top: 0.4rem;
-    }
-
-    .fabric-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: 0.8rem;
-    }
-
-    .fabric-tag {
+    .card-origin {
       font-family: var(--font-mono);
       font-size: 0.52rem;
-      letter-spacing: 0.1em;
+      color: var(--light);
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      border: 1px solid var(--sand);
-      padding: 0.2rem 0.5rem;
-      color: var(--ink-mid);
+      margin-top: 0.35rem;
     }
 
-    /* ── ABOUT STRIP ── */
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-top: 0.75rem;
+    }
+
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      padding: 0.18rem 0.45rem;
+      color: var(--mid);
+    }
+
+    /* ── ABOUT SPLIT ── */
     .about {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      border-top: 1px solid var(--cream-2);
+      border-bottom: 1px solid var(--border);
+      min-height: 600px;
     }
 
     .about-img {
-      aspect-ratio: unset;
-      min-height: 520px;
-      background: var(--cream-2);
+      background: var(--off);
       overflow: hidden;
     }
 
     .about-content {
-      padding: 6rem var(--pad-x);
+      padding: 5rem var(--pad);
       display: flex;
       flex-direction: column;
       justify-content: center;
-      border-left: 1px solid var(--cream-2);
+      border-left: 1px solid var(--border);
     }
 
     .about-headline {
-      font-family: var(--font-serif);
-      font-size: clamp(2rem, 3vw, 3rem);
-      font-weight: 300;
-      line-height: 1.2;
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
       margin-top: 1.5rem;
     }
 
-    .about-headline em { font-style: italic; color: var(--ink-mid); }
+    .about-headline .dim { color: var(--light); }
 
     .about-body {
       margin-top: 2rem;
-      font-size: 0.85rem;
-      color: var(--ink-mid);
+      font-size: 0.83rem;
+      color: var(--mid);
       line-height: 1.8;
       font-weight: 300;
       max-width: 44ch;
     }
 
-    .about-stats {
+    .stats {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 2rem;
       margin-top: 3.5rem;
       padding-top: 2.5rem;
-      border-top: 1px solid var(--cream-2);
+      border-top: 1px solid var(--border);
     }
 
-    .stat-num {
-      font-family: var(--font-serif);
+    .stat-n {
+      font-family: var(--font-display);
       font-size: 2.8rem;
-      font-weight: 300;
+      font-weight: 700;
+      letter-spacing: -0.04em;
       line-height: 1;
     }
 
-    .stat-label {
+    .stat-l {
       font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.14em;
+      font-size: 0.55rem;
+      color: var(--light);
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--ink-light);
       margin-top: 0.4rem;
     }
 
     /* ── VALUES ── */
     .values {
-      padding: 7rem var(--pad-x);
+      padding: 7rem var(--pad);
       max-width: var(--max-w);
       margin: 0 auto;
-      border-top: 1px solid var(--cream-2);
+      border-bottom: 1px solid var(--border);
     }
 
-    .values-header {
+    .values-head {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 4rem;
@@ -647,495 +616,435 @@
     }
 
     .values-headline {
-      font-family: var(--font-serif);
-      font-size: clamp(2rem, 2.8vw, 2.8rem);
-      font-weight: 300;
-      line-height: 1.2;
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3vw, 3rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
     }
 
-    .values-headline em { font-style: italic; }
+    .values-headline .dim { color: var(--light); }
 
     .values-intro {
-      font-size: 0.85rem;
-      color: var(--ink-mid);
+      font-size: 0.83rem;
+      color: var(--mid);
       line-height: 1.8;
       font-weight: 300;
-      padding-top: 0.5rem;
+      padding-top: 0.4rem;
     }
 
     .values-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      border-top: 1px solid var(--cream-2);
-      border-left: 1px solid var(--cream-2);
+      border-top: 1px solid var(--border);
+      border-left: 1px solid var(--border);
     }
 
-    .value-item {
-      padding: 2.5rem 2rem;
-      border-right: 1px solid var(--cream-2);
-      border-bottom: 1px solid var(--cream-2);
+    .value {
+      padding: 2rem 1.75rem;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
 
-    .value-icon {
+    .value-num {
       font-family: var(--font-mono);
-      font-size: 0.6rem;
-      color: var(--ink-light);
+      font-size: 0.52rem;
+      color: var(--light);
       letter-spacing: 0.1em;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1rem;
     }
 
     .value-title {
-      font-family: var(--font-serif);
-      font-size: 1.2rem;
-      font-weight: 400;
-      margin-bottom: 0.75rem;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.6rem;
     }
 
     .value-desc {
-      font-size: 0.8rem;
-      color: var(--ink-mid);
+      font-size: 0.78rem;
+      color: var(--mid);
       line-height: 1.7;
       font-weight: 300;
     }
 
-    /* ── CTA BAND ── */
-    .cta-band {
-      background: var(--accent);
-      color: var(--cream);
-      padding: 6rem var(--pad-x);
-      display: grid;
-      grid-template-columns: 1fr auto;
+    /* ── CTA ── */
+    .cta {
+      background: var(--black);
+      color: var(--white);
+      padding: 7rem var(--pad);
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 4rem;
+      text-align: center;
+      gap: 3rem;
     }
 
     .cta-headline {
-      font-family: var(--font-serif);
-      font-size: clamp(2rem, 3.5vw, 3.5rem);
-      font-weight: 300;
-      line-height: 1.15;
-    }
-
-    .cta-headline em { font-style: italic; color: rgba(255,255,255,0.55); }
-
-    .cta-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
-
-    .btn-light {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.14em;
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 6rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.04em;
       text-transform: uppercase;
-      background: var(--cream);
-      color: var(--accent);
-      padding: 0.9rem 2rem;
-      transition: background 0.2s;
+      max-width: 14ch;
     }
 
-    .btn-light:hover { background: var(--white); }
+    .cta-headline .dim { color: rgba(255,255,255,0.2); }
 
-    .btn-outline-light {
+    .cta-actions { display: flex; gap: 1rem; }
+
+    .btn-white {
       font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.14em;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      border: 1px solid rgba(255,255,255,0.35);
-      color: rgba(255,255,255,0.7);
-      padding: 0.9rem 2rem;
-      transition: border-color 0.2s, color 0.2s;
+      background: var(--white);
+      color: var(--black);
+      padding: 0.85rem 2rem;
+      transition: opacity 0.15s;
     }
+    .btn-white:hover { opacity: 0.8; }
 
-    .btn-outline-light:hover { border-color: rgba(255,255,255,0.7); color: var(--white); }
+    .btn-border-white {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.6);
+      padding: 0.85rem 2rem;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .btn-border-white:hover { border-color: rgba(255,255,255,0.6); color: var(--white); }
 
     /* ── FOOTER ── */
     footer {
-      background: var(--ink);
-      color: rgba(255,255,255,0.6);
-      padding: 4rem var(--pad-x) 2.5rem;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      padding: 3.5rem var(--pad) 2rem;
     }
 
-    .footer-top {
+    .footer-grid {
       display: grid;
       grid-template-columns: 1.5fr 1fr 1fr 1fr;
       gap: 3rem;
       padding-bottom: 3rem;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid var(--border);
     }
 
-    .footer-brand-name {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
+    .footer-brand {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.85);
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
     }
 
     .footer-tagline {
-      font-family: var(--font-serif);
-      font-size: 1rem;
-      font-style: italic;
-      color: rgba(255,255,255,0.4);
-      line-height: 1.5;
+      font-size: 0.8rem;
+      color: var(--light);
+      line-height: 1.6;
     }
 
-    .footer-col-title {
+    .footer-col-head {
       font-family: var(--font-mono);
-      font-size: 0.58rem;
-      letter-spacing: 0.18em;
+      font-size: 0.52rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
-      margin-bottom: 1.2rem;
+      color: var(--light);
+      margin-bottom: 1rem;
     }
 
-    .footer-links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-
-    .footer-links a {
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.55);
-      transition: color 0.2s;
-    }
-
-    .footer-links a:hover { color: rgba(255,255,255,0.9); }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .footer-links a { font-size: 0.82rem; color: var(--mid); transition: color 0.15s; }
+    .footer-links a:hover { color: var(--black); }
 
     .footer-bottom {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: 2rem;
+      padding-top: 1.75rem;
       font-family: var(--font-mono);
-      font-size: 0.58rem;
-      letter-spacing: 0.1em;
-      color: rgba(255,255,255,0.25);
+      font-size: 0.52rem;
+      letter-spacing: 0.08em;
+      color: var(--light);
     }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
       .hero { grid-template-columns: 1fr; }
-      .hero-right { min-height: 420px; }
-      .hero-left { padding-top: 4rem; }
-
+      .hero-right { min-height: 480px; }
+      .statement { grid-template-columns: 1fr; gap: 2rem; }
       .pillars-grid { grid-template-columns: 1fr; }
-      .pillar { border-right: none; border-bottom: 1px solid var(--cream-2); }
+      .pillar { border-right: none; border-bottom: 1px solid var(--border); }
       .pillar:last-child { border-bottom: none; }
-
-      .how-steps { grid-template-columns: 1fr 1fr; gap: 3rem; }
-      .how-step { border-right: none; margin-right: 0; padding-right: 0; }
-
-      .selection-grid { grid-template-columns: repeat(2, 1fr); }
-
+      .how-steps { grid-template-columns: 1fr 1fr; }
+      .grid-4 { grid-template-columns: 1fr 1fr; }
       .about { grid-template-columns: 1fr; }
-      .about-content { border-left: none; border-top: 1px solid var(--cream-2); }
-
-      .footer-top { grid-template-columns: 1fr 1fr; }
-
-      .cta-band { grid-template-columns: 1fr; gap: 2.5rem; }
-
-      .values-header { grid-template-columns: 1fr; gap: 1.5rem; }
+      .about-content { border-left: none; border-top: 1px solid var(--border); }
+      .values-head { grid-template-columns: 1fr; gap: 2rem; }
       .values-grid { grid-template-columns: 1fr 1fr; }
-
-      .intro { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .how-top { flex-direction: column; gap: 2rem; }
     }
 
-    @media (max-width: 700px) {
+    @media (max-width: 680px) {
       .nav-links, .nav-cta { display: none; }
-      .nav-hamburger { display: flex; }
-
-      .hero-headline { font-size: 2.8rem; }
-
       .how-steps { grid-template-columns: 1fr; }
-      .selection-grid { grid-template-columns: 1fr; }
+      .grid-4 { grid-template-columns: 1fr; }
       .values-grid { grid-template-columns: 1fr; }
-      .footer-top { grid-template-columns: 1fr; }
-      .footer-bottom { flex-direction: column; gap: 0.8rem; text-align: center; }
-      .about-stats { grid-template-columns: 1fr; }
-    }
-
-    /* ── Placeholder images (SVG fallbacks) ── */
-    .img-placeholder {
-      width: 100%; height: 100%;
-      background: var(--cream-2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--sand);
-      font-family: var(--font-mono);
-      font-size: 0.58rem;
-      letter-spacing: 0.1em;
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 0.6rem; text-align: center; }
+      .stats { grid-template-columns: 1fr; }
+      .cta-actions { flex-direction: column; }
     }
   </style>
 </head>
-
 <body>
 
-  <!-- ── NAVIGATION ── -->
+  <!-- NAV -->
   <nav>
-    <a href="/" class="nav-logo">The Fabric Connector <span>— TFC</span></a>
+    <a href="/" class="nav-logo">The Fabric Connector</a>
     <ul class="nav-links">
       <li><a href="#pillars">What We Source</a></li>
       <li><a href="#how">How It Works</a></li>
       <li><a href="#about">About</a></li>
-      <li><a href="#fabrics">Library</a></li>
+      <li><a href="#library">Library</a></li>
     </ul>
     <a href="#contact" class="nav-cta">Work With Us</a>
-    <div class="nav-hamburger" onclick="this.classList.toggle('open')">
-      <span></span><span></span><span></span>
-    </div>
   </nav>
 
-  <!-- ── HERO ── -->
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-left">
-      <p class="hero-eyebrow">Est. Amsterdam — Fabric Sourcing</p>
-      <h1 class="hero-headline">
-        Fabric sourcing<br>
-        for <em>design-driven,</em><br>
-        responsible brands.
-      </h1>
-      <p class="hero-sub">
-        We connect ambitious brands with the materials they need to build something better — natural fibres, next-generation textiles, and curated deadstock from trusted mills worldwide.
-      </p>
-      <div class="hero-actions">
-        <a href="#contact" class="btn-primary">Start Sourcing</a>
-        <a href="#how" class="btn-ghost">How it works</a>
+      <div class="hero-top">
+        <div class="hero-eyebrow">
+          <div class="hero-dot"></div>
+          <span class="mono">Fabric Sourcing — Amsterdam</span>
+        </div>
+        <h1 class="hero-headline">
+          Fabric<br>
+          <span class="line-2">Sourcing.</span><br>
+          Done Right.
+        </h1>
+        <p class="hero-sub">
+          We connect design-driven, responsible brands with natural fibres, next-generation materials, and curated deadstock from trusted mills worldwide.
+        </p>
       </div>
-      <div class="hero-scroll">Scroll</div>
+      <div class="hero-bottom">
+        <div class="hero-actions">
+          <a href="#contact" class="btn-black">Start Sourcing</a>
+          <a href="#how" class="btn-border">How it works</a>
+        </div>
+        <div class="hero-meta">
+          <p class="mono">200+ Mill Partners</p>
+          <p class="mono" style="margin-top:0.3rem;">40+ Countries</p>
+        </div>
+      </div>
     </div>
     <div class="hero-right">
-      <!-- Replace src with your own hero image -->
       <img
-        src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1200&auto=format&fit=crop&q=80"
-        alt="Close-up of natural linen fabric texture"
+        src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1400&auto=format&fit=crop&q=85"
+        alt="Natural fabric texture"
         loading="eager"
       />
-      <span class="hero-caption">Natural Linen, Belgian Mill</span>
+      <span class="hero-img-label">Natural Linen — Belgian Mill</span>
     </div>
   </section>
 
-  <!-- ── TICKER ── -->
-  <div class="ticker" aria-hidden="true">
-    <div class="ticker-track">
-      <span>Natural Fibres</span><span class="dot">·</span>
-      <span>Next-Gen Materials</span><span class="dot">·</span>
-      <span>Deadstock</span><span class="dot">·</span>
-      <span>Organic Cotton</span><span class="dot">·</span>
-      <span>Linen &amp; Hemp</span><span class="dot">·</span>
-      <span>Responsible Sourcing</span><span class="dot">·</span>
-      <span>Mycelium Leather</span><span class="dot">·</span>
-      <span>Regenerative Wool</span><span class="dot">·</span>
-      <span>Deadstock Denim</span><span class="dot">·</span>
-      <span>Design-Driven Brands</span><span class="dot">·</span>
-      <!-- duplicate for seamless loop -->
-      <span>Natural Fibres</span><span class="dot">·</span>
-      <span>Next-Gen Materials</span><span class="dot">·</span>
-      <span>Deadstock</span><span class="dot">·</span>
-      <span>Organic Cotton</span><span class="dot">·</span>
-      <span>Linen &amp; Hemp</span><span class="dot">·</span>
-      <span>Responsible Sourcing</span><span class="dot">·</span>
-      <span>Mycelium Leather</span><span class="dot">·</span>
-      <span>Regenerative Wool</span><span class="dot">·</span>
-      <span>Deadstock Denim</span><span class="dot">·</span>
-      <span>Design-Driven Brands</span><span class="dot">·</span>
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Natural Fibres</span><span class="sep">/</span>
+      <span>Next-Gen Materials</span><span class="sep">/</span>
+      <span>Deadstock</span><span class="sep">/</span>
+      <span>Organic Cotton</span><span class="sep">/</span>
+      <span>Linen & Hemp</span><span class="sep">/</span>
+      <span>Responsible Sourcing</span><span class="sep">/</span>
+      <span>Mycelium</span><span class="sep">/</span>
+      <span>Regenerative Wool</span><span class="sep">/</span>
+      <span>Selvedge Denim</span><span class="sep">/</span>
+      <span>Design-Driven Brands</span><span class="sep">/</span>
+      <span>Natural Fibres</span><span class="sep">/</span>
+      <span>Next-Gen Materials</span><span class="sep">/</span>
+      <span>Deadstock</span><span class="sep">/</span>
+      <span>Organic Cotton</span><span class="sep">/</span>
+      <span>Linen & Hemp</span><span class="sep">/</span>
+      <span>Responsible Sourcing</span><span class="sep">/</span>
+      <span>Mycelium</span><span class="sep">/</span>
+      <span>Regenerative Wool</span><span class="sep">/</span>
+      <span>Selvedge Denim</span><span class="sep">/</span>
+      <span>Design-Driven Brands</span><span class="sep">/</span>
     </div>
   </div>
 
-  <!-- ── INTRO ── -->
-  <section class="intro">
-    <div class="intro-label-col">
-      <p class="label">Our Purpose</p>
+  <!-- STATEMENT -->
+  <section class="statement">
+    <div class="statement-label-col">
+      <p class="mono">Our Purpose</p>
     </div>
     <div>
-      <p class="intro-body">
-        The right fabric is not just a material choice — it's a <em>brand statement.</em> We make it easier to source with intention, without compromising on quality or aesthetics.
+      <p class="statement-body">
+        The right fabric is not just a material decision —
+        <span class="dim">it's a brand statement.</span>
+        We make it easier to source with intention.
       </p>
-      <p class="intro-note">
+      <p class="statement-note">
         The Fabric Connector works directly with mills, agents, and fabric producers across Europe, Asia, and beyond — curating a range that spans the full spectrum of responsible sourcing. From certified organic naturals to pioneering next-gen fibres, we speak your creative language.
       </p>
     </div>
   </section>
 
-  <!-- ── PILLARS ── -->
+  <!-- PILLARS -->
   <section class="pillars" id="pillars">
     <div class="pillars-header">
-      <p class="label">What We Source</p>
-      <p class="section-number">02</p>
+      <p class="mono">What We Source</p>
+      <p class="mono">03 Pillars</p>
     </div>
     <div class="pillars-grid">
 
-      <!-- Pillar 1: Natural -->
       <div class="pillar">
-        <span class="pillar-num">01 — Natural Fabrics</span>
+        <div class="pillar-top">
+          <span class="mono">01</span>
+        </div>
         <div class="pillar-img">
-          <img
-            src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&auto=format&fit=crop&q=75"
-            alt="Natural linen and cotton fabrics"
-            loading="lazy"
-          />
+          <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&auto=format&fit=crop&q=75" alt="Natural fabrics" loading="lazy" />
         </div>
         <h2 class="pillar-title">Natural<br>Fibres</h2>
-        <p class="pillar-desc">
-          Linen, organic cotton, silk, wool, and hemp — sourced from mills committed to traceability, low impact, and exceptional handle. The foundation of responsible design.
-        </p>
+        <p class="pillar-desc">Linen, organic cotton, silk, wool, hemp — sourced from mills committed to traceability, low impact, and exceptional handle.</p>
         <a href="#contact" class="pillar-link">Explore naturals</a>
       </div>
 
-      <!-- Pillar 2: Next-Gen -->
       <div class="pillar">
-        <span class="pillar-num">02 — Next-Gen Materials</span>
+        <div class="pillar-top">
+          <span class="mono">02</span>
+        </div>
         <div class="pillar-img">
-          <img
-            src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&auto=format&fit=crop&q=75"
-            alt="Innovative next-generation fabric material"
-            loading="lazy"
-          />
+          <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&auto=format&fit=crop&q=75" alt="Next-gen materials" loading="lazy" />
         </div>
         <h2 class="pillar-title">Next-Gen<br>Materials</h2>
-        <p class="pillar-desc">
-          Mycelium, algae-based fibres, recycled ocean plastics, bio-synthetics — we navigate the frontier of material innovation so your brand can lead, not follow.
-        </p>
+        <p class="pillar-desc">Mycelium, algae-based fibres, bio-synthetics — we navigate the frontier of material innovation so your brand can lead.</p>
         <a href="#contact" class="pillar-link">Explore next-gen</a>
       </div>
 
-      <!-- Pillar 3: Deadstock -->
       <div class="pillar">
-        <span class="pillar-num">03 — Deadstock</span>
+        <div class="pillar-top">
+          <span class="mono">03</span>
+        </div>
         <div class="pillar-img">
-          <img
-            src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=800&auto=format&fit=crop&q=75"
-            alt="Rolls of deadstock fabric"
-            loading="lazy"
-          />
+          <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=800&auto=format&fit=crop&q=75" alt="Deadstock fabric" loading="lazy" />
         </div>
         <h2 class="pillar-title">Curated<br>Deadstock</h2>
-        <p class="pillar-desc">
-          High-quality surplus from premium mills, often in limited quantities. A smart, creative choice for designers who want uniqueness and reduced impact in one decision.
-        </p>
+        <p class="pillar-desc">High-quality surplus from premium mills. Smart, creative, reduced impact — often in limited quantities that make your collections unique.</p>
         <a href="#contact" class="pillar-link">Explore deadstock</a>
       </div>
 
     </div>
   </section>
 
-  <!-- ── HOW IT WORKS ── -->
+  <!-- HOW IT WORKS -->
   <section class="how" id="how">
     <div class="how-inner">
-      <div class="how-header">
-        <p class="label">The Process</p>
-        <p class="section-number" style="color:rgba(255,255,255,0.2)">03</p>
+      <div class="how-top">
+        <h2 class="how-headline">
+          Sourcing<br>
+          <span class="dim">That Works.</span>
+        </h2>
+        <p class="how-sub">A focused process built around your collection — not a generic catalogue. Four steps from brief to fabric on your cutting table.</p>
       </div>
-      <h2 class="how-headline">
-        Sourcing that <em>works</em><br>the way you design.
-      </h2>
       <div class="how-steps">
-        <div class="how-step">
-          <p class="how-step-num">01</p>
-          <h3 class="how-step-title">Brief &amp; Align</h3>
-          <p class="how-step-desc">We start with a conversation — your collection direction, values, MOQs, lead times, and budget. No generic forms.</p>
+        <div>
+          <p class="step-num">01</p>
+          <h3 class="step-title">Brief & Align</h3>
+          <p class="step-desc">We start with a conversation — your collection direction, values, MOQs, lead times, budget. No generic forms.</p>
         </div>
-        <div class="how-step">
-          <p class="how-step-num">02</p>
-          <h3 class="how-step-title">Curated Selection</h3>
-          <p class="how-step-desc">We pull a shortlist of fabrics from our network — selected for your specific needs, not a generic catalogue.</p>
+        <div>
+          <p class="step-num">02</p>
+          <h3 class="step-title">Curated Selection</h3>
+          <p class="step-desc">We pull a shortlist from our network — selected for your specific needs, not a generic catalogue.</p>
         </div>
-        <div class="how-step">
-          <p class="how-step-num">03</p>
-          <h3 class="how-step-title">Samples &amp; Review</h3>
-          <p class="how-step-desc">Physical swatches arrive at your studio. We support you through evaluation, testing, and refinement.</p>
+        <div>
+          <p class="step-num">03</p>
+          <h3 class="step-title">Samples & Review</h3>
+          <p class="step-desc">Physical swatches arrive at your studio. We support you through evaluation, testing, and refinement.</p>
         </div>
-        <div class="how-step">
-          <p class="how-step-num">04</p>
-          <h3 class="how-step-title">Order &amp; Follow-Through</h3>
-          <p class="how-step-desc">We manage the mill relationship, documentation, and delivery — so you can focus on making great product.</p>
+        <div>
+          <p class="step-num">04</p>
+          <h3 class="step-title">Order & Follow-Through</h3>
+          <p class="step-desc">We manage the mill relationship, documentation, and delivery. You focus on making great product.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── FABRIC SELECTION PREVIEW ── -->
-  <section class="selection" id="fabrics">
-    <div class="selection-header">
-      <h2 class="selection-title">From the Library</h2>
-      <a href="#contact" class="btn-ghost" style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;display:flex;align-items:center;gap:0.5rem;color:var(--ink-mid);">View full library →</a>
+  <!-- LIBRARY PREVIEW -->
+  <section class="library" id="library">
+    <div class="library-header">
+      <p class="library-title">From the Library</p>
+      <a href="#contact" class="mono" style="color:var(--mid);">View full library →</a>
     </div>
-    <div class="selection-grid">
+    <div class="grid-4">
 
-      <div class="fabric-card">
-        <div class="fabric-card-img">
-          <img
-            src="https://images.unsplash.com/photo-1594938298603-c8148c4c1b61?w=600&auto=format&fit=crop&q=75"
-            alt="Belgian Stonewashed Linen"
-            loading="lazy"
-          />
+      <div class="card">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1594938298603-c8148c4c1b61?w=600&auto=format&fit=crop&q=75" alt="Belgian Linen" loading="lazy" />
         </div>
-        <div class="fabric-card-meta">
-          <p class="fabric-id">TFC-NL-001</p>
-          <p class="fabric-name">Belgian Stonewashed Linen</p>
-          <p class="fabric-origin">Belgium — Mill Direct</p>
-          <div class="fabric-tags">
-            <span class="fabric-tag">Natural</span>
-            <span class="fabric-tag">OEKO-TEX</span>
+        <div class="card-meta">
+          <p class="card-id">TFC-NL-001</p>
+          <p class="card-name">Belgian Stonewashed Linen</p>
+          <p class="card-origin">Belgium — Mill Direct</p>
+          <div class="card-tags">
+            <span class="tag">Natural</span>
+            <span class="tag">OEKO-TEX</span>
           </div>
         </div>
       </div>
 
-      <div class="fabric-card">
-        <div class="fabric-card-img">
-          <img
-            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=75"
-            alt="Organic Merino Wool"
-            loading="lazy"
-          />
+      <div class="card">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1600185365778-46f7f9c3e024?w=600&auto=format&fit=crop&q=75" alt="Organic Merino" loading="lazy" />
         </div>
-        <div class="fabric-card-meta">
-          <p class="fabric-id">TFC-NW-008</p>
-          <p class="fabric-name">Organic Merino Wool</p>
-          <p class="fabric-origin">Italy — Certified Organic</p>
-          <div class="fabric-tags">
-            <span class="fabric-tag">Natural</span>
-            <span class="fabric-tag">GOTS</span>
+        <div class="card-meta">
+          <p class="card-id">TFC-NW-008</p>
+          <p class="card-name">Organic Merino Wool</p>
+          <p class="card-origin">Italy — Certified Organic</p>
+          <div class="card-tags">
+            <span class="tag">Natural</span>
+            <span class="tag">GOTS</span>
           </div>
         </div>
       </div>
 
-      <div class="fabric-card">
-        <div class="fabric-card-img">
-          <img
-            src="https://images.unsplash.com/photo-1581075100757-a8bbeef0e10d?w=600&auto=format&fit=crop&q=75"
-            alt="Mycelium Leather Alternative"
-            loading="lazy"
-          />
+      <div class="card">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1581075100757-a8bbeef0e10d?w=600&auto=format&fit=crop&q=75" alt="Next-Gen Material" loading="lazy" />
         </div>
-        <div class="fabric-card-meta">
-          <p class="fabric-id">TFC-NG-003</p>
-          <p class="fabric-name">Mycelium Leather Alt.</p>
-          <p class="fabric-origin">Netherlands — Next-Gen</p>
-          <div class="fabric-tags">
-            <span class="fabric-tag">Next-Gen</span>
-            <span class="fabric-tag">Vegan</span>
+        <div class="card-meta">
+          <p class="card-id">TFC-NG-003</p>
+          <p class="card-name">Mycelium Leather Alt.</p>
+          <p class="card-origin">Netherlands — Next-Gen</p>
+          <div class="card-tags">
+            <span class="tag">Next-Gen</span>
+            <span class="tag">Vegan</span>
           </div>
         </div>
       </div>
 
-      <div class="fabric-card">
-        <div class="fabric-card-img">
-          <img
-            src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&auto=format&fit=crop&q=75"
-            alt="Deadstock Japanese Denim"
-            loading="lazy"
-          />
+      <div class="card">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&auto=format&fit=crop&q=75" alt="Deadstock Denim" loading="lazy" />
         </div>
-        <div class="fabric-card-meta">
-          <p class="fabric-id">TFC-DS-021</p>
-          <p class="fabric-name">Deadstock Selvedge Denim</p>
-          <p class="fabric-origin">Japan — 340m Available</p>
-          <div class="fabric-tags">
-            <span class="fabric-tag">Deadstock</span>
-            <span class="fabric-tag">Limited</span>
+        <div class="card-meta">
+          <p class="card-id">TFC-DS-021</p>
+          <p class="card-name">Deadstock Selvedge Denim</p>
+          <p class="card-origin">Japan — 340m Available</p>
+          <div class="card-tags">
+            <span class="tag">Deadstock</span>
+            <span class="tag">Limited</span>
           </div>
         </div>
       </div>
@@ -1143,124 +1052,121 @@
     </div>
   </section>
 
-  <!-- ── ABOUT ── -->
+  <!-- ABOUT -->
   <section class="about" id="about">
     <div class="about-img">
-      <img
-        src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=900&auto=format&fit=crop&q=80"
-        alt="TFC team reviewing fabric samples"
-        loading="lazy"
-      />
+      <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=900&auto=format&fit=crop&q=80" alt="Reviewing fabric samples" loading="lazy" />
     </div>
     <div class="about-content">
-      <p class="label">About TFC</p>
+      <p class="mono">About TFC</p>
       <h2 class="about-headline">
-        A sourcing partner that <em>speaks design.</em>
+        A Sourcing<br>
+        <span class="dim">Partner That</span><br>
+        Speaks Design.
       </h2>
       <p class="about-body">
-        The Fabric Connector was built to bridge the gap between ambitious creative brands and the materials that match their values. Based in Amsterdam, we have spent years building relationships with mills, agents, and producers who care as much about how fabric is made as you do about how it looks and feels.
+        Built to bridge the gap between ambitious creative brands and the materials that match their values. Based in Amsterdam, we've spent years building relationships with mills, agents, and producers who care as much about how fabric is made as you do about how it looks and feels.
       </p>
       <p class="about-body" style="margin-top:1rem;">
-        We don't just find fabrics. We understand collections. We know the difference between a fabric that photographs beautifully and one that actually performs. And we know that sustainability, for design-driven brands, has to come without compromise.
+        We don't just find fabrics. We understand collections — the difference between a fabric that photographs beautifully and one that actually performs.
       </p>
-      <div class="about-stats">
+      <div class="stats">
         <div>
-          <p class="stat-num">200+</p>
-          <p class="stat-label">Mill Partners</p>
+          <p class="stat-n">200+</p>
+          <p class="stat-l">Mill Partners</p>
         </div>
         <div>
-          <p class="stat-num">40+</p>
-          <p class="stat-label">Countries Sourced</p>
+          <p class="stat-n">40+</p>
+          <p class="stat-l">Countries</p>
         </div>
         <div>
-          <p class="stat-num">150+</p>
-          <p class="stat-label">Brands Served</p>
+          <p class="stat-n">150+</p>
+          <p class="stat-l">Brands Served</p>
         </div>
         <div>
-          <p class="stat-num">8</p>
-          <p class="stat-label">Years of Sourcing</p>
+          <p class="stat-n">8</p>
+          <p class="stat-l">Years Sourcing</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── VALUES ── -->
+  <!-- VALUES -->
   <section class="values">
-    <div class="values-header">
+    <div class="values-head">
       <h2 class="values-headline">
-        What we stand for,<br><em>and how it shows.</em>
+        What We<br>
+        <span class="dim">Stand For.</span>
       </h2>
       <p class="values-intro">
         Responsible sourcing is not a feature we bolt on — it's woven into every recommendation we make. These are the principles that guide how we curate, advise, and connect.
       </p>
     </div>
     <div class="values-grid">
-      <div class="value-item">
-        <p class="value-icon">01 — Integrity</p>
+      <div class="value">
+        <p class="value-num">01 — Integrity</p>
         <h3 class="value-title">Radical Transparency</h3>
-        <p class="value-desc">We tell you exactly where a fabric comes from, how it's certified, and any limitations — no greenwashing, no vague claims.</p>
+        <p class="value-desc">We tell you exactly where a fabric comes from, how it's certified, and any limitations. No greenwashing.</p>
       </div>
-      <div class="value-item">
-        <p class="value-icon">02 — Curation</p>
+      <div class="value">
+        <p class="value-num">02 — Curation</p>
         <h3 class="value-title">Quality Over Volume</h3>
-        <p class="value-desc">We work with a selective network of suppliers who meet our standards for craft, ethics, and material quality. We'd rather say no than recommend the wrong thing.</p>
+        <p class="value-desc">We work with a selective network of suppliers who meet our standards for craft, ethics, and material quality.</p>
       </div>
-      <div class="value-item">
-        <p class="value-icon">03 — Partnership</p>
+      <div class="value">
+        <p class="value-num">03 — Partnership</p>
         <h3 class="value-title">Long-Term Thinking</h3>
-        <p class="value-desc">We build sourcing relationships that grow with your brand — not transactional, but consultative. Your collections become better season by season.</p>
+        <p class="value-desc">We build sourcing relationships that grow with your brand — consultative, not transactional.</p>
       </div>
-      <div class="value-item">
-        <p class="value-icon">04 — Innovation</p>
+      <div class="value">
+        <p class="value-num">04 — Innovation</p>
         <h3 class="value-title">Material Curiosity</h3>
-        <p class="value-desc">We actively scout new materials so you don't have to. First access to next-gen fabrics, before they reach mass adoption.</p>
+        <p class="value-desc">We actively scout new materials so you don't have to. First access to next-gen fabrics before mass adoption.</p>
       </div>
-      <div class="value-item">
-        <p class="value-icon">05 — Craft</p>
+      <div class="value">
+        <p class="value-num">05 — Craft</p>
         <h3 class="value-title">Respect for Making</h3>
-        <p class="value-desc">Behind every fabric is a mill with people, expertise, and heritage. We treat those relationships with the same care we bring to working with brands.</p>
+        <p class="value-desc">Behind every fabric is a mill with people, expertise, and heritage. We treat those relationships accordingly.</p>
       </div>
-      <div class="value-item">
-        <p class="value-icon">06 — Impact</p>
+      <div class="value">
+        <p class="value-num">06 — Impact</p>
         <h3 class="value-title">Meaningful Reduction</h3>
-        <p class="value-desc">Whether through deadstock, certified naturals, or next-gen alternatives, every sourcing decision we guide reduces the footprint of fashion — one metre at a time.</p>
+        <p class="value-desc">Every sourcing decision we guide reduces the footprint of fashion — one metre at a time.</p>
       </div>
     </div>
   </section>
 
-  <!-- ── CTA BAND ── -->
-  <section class="cta-band" id="contact">
-    <div>
-      <p class="label" style="color:rgba(255,255,255,0.4);margin-bottom:1.5rem;">Work With Us</p>
-      <h2 class="cta-headline">
-        Ready to source <em>with intention?</em><br>
-        Let's talk about your next collection.
-      </h2>
-    </div>
+  <!-- CTA -->
+  <section class="cta" id="contact">
+    <h2 class="cta-headline">
+      Source With<br>
+      <span class="dim">Intention.</span>
+    </h2>
+    <p class="mono" style="color:rgba(255,255,255,0.35);">Ready to talk about your next collection?</p>
     <div class="cta-actions">
-      <a href="mailto:hello@fabric-connector.com" class="btn-light">Get in Touch</a>
-      <a href="#how" class="btn-outline-light">How it works</a>
+      <a href="mailto:hello@fabric-connector.com" class="btn-white">Get in Touch</a>
+      <a href="#how" class="btn-border-white">How it works</a>
     </div>
   </section>
 
-  <!-- ── FOOTER ── -->
+  <!-- FOOTER -->
   <footer>
-    <div class="footer-top">
+    <div class="footer-grid">
       <div>
-        <p class="footer-brand-name">The Fabric Connector</p>
-        <p class="footer-tagline">Fabric sourcing for<br>design-driven, responsible brands.</p>
+        <p class="footer-brand">The Fabric Connector</p>
+        <p class="footer-tagline">Fabric sourcing for design-driven,<br>responsible brands.</p>
       </div>
       <div>
-        <p class="footer-col-title">Explore</p>
+        <p class="footer-col-head">Explore</p>
         <ul class="footer-links">
           <li><a href="#pillars">Natural Fabrics</a></li>
           <li><a href="#pillars">Next-Gen Materials</a></li>
           <li><a href="#pillars">Deadstock</a></li>
-          <li><a href="#fabrics">Fabric Library</a></li>
+          <li><a href="#library">Fabric Library</a></li>
         </ul>
       </div>
       <div>
-        <p class="footer-col-title">Company</p>
+        <p class="footer-col-head">Company</p>
         <ul class="footer-links">
           <li><a href="#about">About TFC</a></li>
           <li><a href="#how">How It Works</a></li>
@@ -1268,7 +1174,7 @@
         </ul>
       </div>
       <div>
-        <p class="footer-col-title">Contact</p>
+        <p class="footer-col-head">Contact</p>
         <ul class="footer-links">
           <li><a href="mailto:hello@fabric-connector.com">hello@fabric-connector.com</a></li>
           <li><a href="#">Instagram</a></li>
@@ -1278,8 +1184,8 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2025 The Fabric Connector. All rights reserved.</p>
-      <p>Privacy Policy &nbsp;·&nbsp; Terms</p>
+      <p>© 2025 The Fabric Connector</p>
+      <p>Privacy · Terms</p>
     </div>
   </footer>
 
