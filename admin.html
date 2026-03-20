@@ -373,9 +373,108 @@
       .setup-row { flex-direction: column; }
       .row-origin, .row-id { display: none; }
     }
+
+    /* ── LOGIN SCREEN ── */
+    #loginScreen {
+      position: fixed; inset: 0;
+      background: var(--black);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-box {
+      width: 100%;
+      max-width: 380px;
+      padding: 2.5rem;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .login-logo {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+
+    .login-sub {
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 2.5rem;
+    }
+
+    .login-label {
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .login-input {
+      width: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      padding: 0.75rem 1rem;
+      outline: none;
+      transition: border-color 0.15s;
+      margin-bottom: 1rem;
+    }
+
+    .login-input:focus { border-color: rgba(255,255,255,0.4); }
+    .login-input::placeholder { color: rgba(255,255,255,0.2); }
+
+    .login-btn {
+      width: 100%;
+      background: var(--white);
+      color: var(--black);
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: none;
+      padding: 0.85rem;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .login-btn:hover { opacity: 0.85; }
+
+    .login-error {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.08em;
+      color: #ff6b55;
+      margin-top: 0.75rem;
+      display: none;
+    }
+    .login-error.show { display: block; }
   </style>
 </head>
 <body>
+
+  <!-- LOGIN SCREEN -->
+  <div id="loginScreen">
+    <div class="login-box">
+      <p class="login-logo">The Fabric Connector</p>
+      <p class="login-sub">Admin — Fabric Library</p>
+      <label class="login-label" for="loginPw">Password</label>
+      <input class="login-input" type="password" id="loginPw" placeholder="Enter password…" autocomplete="current-password" />
+      <button class="login-btn" onclick="attemptLogin()">Enter</button>
+      <p class="login-error" id="loginError">Incorrect password. Please try again.</p>
+    </div>
+  </div>
 
   <div class="topbar">
     <div class="topbar-brand">
@@ -531,6 +630,40 @@
   </div>
 
   <script>
+    // ── PASSWORD ─────────────────────────────────────────────────────
+    // SHA-256 hash of the password. To change it, update this value.
+    // Default password: TFC2025
+    const PASSWORD_HASH = '03b3673f5e65390ae673624db3117cff22017e16d0e4bff3e6bcdb3c1999e31c';
+
+    async function sha256(str) {
+      const buf  = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+    }
+
+    async function attemptLogin() {
+      const pw   = document.getElementById('loginPw').value;
+      const hash = await sha256(pw);
+      if (hash === PASSWORD_HASH) {
+        sessionStorage.setItem('tfc_auth', '1');
+        document.getElementById('loginScreen').style.display = 'none';
+      } else {
+        document.getElementById('loginError').classList.add('show');
+        document.getElementById('loginPw').value = '';
+        document.getElementById('loginPw').focus();
+      }
+    }
+
+    // Allow pressing Enter to submit
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('loginPw').addEventListener('keydown', e => {
+        if (e.key === 'Enter') attemptLogin();
+      });
+      // Stay logged in for the session
+      if (sessionStorage.getItem('tfc_auth') === '1') {
+        document.getElementById('loginScreen').style.display = 'none';
+      }
+    });
+
     // ── CONFIG ────────────────────────────────────────────────────────
     const LS = {
       get owner() { return localStorage.getItem('tfc_owner') || ''; },
@@ -545,7 +678,8 @@
     let currentSha = '';
 
     // ── INIT ─────────────────────────────────────────────────────────
-    window.addEventListener('DOMContentLoaded', () => {
+    // (DOMContentLoaded is handled above; piggyback on it here)
+    document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('ghOwner').value = LS.owner;
       document.getElementById('ghRepo').value  = LS.repo;
       document.getElementById('ghToken').value = LS.token;
