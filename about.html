@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — The Fabric Connector</title>
+  <meta name="description" content="The Fabric Connector was founded to make responsible fabric sourcing accessible to design-driven brands. Based in Amsterdam, we connect brands with natural, next-gen, and deadstock fabrics." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white:  #ffffff;
+      --off:    #F5F5F3;
+      --black:  #0A0A0A;
+      --mid:    #5C5C5C;
+      --light:  #ABABAB;
+      --border: #E3E3E3;
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'Inter', sans-serif;
+      --font-mono:    'Space Mono', monospace;
+      --pad: clamp(1.5rem, 5vw, 4.5rem);
+      --max-w: 1400px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { color: inherit; text-decoration: none; }
+
+    .mono {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--light);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--pad);
+      height: 60px;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.active { color: var(--black); }
+
+    .nav-cta {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--black);
+      color: var(--white);
+      padding: 0.55rem 1.25rem;
+      transition: opacity 0.15s;
+    }
+    .nav-cta:hover { opacity: 0.75; }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      margin-top: 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 70vh;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-left {
+      padding: 5rem var(--pad);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid var(--border);
+    }
+
+    .hero-label { margin-bottom: 2rem; }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 5.5vw, 6.5rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+    }
+
+    .hero-headline .dim { color: var(--light); }
+
+    .hero-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+
+    .hero-stat-n {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .hero-stat-l {
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      color: var(--light);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 0.3rem;
+    }
+
+    .hero-right {
+      background: var(--black);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-right img {
+      filter: grayscale(15%);
+      opacity: 0.85;
+      transition: transform 8s ease;
+    }
+
+    .hero-right:hover img { transform: scale(1.03); }
+
+    .hero-img-label {
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* ── STORY ── */
+    .story {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .story-img {
+      background: var(--off);
+      overflow: hidden;
+      min-height: 520px;
+    }
+
+    .story-content {
+      padding: 6rem var(--pad);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-left: 1px solid var(--border);
+    }
+
+    .story-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      margin-top: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .story-headline .dim { color: var(--light); }
+
+    .story-body p {
+      font-size: 0.88rem;
+      color: var(--mid);
+      line-height: 1.8;
+      font-weight: 300;
+      max-width: 46ch;
+    }
+
+    .story-body p + p { margin-top: 1.1rem; }
+
+    /* ── APPROACH ── */
+    .approach {
+      background: var(--black);
+      color: var(--white);
+      padding: 7rem var(--pad);
+    }
+
+    .approach-inner { max-width: var(--max-w); margin: 0 auto; }
+
+    .approach-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      padding-bottom: 5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 5rem;
+    }
+
+    .approach-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 4vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+    }
+
+    .approach-headline .dim { color: rgba(255,255,255,0.2); }
+
+    .approach-body p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    .approach-body p + p { margin-top: 1rem; }
+
+    .approach-pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+
+    .approach-pillar {
+      padding-right: 3rem;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      margin-right: 3rem;
+    }
+
+    .approach-pillar:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+
+    .pillar-num {
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+    }
+
+    .pillar-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.75rem;
+    }
+
+    .pillar-desc {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    /* ── TEAM ── */
+    .team {
+      padding: 7rem var(--pad);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .team-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 5rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .team-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 4vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+    }
+
+    .team-headline .dim { color: var(--light); }
+
+    .team-intro {
+      font-size: 0.88rem;
+      color: var(--mid);
+      line-height: 1.8;
+      font-weight: 300;
+      padding-top: 0.5rem;
+      max-width: 46ch;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+
+    .team-member {
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 2.5rem 2rem;
+      transition: background 0.2s;
+    }
+
+    .team-member:hover { background: var(--off); }
+
+    /* Remove right border on every 3rd item */
+    .team-member:nth-child(3n) { border-right: none; }
+    /* Remove bottom border on last row */
+    .team-member:nth-last-child(-n+3) { border-bottom: none; }
+
+    .member-photo {
+      width: 72px;
+      height: 72px;
+      background: var(--black);
+      margin-bottom: 1.25rem;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .member-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+    .member-initials {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+
+    .member-name {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.2rem;
+    }
+
+    .member-role {
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      color: var(--light);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .member-bio {
+      font-size: 0.8rem;
+      color: var(--mid);
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    /* ── MEDIA ── */
+    .media {
+      padding: 5rem var(--pad);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .media-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 3rem;
+    }
+
+    .media-label { margin-bottom: 0; }
+
+    .media-logos {
+      display: flex;
+      align-items: center;
+      gap: 3.5rem;
+      flex-wrap: wrap;
+    }
+
+    .media-logo {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--light);
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+
+    .media-logo:hover { color: var(--black); }
+
+    /* ── LOCATION ── */
+    .location {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .location-map {
+      background: var(--off);
+      min-height: 420px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .location-map iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      filter: grayscale(100%) contrast(1.1);
+      min-height: 420px;
+    }
+
+    .location-content {
+      padding: 5rem var(--pad);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-left: 1px solid var(--border);
+      gap: 2rem;
+    }
+
+    .location-headline {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      margin-top: 1rem;
+    }
+
+    .location-headline .dim { color: var(--light); }
+
+    .location-details { display: flex; flex-direction: column; gap: 1.25rem; }
+
+    .location-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .location-item-label {
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
+      color: var(--light);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .location-item-value {
+      font-size: 0.88rem;
+      color: var(--mid);
+      font-weight: 300;
+    }
+
+    .location-item-value a {
+      color: var(--black);
+      border-bottom: 1px solid var(--border);
+      transition: border-color 0.15s;
+    }
+
+    .location-item-value a:hover { border-color: var(--black); }
+
+    /* ── CTA ── */
+    .cta {
+      background: var(--black);
+      color: var(--white);
+      padding: 7rem var(--pad);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 3rem;
+    }
+
+    .cta-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 6rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      max-width: 14ch;
+    }
+
+    .cta-headline .dim { color: rgba(255,255,255,0.2); }
+    .cta-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+    .btn-white {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--white);
+      color: var(--black);
+      padding: 0.85rem 2rem;
+      transition: opacity 0.15s;
+    }
+    .btn-white:hover { opacity: 0.8; }
+
+    .btn-border-white {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.6);
+      padding: 0.85rem 2rem;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .btn-border-white:hover { border-color: rgba(255,255,255,0.6); color: var(--white); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      padding: 3.5rem var(--pad) 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .footer-brand {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-tagline { font-size: 0.8rem; color: var(--light); line-height: 1.6; }
+
+    .footer-col-head {
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 1rem;
+    }
+
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .footer-links a { font-size: 0.82rem; color: var(--mid); transition: color 0.15s; }
+    .footer-links a:hover { color: var(--black); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.08em;
+      color: var(--light);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .page-hero { grid-template-columns: 1fr; }
+      .hero-right { min-height: 400px; }
+      .story { grid-template-columns: 1fr; }
+      .story-content { border-left: none; border-top: 1px solid var(--border); }
+      .approach-top { grid-template-columns: 1fr; gap: 2rem; }
+      .approach-pillars { grid-template-columns: 1fr; gap: 2.5rem; }
+      .approach-pillar { border-right: none; margin-right: 0; padding-right: 0; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 2.5rem; }
+      .approach-pillar:last-child { border-bottom: none; padding-bottom: 0; }
+      .team-header { grid-template-columns: 1fr; gap: 2rem; }
+      .team-grid { grid-template-columns: 1fr 1fr; }
+      .team-member:nth-child(3n) { border-right: 1px solid var(--border); }
+      .team-member:nth-child(2n) { border-right: none; }
+      .team-member:nth-last-child(-n+3) { border-bottom: 1px solid var(--border); }
+      .team-member:nth-last-child(-n+2) { border-bottom: none; }
+      .location { grid-template-columns: 1fr; }
+      .location-content { border-left: none; border-top: 1px solid var(--border); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 680px) {
+      .nav-links, .nav-cta { display: none; }
+      .hero-bottom { grid-template-columns: 1fr 1fr; }
+      .team-grid { grid-template-columns: 1fr; }
+      .team-member:nth-child(n) { border-right: none; border-bottom: 1px solid var(--border); }
+      .team-member:last-child { border-bottom: none; }
+      .media-inner { flex-direction: column; align-items: flex-start; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 0.6rem; text-align: center; }
+      .cta-actions { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">The Fabric Connector</a>
+    <ul class="nav-links">
+      <li><a href="index.html#pillars">What We Source</a></li>
+      <li><a href="index.html#how">How It Works</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="library.html">Library</a></li>
+    </ul>
+    <a href="index.html#contact" class="nav-cta">Work With Us</a>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="hero-left">
+      <div>
+        <p class="mono hero-label">Amsterdam — Est. 2022</p>
+        <h1 class="hero-headline">
+          We Are<br>
+          <span class="dim">The Fabric</span><br>
+          Connector.
+        </h1>
+      </div>
+      <div class="hero-bottom">
+        <div>
+          <p class="hero-stat-n">30+</p>
+          <p class="hero-stat-l">Years industry experience</p>
+        </div>
+        <div>
+          <p class="hero-stat-n">200+</p>
+          <p class="hero-stat-l">Mill partners worldwide</p>
+        </div>
+        <div>
+          <p class="hero-stat-n">150+</p>
+          <p class="hero-stat-l">Brands served</p>
+        </div>
+        <div>
+          <p class="hero-stat-n">40+</p>
+          <p class="hero-stat-l">Countries sourced</p>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img
+        src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1400&auto=format&fit=crop&q=85"
+        alt="Fabric samples at The Fabric Connector"
+        loading="eager"
+      />
+      <span class="hero-img-label">Material Library — Amsterdam</span>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="story">
+    <div class="story-img">
+      <img
+        src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&auto=format&fit=crop&q=80"
+        alt="Fabric sourcing"
+        loading="lazy"
+      />
+    </div>
+    <div class="story-content">
+      <p class="mono">Our Story</p>
+      <h2 class="story-headline">
+        Built by<br>
+        <span class="dim">people who</span><br>
+        know fabric.
+      </h2>
+      <div class="story-body">
+        <p>
+          The Fabric Connector was founded by Bas and Bart Slootman — a father and son who between them bring over three decades of textile industry experience and a shared belief that sourcing doesn't have to be a compromise.
+        </p>
+        <p>
+          Bart spent thirty years watching the industry produce more than it needed. Bas grew up inside that world, then studied Business & Social Impact, and came back with a question: what if responsible sourcing was the default, not the exception?
+        </p>
+        <p>
+          We started in Amsterdam with a physical material library and a straightforward goal — to make it easier for design-driven brands to find the right fabric, from the right source, without the usual friction. Natural fibres, next-generation materials, and carefully curated deadstock: all in one place, with a team that understands what you're making.
+        </p>
+        <p>
+          We've since built a network of 200+ mill partners across 40+ countries, launched an impact measurement tool, and joined platforms like Munich Fabric Start's ReSOURCE. But the mission stays the same: fabric sourcing for brands that care about both quality and consequence.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPROACH -->
+  <section class="approach">
+    <div class="approach-inner">
+      <div class="approach-top">
+        <h2 class="approach-headline">
+          How We<br>
+          <span class="dim">Think About</span><br>
+          Sourcing.
+        </h2>
+        <div class="approach-body">
+          <p>
+            We don't believe responsible sourcing has to come at the cost of design. The brands we work with prove otherwise every season — great materials, clear provenance, and collections that look and feel the way they should.
+          </p>
+          <p>
+            Our approach is consultative, not transactional. We take the brief, understand the collection, and find fabrics that serve both the creative and the conscience. That means being honest when something isn't right — and relentless when it comes to finding something that is.
+          </p>
+        </div>
+      </div>
+      <div class="approach-pillars">
+        <div class="approach-pillar">
+          <p class="pillar-num">01 — Natural First</p>
+          <h3 class="pillar-title">Start With Nature</h3>
+          <p class="pillar-desc">Linen, wool, organic cotton, hemp, silk — grown and processed with traceability and care. Our default is natural, because the best materials often already exist in the ground.</p>
+        </div>
+        <div class="approach-pillar">
+          <p class="pillar-num">02 — Look Forward</p>
+          <h3 class="pillar-title">Embrace What's Next</h3>
+          <p class="pillar-desc">Mycelium, algae fibres, bio-based alternatives — we scout the frontier of material innovation so your brand can lead. Not every brand is ready for next-gen. But we make sure you know when you are.</p>
+        </div>
+        <div class="approach-pillar">
+          <p class="pillar-num">03 — Nothing Wasted</p>
+          <h3 class="pillar-title">Deadstock as a Choice</h3>
+          <p class="pillar-desc">The most sustainable fabric is still the one that already exists. Deadstock isn't a fallback — it's a creative decision. Limited runs, premium mills, materials that tell a story.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="team">
+    <div class="team-header">
+      <h2 class="team-headline">
+        The Team<br>
+        <span class="dim">Behind TFC.</span>
+      </h2>
+      <p class="team-intro">
+        A small team of textile veterans, creative thinkers, and industry connectors. We blend decades of experience with fresh thinking on what responsible sourcing can look like — and what it should feel like to work with a sourcing partner that actually gets design.
+      </p>
+    </div>
+
+    <div class="team-grid">
+
+      <div class="team-member">
+        <div class="member-photo">
+          <span class="member-initials">BS</span>
+        </div>
+        <p class="member-name">Bas Slootman</p>
+        <p class="member-role">Co-Founder</p>
+        <p class="member-bio">Growing up in a textile family and with a background in Business & Social Impact, the step to founding The Fabric Connector came naturally. Bas drives the vision — building a sourcing platform that works for design-forward brands without compromising on values. When he's not working on the circular economy, you'll find him kitesurfing or mastering calisthenics.</p>
+      </div>
+
+      <div class="team-member">
+        <div class="member-photo">
+          <span class="member-initials">BaS</span>
+        </div>
+        <p class="member-name">Bart Slootman</p>
+        <p class="member-role">Co-Founder</p>
+        <p class="member-bio">With over 30 years in the textile industry, Bart has seen every side of how fabric moves through the world — and where it gets stuck. He's the founding father: the network, the instinct, the deep knowledge of mills and materials that makes TFC's sourcing genuinely different. One day, the Côte d'Azur. For now, right where he needs to be.</p>
+      </div>
+
+      <div class="team-member">
+        <div class="member-photo">
+          <span class="member-initials">AS</span>
+        </div>
+        <p class="member-name">Alexandra Schott</p>
+        <p class="member-role">Head of Brand & Community</p>
+        <p class="member-bio">Alexandra brings 10+ years across fashion, tech, and sustainability. A connector at heart, she believes every great garment begins with its fabric — and that brands are ready for a more intentional relationship with materials. She leads how TFC shows up in the world and builds the community around it.</p>
+      </div>
+
+      <div class="team-member">
+        <div class="member-photo">
+          <span class="member-initials">KK</span>
+        </div>
+        <p class="member-name">Kayle Knops</p>
+        <p class="member-role">Tech Lead</p>
+        <p class="member-bio">Kayle is the brain behind TFC's technology. As founder of Alltrons, he leads a team in Eindhoven that keeps the platform running smoothly. He's the reason the systems work the way they should — quietly, reliably, and without fuss.</p>
+      </div>
+
+      <div class="team-member">
+        <div class="member-photo">
+          <span class="member-initials">LH</span>
+        </div>
+        <p class="member-name">Leoni Huisman</p>
+        <p class="member-role">Board Member</p>
+        <p class="member-bio">With over 20 years in fashion, Leoni's creative vision is grounded in real industry experience — most of it spent shaping the brand identity of G-Star RAW. Now running her own studio, she brings that same sharp creative eye to TFC as a board member and creative lead.</p>
+      </div>
+
+      <div class="team-member">
+        <div class="member-photo">
+          <span class="member-initials">RR</span>
+        </div>
+        <p class="member-name">Roosmarie Ruigrok</p>
+        <p class="member-role">Board Member</p>
+        <p class="member-bio">35+ years in fashion and textiles. Founder of Clean & Unique. Roosmarie has spent her career at the intersection of style and sustainability — building a network that spans the industry and using it to make meaningful things happen. As a board member, she opens doors and makes the right connections at the right moment.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MEDIA -->
+  <section class="media">
+    <div class="media-inner">
+      <p class="mono">Found in the media</p>
+      <div class="media-logos">
+        <span class="media-logo">Fashion United</span>
+        <span class="media-logo">RTL-Z</span>
+        <span class="media-logo">Textilia</span>
+        <span class="media-logo">Duurzaam Ondernemen</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION -->
+  <section class="location">
+    <div class="location-map">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2435.6!2d4.9041!3d52.3759!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c609b6c3a4f3f7%3A0x0!2sHerenmarkt+93A%2C+1013+EC+Amsterdam!5e0!3m2!1sen!2snl!4v1234567890"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="TFC Amsterdam office location">
+      </iframe>
+    </div>
+    <div class="location-content">
+      <p class="mono">Find Us</p>
+      <h2 class="location-headline">
+        Based in<br>
+        <span class="dim">Amsterdam.</span>
+      </h2>
+      <div class="location-details">
+        <div class="location-item">
+          <span class="location-item-label">Address</span>
+          <span class="location-item-value">Herenmarkt 93A<br>1013 EC, Amsterdam<br>The Netherlands</span>
+        </div>
+        <div class="location-item">
+          <span class="location-item-label">Email</span>
+          <span class="location-item-value">
+            <a href="mailto:info@fabric-connector.com">info@fabric-connector.com</a>
+          </span>
+        </div>
+        <div class="location-item">
+          <span class="location-item-label">Material Library</span>
+          <span class="location-item-value">Visit our physical fabric library in Amsterdam — by appointment.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2 class="cta-headline">
+      Let's Talk<br>
+      <span class="dim">Fabric.</span>
+    </h2>
+    <p class="mono" style="color:rgba(255,255,255,0.3);">Ready to source with intention?</p>
+    <div class="cta-actions">
+      <a href="mailto:info@fabric-connector.com" class="btn-white">Get in Touch</a>
+      <a href="library.html" class="btn-border-white">Browse the Library</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <p class="footer-brand">The Fabric Connector</p>
+        <p class="footer-tagline">Fabric sourcing for design-driven,<br>responsible brands.</p>
+      </div>
+      <div>
+        <p class="footer-col-head">Explore</p>
+        <ul class="footer-links">
+          <li><a href="index.html#pillars">Natural Fabrics</a></li>
+          <li><a href="index.html#pillars">Next-Gen Materials</a></li>
+          <li><a href="index.html#pillars">Deadstock</a></li>
+          <li><a href="library.html">Fabric Library</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-head">Company</p>
+        <ul class="footer-links">
+          <li><a href="about.html">About TFC</a></li>
+          <li><a href="index.html#how">How It Works</a></li>
+          <li><a href="index.html#contact">Work With Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-head">Contact</p>
+        <ul class="footer-links">
+          <li><a href="mailto:info@fabric-connector.com">info@fabric-connector.com</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Amsterdam, NL</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 The Fabric Connector</p>
+      <p>Privacy · Terms</p>
+    </div>
+  </footer>
+
+</body>
+</html>
