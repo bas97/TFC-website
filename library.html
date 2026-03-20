@@ -736,8 +736,24 @@
   </footer>
 
   <script>
-    // ── FABRIC DATABASE ──────────────────────────────────────────────
-    const FABRICS = [
+    // ── FABRIC DATABASE (loaded from fabrics.json) ───────────────────
+    let FABRICS = [];
+
+    // ── INIT ──────────────────────────────────────────────────────────
+    fetch('fabrics.json?v=' + Date.now())
+      .then(r => r.json())
+      .then(data => {
+        FABRICS = data;
+        buildSidebar();
+        renderGrid();
+      })
+      .catch(() => {
+        document.getElementById('fabricGrid').innerHTML =
+          '<div class="empty-state"><h3>Could not load fabrics</h3><p>Please try refreshing the page.</p></div>';
+      });
+
+    // ── LEGACY INLINE DATA (unused, kept as fallback reference) ──────
+    const _FABRICS_BACKUP = [
       {
         id: "TFC-NL-001",
         name: "Belgian Stonewashed Linen",
@@ -1387,9 +1403,6 @@
       }
     });
 
-    // ── INIT ──────────────────────────────────────────────────────
-    buildSidebar();
-    renderGrid();
   </script>
 </body>
 </html>

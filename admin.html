@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Fabric Library</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=Inter:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white:  #ffffff;
+      --off:    #F5F5F3;
+      --black:  #0A0A0A;
+      --mid:    #5C5C5C;
+      --light:  #ABABAB;
+      --border: #E3E3E3;
+      --green:  #1a8a4a;
+      --red:    #cc2200;
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'Inter', sans-serif;
+      --font-mono:    'Space Mono', monospace;
+    }
+
+    body {
+      background: var(--off);
+      color: var(--black);
+      font-family: var(--font-body);
+      font-size: 14px;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── LAYOUT ── */
+    .topbar {
+      background: var(--black);
+      color: var(--white);
+      padding: 0 2rem;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .topbar-brand {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .topbar-brand span {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      color: rgba(255,255,255,0.35);
+      margin-left: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .topbar-links { display: flex; gap: 1.5rem; align-items: center; }
+
+    .topbar-links a {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      transition: color 0.15s;
+    }
+    .topbar-links a:hover { color: var(--white); }
+
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 2rem; }
+
+    /* ── SETUP CARD ── */
+    .setup-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .card-sub {
+      font-size: 0.78rem;
+      color: var(--mid);
+      margin-bottom: 1.25rem;
+      line-height: 1.5;
+    }
+
+    .card-sub a { color: var(--black); text-decoration: underline; }
+
+    .setup-row { display: flex; gap: 0.75rem; align-items: flex-end; flex-wrap: wrap; }
+
+    .field { display: flex; flex-direction: column; gap: 0.35rem; }
+    .field.grow { flex: 1; min-width: 200px; }
+
+    label {
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--light);
+    }
+
+    input, select, textarea {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      color: var(--black);
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 0.55rem 0.75rem;
+      outline: none;
+      transition: border-color 0.15s;
+      width: 100%;
+    }
+
+    input:focus, select:focus, textarea:focus { border-color: var(--black); }
+    input::placeholder, textarea::placeholder { color: var(--light); }
+
+    textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
+
+    /* ── BUTTONS ── */
+    .btn {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.65rem 1.25rem;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.15s;
+      white-space: nowrap;
+    }
+
+    .btn:hover { opacity: 0.75; }
+    .btn:disabled { opacity: 0.35; cursor: default; }
+
+    .btn-black  { background: var(--black); color: var(--white); }
+    .btn-green  { background: var(--green); color: var(--white); }
+    .btn-red    { background: var(--red);   color: var(--white); font-size: 0.52rem; padding: 0.4rem 0.7rem; }
+    .btn-border { background: none; border: 1px solid var(--border); color: var(--mid); }
+    .btn-border:hover { border-color: var(--black); color: var(--black); opacity: 1; }
+
+    /* ── STATUS BAR ── */
+    .status {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.08em;
+      padding: 0.6rem 0.9rem;
+      margin-bottom: 1.25rem;
+      display: none;
+    }
+
+    .status.show { display: block; }
+    .status.ok   { background: #e8f5ee; color: var(--green); border: 1px solid #b3dfc4; }
+    .status.err  { background: #fce8e5; color: var(--red);   border: 1px solid #f5b8b0; }
+    .status.info { background: #eef2ff; color: #3355cc;      border: 1px solid #b3c2f0; }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .section-header h2 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── FORM CARD ── */
+    .form-card {
+      background: var(--white);
+      border: 1px solid var(--black);
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+      display: none;
+    }
+
+    .form-card.open { display: block; }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-grid .span-2 { grid-column: span 2; }
+    .form-grid .span-3 { grid-column: span 3; }
+
+    .cert-checkboxes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.35rem;
+    }
+
+    .cert-check {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      cursor: pointer;
+      font-size: 0.78rem;
+      color: var(--mid);
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.6rem;
+      transition: all 0.15s;
+      user-select: none;
+    }
+
+    .cert-check input { display: none; }
+    .cert-check.checked { background: var(--black); color: var(--white); border-color: var(--black); }
+
+    .form-actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--border); }
+
+    .img-preview {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--off);
+      object-fit: cover;
+      display: none;
+      margin-top: 0.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .img-preview.show { display: block; }
+
+    /* ── FABRIC LIST ── */
+    .fabric-list { display: flex; flex-direction: column; gap: 0; }
+
+    .fabric-row {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-bottom: none;
+      padding: 0.9rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: background 0.15s;
+    }
+
+    .fabric-row:last-child { border-bottom: 1px solid var(--border); }
+    .fabric-row:hover { background: var(--off); }
+
+    .row-thumb {
+      width: 52px;
+      height: 40px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: var(--off);
+    }
+
+    .row-id {
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      color: var(--light);
+      letter-spacing: 0.08em;
+      min-width: 90px;
+    }
+
+    .row-name {
+      font-family: var(--font-display);
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      flex: 1;
+    }
+
+    .row-cat {
+      font-family: var(--font-mono);
+      font-size: 0.48rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      min-width: 70px;
+      text-align: center;
+    }
+
+    .cat-natural   { background: var(--black); color: var(--white); }
+    .cat-nextgen   { background: #1a1a1a; color: #aaffaa; }
+    .cat-deadstock { background: var(--off); color: var(--mid); border: 1px solid var(--border); }
+
+    .row-origin {
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      color: var(--light);
+      min-width: 90px;
+    }
+
+    .row-actions { display: flex; gap: 0.5rem; margin-left: auto; flex-shrink: 0; }
+
+    .empty-list {
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 3rem;
+      text-align: center;
+      color: var(--light);
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ── MODAL CONFIRM ── */
+    .confirm-overlay {
+      position: fixed; inset: 0;
+      background: rgba(10,10,10,0.6);
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      display: none;
+    }
+
+    .confirm-overlay.open { display: flex; }
+
+    .confirm-box {
+      background: var(--white);
+      padding: 2rem;
+      max-width: 360px;
+      width: 90%;
+      border: 1px solid var(--border);
+    }
+
+    .confirm-box h3 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .confirm-box p { font-size: 0.82rem; color: var(--mid); margin-bottom: 1.5rem; line-height: 1.6; }
+    .confirm-actions { display: flex; gap: 0.75rem; }
+
+    /* ── LOADER ── */
+    .spinner {
+      display: inline-block;
+      width: 12px; height: 12px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: var(--white);
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 700px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .form-grid .span-2, .form-grid .span-3 { grid-column: span 1; }
+      .setup-row { flex-direction: column; }
+      .row-origin, .row-id { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="topbar-brand">
+      The Fabric Connector <span>Admin</span>
+    </div>
+    <div class="topbar-links">
+      <a href="library.html" target="_blank">View Library ↗</a>
+      <a href="index.html" target="_blank">View Site ↗</a>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- SETUP -->
+    <div class="setup-card">
+      <p class="card-title">GitHub Setup</p>
+      <p class="card-sub">
+        To save changes, you need a GitHub Personal Access Token with <strong>repo</strong> access.
+        <a href="https://github.com/settings/tokens/new?scopes=repo&description=TFC+Admin" target="_blank">Click here to create one</a>
+        — check the "repo" box and copy the token. You only need to do this once.
+      </p>
+      <div class="setup-row">
+        <div class="field" style="min-width:140px">
+          <label>GitHub Username</label>
+          <input type="text" id="ghOwner" placeholder="e.g. bas97" />
+        </div>
+        <div class="field" style="min-width:140px">
+          <label>Repo Name</label>
+          <input type="text" id="ghRepo" placeholder="e.g. TFC-website" />
+        </div>
+        <div class="field grow">
+          <label>Personal Access Token</label>
+          <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxx" />
+        </div>
+        <button class="btn btn-black" onclick="saveSettings()">Save Settings</button>
+      </div>
+    </div>
+
+    <!-- STATUS -->
+    <div class="status" id="status"></div>
+
+    <!-- FABRIC LIST -->
+    <div class="section-header">
+      <h2>Fabric Database <span id="fabricCount" style="color:var(--light);font-family:var(--font-mono);font-size:0.6rem;font-weight:400;letter-spacing:0.1em;margin-left:0.5rem;"></span></h2>
+      <button class="btn btn-black" onclick="openNewForm()">+ Add Fabric</button>
+    </div>
+
+    <!-- ADD / EDIT FORM -->
+    <div class="form-card" id="formCard">
+      <p class="card-title" id="formTitle">New Fabric</p>
+      <input type="hidden" id="editingId" value="" />
+
+      <div class="form-grid">
+        <div class="field">
+          <label>Fabric ID *</label>
+          <input type="text" id="fId" placeholder="e.g. TFC-NL-041" />
+        </div>
+        <div class="field span-2">
+          <label>Fabric Name *</label>
+          <input type="text" id="fName" placeholder="e.g. Belgian Stonewashed Linen" />
+        </div>
+
+        <div class="field">
+          <label>Category *</label>
+          <select id="fCategory">
+            <option value="">— Select —</option>
+            <option value="natural">Natural</option>
+            <option value="nextgen">Next-Gen</option>
+            <option value="deadstock">Deadstock</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Fibre Type *</label>
+          <input type="text" id="fFiber" placeholder="e.g. Linen" />
+        </div>
+        <div class="field">
+          <label>Origin / Country *</label>
+          <input type="text" id="fOrigin" placeholder="e.g. Belgium" />
+        </div>
+
+        <div class="field span-2">
+          <label>Mill Name</label>
+          <input type="text" id="fMill" placeholder="e.g. Van Cleemputte" />
+        </div>
+        <div class="field">
+          <label>Limited Stock?</label>
+          <select id="fLimited">
+            <option value="false">No</option>
+            <option value="true">Yes — mark as Limited</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Weight</label>
+          <input type="text" id="fWeight" placeholder="e.g. 185gsm" />
+        </div>
+        <div class="field">
+          <label>Width</label>
+          <input type="text" id="fWidth" placeholder="e.g. 150cm" />
+        </div>
+        <div class="field">
+          <label>MOQ (Min. Order)</label>
+          <input type="text" id="fMoq" placeholder="e.g. 50m" />
+        </div>
+
+        <div class="field span-3">
+          <label>Description</label>
+          <textarea id="fDesc" placeholder="Describe the fabric — handle, applications, origin story, unique qualities…"></textarea>
+        </div>
+
+        <div class="field span-3">
+          <label>Image URL</label>
+          <input type="url" id="fImage" placeholder="https://images.unsplash.com/…" oninput="previewImage()" />
+          <img class="img-preview" id="imgPreview" src="" alt="Preview" />
+        </div>
+
+        <div class="field span-3">
+          <label>Certifications</label>
+          <div class="cert-checkboxes" id="certChecks">
+            <label class="cert-check" onclick="toggleCert(this)"><input type="checkbox" value="GOTS" />GOTS</label>
+            <label class="cert-check" onclick="toggleCert(this)"><input type="checkbox" value="OEKO-TEX" />OEKO-TEX</label>
+            <label class="cert-check" onclick="toggleCert(this)"><input type="checkbox" value="GRS" />GRS</label>
+            <label class="cert-check" onclick="toggleCert(this)"><input type="checkbox" value="Bluesign" />Bluesign</label>
+            <label class="cert-check" onclick="toggleCert(this)"><input type="checkbox" value="RCS" />RCS</label>
+            <label class="cert-check" onclick="toggleCert(this)"><input type="checkbox" value="Fair Trade" />Fair Trade</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-green" id="saveBtn" onclick="saveFabric()">Save Fabric</button>
+        <button class="btn btn-border" onclick="closeForm()">Cancel</button>
+      </div>
+    </div>
+
+    <!-- LIST -->
+    <div class="fabric-list" id="fabricList">
+      <div class="empty-list">Loading fabrics…</div>
+    </div>
+
+  </div><!-- /wrap -->
+
+  <!-- DELETE CONFIRM -->
+  <div class="confirm-overlay" id="confirmOverlay">
+    <div class="confirm-box">
+      <h3>Delete Fabric?</h3>
+      <p id="confirmText">This will permanently remove this fabric from the library. This cannot be undone.</p>
+      <div class="confirm-actions">
+        <button class="btn btn-red" id="confirmYes">Delete</button>
+        <button class="btn btn-border" onclick="closeConfirm()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ── CONFIG ────────────────────────────────────────────────────────
+    const LS = {
+      get owner() { return localStorage.getItem('tfc_owner') || ''; },
+      get repo()  { return localStorage.getItem('tfc_repo')  || ''; },
+      get token() { return localStorage.getItem('tfc_token') || ''; },
+      set owner(v) { localStorage.setItem('tfc_owner', v); },
+      set repo(v)  { localStorage.setItem('tfc_repo',  v); },
+      set token(v) { localStorage.setItem('tfc_token', v); },
+    };
+
+    let FABRICS = [];
+    let currentSha = '';
+
+    // ── INIT ─────────────────────────────────────────────────────────
+    window.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('ghOwner').value = LS.owner;
+      document.getElementById('ghRepo').value  = LS.repo;
+      document.getElementById('ghToken').value = LS.token;
+      loadFabrics();
+    });
+
+    // ── SETTINGS ─────────────────────────────────────────────────────
+    function saveSettings() {
+      LS.owner = document.getElementById('ghOwner').value.trim();
+      LS.repo  = document.getElementById('ghRepo').value.trim();
+      LS.token = document.getElementById('ghToken').value.trim();
+      showStatus('Settings saved.', 'ok');
+    }
+
+    // ── LOAD ─────────────────────────────────────────────────────────
+    async function loadFabrics() {
+      try {
+        const res = await fetch('fabrics.json?v=' + Date.now());
+        if (!res.ok) throw new Error('Could not load fabrics.json');
+        FABRICS = await res.json();
+        renderList();
+      } catch(e) {
+        showStatus('Could not load fabrics. ' + e.message, 'err');
+        document.getElementById('fabricList').innerHTML =
+          '<div class="empty-list">Could not load fabric data.</div>';
+      }
+    }
+
+    // ── RENDER LIST ──────────────────────────────────────────────────
+    function renderList() {
+      const list = document.getElementById('fabricList');
+      document.getElementById('fabricCount').textContent = FABRICS.length + ' fabrics';
+
+      if (!FABRICS.length) {
+        list.innerHTML = '<div class="empty-list">No fabrics yet. Add your first one above.</div>';
+        return;
+      }
+
+      list.innerHTML = FABRICS.map((f, i) => `
+        <div class="fabric-row">
+          <img class="row-thumb" src="${f.image}" alt="${f.name}" onerror="this.style.display='none'" />
+          <span class="row-id">${f.id}</span>
+          <span class="row-name">${f.name}</span>
+          <span class="row-cat cat-${f.category}">${catLabel(f.category)}</span>
+          <span class="row-origin">${f.origin}</span>
+          <div class="row-actions">
+            <button class="btn btn-border" onclick="editFabric(${i})">Edit</button>
+            <button class="btn btn-red"    onclick="confirmDelete(${i})">Delete</button>
+          </div>
+        </div>`).join('');
+    }
+
+    function catLabel(c) {
+      return c === 'natural' ? 'Natural' : c === 'nextgen' ? 'Next-Gen' : 'Deadstock';
+    }
+
+    // ── FORM ─────────────────────────────────────────────────────────
+    function openNewForm() {
+      clearForm();
+      document.getElementById('formTitle').textContent = 'New Fabric';
+      document.getElementById('editingId').value = '';
+      document.getElementById('formCard').classList.add('open');
+      window.scrollTo({ top: document.getElementById('formCard').offsetTop - 80, behavior: 'smooth' });
+    }
+
+    function editFabric(i) {
+      const f = FABRICS[i];
+      clearForm();
+      document.getElementById('formTitle').textContent = 'Edit Fabric';
+      document.getElementById('editingId').value = f.id;
+      document.getElementById('fId').value       = f.id;
+      document.getElementById('fName').value     = f.name;
+      document.getElementById('fCategory').value = f.category;
+      document.getElementById('fFiber').value    = f.fiber;
+      document.getElementById('fOrigin').value   = f.origin;
+      document.getElementById('fMill').value     = f.mill;
+      document.getElementById('fWeight').value   = f.weight;
+      document.getElementById('fWidth').value    = f.width;
+      document.getElementById('fMoq').value      = f.moq;
+      document.getElementById('fDesc').value     = f.description;
+      document.getElementById('fImage').value    = f.image;
+      document.getElementById('fLimited').value  = String(f.limited);
+      previewImage();
+
+      // certs
+      document.querySelectorAll('.cert-check').forEach(el => {
+        const val = el.querySelector('input').value;
+        el.classList.toggle('checked', f.certifications.includes(val));
+      });
+
+      document.getElementById('formCard').classList.add('open');
+      window.scrollTo({ top: document.getElementById('formCard').offsetTop - 80, behavior: 'smooth' });
+    }
+
+    function closeForm() {
+      document.getElementById('formCard').classList.remove('open');
+      clearForm();
+    }
+
+    function clearForm() {
+      ['fId','fName','fFiber','fOrigin','fMill','fWeight','fWidth','fMoq','fDesc','fImage'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+      document.getElementById('fCategory').value = '';
+      document.getElementById('fLimited').value  = 'false';
+      document.getElementById('editingId').value = '';
+      document.querySelectorAll('.cert-check').forEach(el => el.classList.remove('checked'));
+      document.getElementById('imgPreview').classList.remove('show');
+    }
+
+    function toggleCert(el) {
+      el.classList.toggle('checked');
+    }
+
+    function previewImage() {
+      const url = document.getElementById('fImage').value.trim();
+      const img = document.getElementById('imgPreview');
+      if (url) { img.src = url; img.classList.add('show'); }
+      else { img.classList.remove('show'); }
+    }
+
+    // ── SAVE ─────────────────────────────────────────────────────────
+    async function saveFabric() {
+      const id       = document.getElementById('fId').value.trim();
+      const name     = document.getElementById('fName').value.trim();
+      const category = document.getElementById('fCategory').value;
+
+      if (!id || !name || !category) {
+        showStatus('Please fill in Fabric ID, Name, and Category.', 'err');
+        return;
+      }
+
+      if (!LS.token || !LS.owner || !LS.repo) {
+        showStatus('Please fill in your GitHub settings above first.', 'err');
+        return;
+      }
+
+      const certs = [...document.querySelectorAll('.cert-check.checked')]
+        .map(el => el.querySelector('input').value);
+
+      const fabric = {
+        id,
+        name,
+        category,
+        fiber:          document.getElementById('fFiber').value.trim(),
+        origin:         document.getElementById('fOrigin').value.trim(),
+        mill:           document.getElementById('fMill').value.trim(),
+        weight:         document.getElementById('fWeight').value.trim() || '—',
+        width:          document.getElementById('fWidth').value.trim()  || '—',
+        moq:            document.getElementById('fMoq').value.trim()    || '—',
+        certifications: certs,
+        description:    document.getElementById('fDesc').value.trim(),
+        image:          document.getElementById('fImage').value.trim(),
+        limited:        document.getElementById('fLimited').value === 'true',
+      };
+
+      const editingId = document.getElementById('editingId').value;
+      if (editingId) {
+        const idx = FABRICS.findIndex(f => f.id === editingId);
+        if (idx !== -1) FABRICS[idx] = fabric;
+        else FABRICS.push(fabric);
+      } else {
+        if (FABRICS.find(f => f.id === id)) {
+          showStatus(`ID "${id}" already exists. Use a different ID or edit the existing entry.`, 'err');
+          return;
+        }
+        FABRICS.push(fabric);
+      }
+
+      const btn = document.getElementById('saveBtn');
+      btn.innerHTML = '<span class="spinner"></span>Saving…';
+      btn.disabled = true;
+
+      const ok = await commitToGitHub();
+
+      btn.innerHTML = 'Save Fabric';
+      btn.disabled = false;
+
+      if (ok) {
+        closeForm();
+        renderList();
+      }
+    }
+
+    // ── DELETE ───────────────────────────────────────────────────────
+    let pendingDeleteIdx = -1;
+
+    function confirmDelete(i) {
+      pendingDeleteIdx = i;
+      document.getElementById('confirmText').textContent =
+        `This will permanently remove "${FABRICS[i].name}" from the library. This cannot be undone.`;
+      document.getElementById('confirmOverlay').classList.add('open');
+      document.getElementById('confirmYes').onclick = async () => {
+        closeConfirm();
+        FABRICS.splice(pendingDeleteIdx, 1);
+        const ok = await commitToGitHub();
+        if (ok) renderList();
+      };
+    }
+
+    function closeConfirm() {
+      document.getElementById('confirmOverlay').classList.remove('open');
+      pendingDeleteIdx = -1;
+    }
+
+    // ── GITHUB API ───────────────────────────────────────────────────
+    async function commitToGitHub() {
+      showStatus('<span class="spinner"></span>Saving to GitHub…', 'info');
+
+      try {
+        // 1. Get current SHA of fabrics.json
+        const metaRes = await fetch(
+          `https://api.github.com/repos/${LS.owner}/${LS.repo}/contents/fabrics.json`,
+          { headers: { Authorization: `token ${LS.token}`, Accept: 'application/vnd.github.v3+json' } }
+        );
+
+        if (!metaRes.ok) {
+          const err = await metaRes.json();
+          throw new Error(err.message || 'Could not read file from GitHub');
+        }
+
+        const meta = await metaRes.json();
+        const sha  = meta.sha;
+
+        // 2. Encode updated content as base64
+        const json    = JSON.stringify(FABRICS, null, 2);
+        const encoded = btoa(unescape(encodeURIComponent(json)));
+
+        // 3. Commit
+        const putRes = await fetch(
+          `https://api.github.com/repos/${LS.owner}/${LS.repo}/contents/fabrics.json`,
+          {
+            method: 'PUT',
+            headers: {
+              Authorization: `token ${LS.token}`,
+              Accept: 'application/vnd.github.v3+json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              message: `Update fabric database — ${new Date().toISOString().slice(0,10)}`,
+              content: encoded,
+              sha,
+            }),
+          }
+        );
+
+        if (!putRes.ok) {
+          const err = await putRes.json();
+          throw new Error(err.message || 'GitHub commit failed');
+        }
+
+        showStatus('Saved. The library will update within a minute.', 'ok');
+        return true;
+
+      } catch(e) {
+        showStatus('Error: ' + e.message, 'err');
+        return false;
+      }
+    }
+
+    // ── STATUS ───────────────────────────────────────────────────────
+    function showStatus(msg, type) {
+      const el = document.getElementById('status');
+      el.innerHTML = msg;
+      el.className = `status show ${type}`;
+      if (type === 'ok') setTimeout(() => el.classList.remove('show'), 5000);
+    }
+  </script>
+</body>
+</html>
