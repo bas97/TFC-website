@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fabric Library — The Fabric Connector</title>
+  <meta name="description" content="Browse our curated library of natural, next-generation, and deadstock fabrics from trusted mills worldwide." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white:  #ffffff;
+      --off:    #F5F5F3;
+      --black:  #0A0A0A;
+      --mid:    #5C5C5C;
+      --light:  #ABABAB;
+      --border: #E3E3E3;
+
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'Inter', sans-serif;
+      --font-mono:    'Space Mono', monospace;
+
+      --pad: clamp(1.5rem, 4vw, 4rem);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--pad);
+      height: 60px;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      transition: color 0.15s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--black); }
+
+    .nav-cta {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--black);
+      color: var(--white);
+      padding: 0.55rem 1.25rem;
+      transition: opacity 0.15s;
+    }
+    .nav-cta:hover { opacity: 0.75; }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      margin-top: 60px;
+      padding: 4rem var(--pad) 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-header-top {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding-bottom: 2.5rem;
+    }
+
+    .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .page-title .dim { color: var(--light); }
+
+    .page-desc {
+      max-width: 36ch;
+      font-size: 0.82rem;
+      color: var(--mid);
+      line-height: 1.7;
+      font-weight: 300;
+      text-align: right;
+    }
+
+    /* ── SEARCH & FILTERS ── */
+    .controls {
+      padding: 1.5rem var(--pad);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+      background: var(--white);
+      position: sticky;
+      top: 60px;
+      z-index: 50;
+    }
+
+    .search-wrap {
+      position: relative;
+      flex: 1;
+      min-width: 220px;
+      max-width: 360px;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.85rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--light);
+      pointer-events: none;
+      font-size: 0.75rem;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.65rem 0.85rem 0.65rem 2.2rem;
+      border: 1px solid var(--border);
+      background: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      color: var(--black);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .search-input::placeholder { color: var(--light); }
+    .search-input:focus { border-color: var(--black); }
+
+    .filter-group {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      background: var(--white);
+      color: var(--mid);
+      padding: 0.5rem 0.85rem;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+
+    .filter-btn:hover { border-color: var(--black); color: var(--black); }
+    .filter-btn.active { background: var(--black); color: var(--white); border-color: var(--black); }
+
+    .divider-v {
+      width: 1px;
+      height: 28px;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+
+    .results-count {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      color: var(--light);
+      text-transform: uppercase;
+      margin-left: auto;
+      white-space: nowrap;
+    }
+
+    .clear-btn {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--light);
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 0.15s;
+      padding: 0;
+    }
+    .clear-btn:hover { color: var(--black); }
+    .clear-btn.hidden { display: none; }
+
+    /* ── ACTIVE FILTER TAGS ── */
+    .active-filters {
+      padding: 0.75rem var(--pad);
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      min-height: 0;
+      transition: all 0.2s;
+    }
+    .active-filters.hidden { display: none; }
+
+    .active-tag {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--black);
+      color: var(--white);
+      padding: 0.28rem 0.6rem;
+    }
+
+    .active-tag button {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.5);
+      cursor: pointer;
+      font-size: 0.7rem;
+      padding: 0;
+      line-height: 1;
+      transition: color 0.15s;
+    }
+    .active-tag button:hover { color: var(--white); }
+
+    /* ── LAYOUT ── */
+    .library-layout {
+      display: flex;
+      min-height: calc(100vh - 60px);
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: 240px;
+      flex-shrink: 0;
+      border-right: 1px solid var(--border);
+      padding: 2rem 1.5rem;
+      position: sticky;
+      top: calc(60px + 57px);
+      height: fit-content;
+    }
+
+    .sidebar-section { margin-bottom: 2rem; }
+
+    .sidebar-title {
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-options { display: flex; flex-direction: column; gap: 0.2rem; }
+
+    .sidebar-opt {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.45rem 0.5rem;
+      cursor: pointer;
+      font-size: 0.8rem;
+      color: var(--mid);
+      transition: color 0.15s, background 0.15s;
+      border-radius: 0;
+    }
+
+    .sidebar-opt:hover { color: var(--black); background: var(--off); }
+    .sidebar-opt.active { color: var(--black); font-weight: 500; }
+
+    .sidebar-opt-count {
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
+      color: var(--light);
+      letter-spacing: 0.05em;
+    }
+
+    .sidebar-opt.active .sidebar-opt-count { color: var(--mid); }
+
+    /* ── GRID ── */
+    .grid-area {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .fabric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-left: none;
+    }
+
+    .fabric-card {
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+      cursor: default;
+    }
+
+    .fabric-card:hover { background: var(--off); }
+
+    .fabric-card:nth-child(3n) { border-right: none; }
+
+    .card-img {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: var(--off);
+      position: relative;
+    }
+
+    .card-img img { transition: transform 0.5s ease; filter: grayscale(8%); }
+    .fabric-card:hover .card-img img { transform: scale(1.03); }
+
+    .card-badge {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.48rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+    }
+
+    .badge-natural  { background: var(--black); color: var(--white); }
+    .badge-nextgen  { background: #1a1a1a; color: #aaffaa; }
+    .badge-deadstock { background: var(--off); color: var(--mid); border: 1px solid var(--border); }
+    .badge-limited  { background: #ff3300; color: var(--white); }
+
+    .card-meta {
+      padding: 1rem 1.2rem 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .card-id {
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
+      color: var(--light);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.35rem;
+    }
+
+    .card-name {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .card-origin {
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
+      color: var(--light);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 0.3rem;
+    }
+
+    .card-specs {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.65rem;
+    }
+
+    .spec {
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
+      color: var(--mid);
+      letter-spacing: 0.06em;
+    }
+
+    .spec span { color: var(--light); display: block; font-size: 0.45rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.1rem; }
+
+    .card-certs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-top: 0.75rem;
+    }
+
+    .cert {
+      font-family: var(--font-mono);
+      font-size: 0.48rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      padding: 0.15rem 0.4rem;
+      color: var(--mid);
+    }
+
+    /* Empty state */
+    .empty-state {
+      padding: 6rem 2rem;
+      text-align: center;
+      width: 100%;
+      grid-column: 1 / -1;
+    }
+
+    .empty-state h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 0.75rem;
+    }
+
+    .empty-state p {
+      font-size: 0.82rem;
+      color: var(--light);
+    }
+
+    /* ── FABRIC DETAIL MODAL ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10,10,10,0.7);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-overlay.open { opacity: 1; pointer-events: auto; }
+
+    .modal {
+      background: var(--white);
+      max-width: 860px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      transform: translateY(12px);
+      transition: transform 0.2s;
+    }
+
+    .modal-overlay.open .modal { transform: translateY(0); }
+
+    .modal-img {
+      aspect-ratio: unset;
+      min-height: 400px;
+      background: var(--off);
+      overflow: hidden;
+    }
+
+    .modal-content {
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      border-left: 1px solid var(--border);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--white);
+      border: 1px solid var(--border);
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s;
+    }
+
+    .modal-close:hover { background: var(--off); }
+
+    .modal-id {
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      color: var(--light);
+      letter-spacing: 0.1em;
+    }
+
+    .modal-name {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .modal-desc {
+      font-size: 0.82rem;
+      color: var(--mid);
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    .modal-specs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      padding: 1.25rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-spec {
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+    }
+
+    .modal-spec-label {
+      color: var(--light);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .modal-spec-value { color: var(--black); }
+
+    .modal-certs { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+    .btn-request {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--black);
+      color: var(--white);
+      padding: 0.85rem 1.5rem;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.15s;
+      text-align: center;
+    }
+    .btn-request:hover { opacity: 0.75; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      padding: 2rem var(--pad);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-brand {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      color: var(--light);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .fabric-grid { grid-template-columns: repeat(2, 1fr); }
+      .fabric-card:nth-child(3n) { border-right: 1px solid var(--border); }
+      .fabric-card:nth-child(2n) { border-right: none; }
+    }
+
+    @media (max-width: 860px) {
+      .sidebar { display: none; }
+      .modal { grid-template-columns: 1fr; }
+      .modal-img { min-height: 280px; }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links, .nav-cta { display: none; }
+      .fabric-grid { grid-template-columns: 1fr; }
+      .fabric-card:nth-child(n) { border-right: none; }
+      .page-header-top { flex-direction: column; gap: 1rem; align-items: flex-start; }
+      .page-desc { text-align: left; }
+      .controls { gap: 0.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">The Fabric Connector</a>
+    <ul class="nav-links">
+      <li><a href="index.html#pillars">What We Source</a></li>
+      <li><a href="index.html#how">How It Works</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="library.html" class="active">Library</a></li>
+    </ul>
+    <a href="index.html#contact" class="nav-cta">Work With Us</a>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-top">
+      <h1 class="page-title">Fabric<br><span class="dim">Library.</span></h1>
+      <p class="page-desc">A curated selection of natural fibres, next-generation materials, and deadstock from trusted mills worldwide. Updated regularly.</p>
+    </div>
+  </div>
+
+  <!-- CONTROLS -->
+  <div class="controls">
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input type="text" class="search-input" id="searchInput" placeholder="Search fabrics, fibres, origins…" autocomplete="off" />
+    </div>
+
+    <div class="divider-v"></div>
+
+    <div class="filter-group" id="categoryFilters">
+      <button class="filter-btn active" data-filter="category" data-value="all">All</button>
+      <button class="filter-btn" data-filter="category" data-value="natural">Natural</button>
+      <button class="filter-btn" data-filter="category" data-value="nextgen">Next-Gen</button>
+      <button class="filter-btn" data-filter="category" data-value="deadstock">Deadstock</button>
+    </div>
+
+    <div class="divider-v"></div>
+
+    <div class="filter-group" id="certFilters">
+      <button class="filter-btn" data-filter="cert" data-value="GOTS">GOTS</button>
+      <button class="filter-btn" data-filter="cert" data-value="OEKO-TEX">OEKO-TEX</button>
+      <button class="filter-btn" data-filter="cert" data-value="GRS">GRS</button>
+      <button class="filter-btn" data-filter="cert" data-value="Bluesign">Bluesign</button>
+    </div>
+
+    <span class="results-count" id="resultsCount">24 Fabrics</span>
+    <button class="clear-btn hidden" id="clearBtn">Clear All</button>
+  </div>
+
+  <!-- ACTIVE FILTER TAGS -->
+  <div class="active-filters hidden" id="activeFilters"></div>
+
+  <!-- MAIN LAYOUT -->
+  <div class="library-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-section">
+        <p class="sidebar-title">Fibre Type</p>
+        <div class="sidebar-options" id="fiberOptions"></div>
+      </div>
+      <div class="sidebar-section">
+        <p class="sidebar-title">Origin</p>
+        <div class="sidebar-options" id="originOptions"></div>
+      </div>
+      <div class="sidebar-section">
+        <p class="sidebar-title">Weight</p>
+        <div class="sidebar-options" id="weightOptions"></div>
+      </div>
+    </aside>
+
+    <!-- GRID -->
+    <div class="grid-area">
+      <div class="fabric-grid" id="fabricGrid"></div>
+    </div>
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+    <div class="modal" id="modal">
+      <div class="modal-img"><img id="modalImg" src="" alt="" /></div>
+      <div class="modal-content">
+        <div>
+          <p class="modal-id" id="modalId"></p>
+          <h2 class="modal-name" id="modalName"></h2>
+        </div>
+        <p class="modal-desc" id="modalDesc"></p>
+        <div class="modal-specs-grid" id="modalSpecs"></div>
+        <div>
+          <p style="font-family:var(--font-mono);font-size:0.52rem;color:var(--light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem;">Certifications</p>
+          <div class="modal-certs" id="modalCerts"></div>
+        </div>
+        <a href="index.html#contact" class="btn-request">Request Sample</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p class="footer-brand">The Fabric Connector</p>
+    <p class="footer-copy">© 2025 — All rights reserved</p>
+  </footer>
+
+  <script>
+    // ── FABRIC DATABASE ──────────────────────────────────────────────
+    const FABRICS = [
+      {
+        id: "TFC-NL-001",
+        name: "Belgian Stonewashed Linen",
+        category: "natural",
+        fiber: "Linen",
+        origin: "Belgium",
+        mill: "Van Cleemputte",
+        weight: "185gsm",
+        width: "150cm",
+        moq: "50m",
+        certifications: ["OEKO-TEX"],
+        description: "A beautifully relaxed, stonewashed linen with exceptional drape and a lived-in texture. Ideal for shirts, trousers, and outerwear. One of our most consistently requested naturals.",
+        image: "https://images.unsplash.com/photo-1594938298603-c8148c4c1b61?w=800&auto=format&fit=crop&q=80",
+        limited: false
+      },
+      {
+        id: "TFC-NW-008",
+        name: "Organic Merino Wool",
+        category: "natural",
+        fiber: "Wool",
+        origin: "Italy",
+        mill: "Lanificio Cerruti",
+        weight: "210gsm",
+        width: "150cm",
+        moq: "30m",
+        certifications: ["GOTS", "OEKO-TEX"],
+        description: "Super-fine 18.5 micron merino, certified organic, from a renowned Biella mill. Incredibly soft handle with excellent recovery. Suited to tailoring, knitwear, and precision-cut separates.",
+        image: "https://images.unsplash.com/photo-1600185365778-46f7f9c3e024?w=800&auto=format&fit=crop&q=80",
+        limited: false
+      },
+      {
+        id: "TFC-NC-012",
+        name: "GOTS Organic Poplin",
+        category: "natural",
+        fiber: "Cotton",
+        origin: "Portugal",
+        mill: "Têxtil Manuel Gonçalves",
+        weight: "120gsm",
+        width: "145cm",
+        moq: "100m",
+        certifications: ["GOTS", "OEKO-TEX"],
+        description: "A crisp, lightweight organic cotton poplin. Excellent colour-fastness and a refined, smooth hand. Ideal for shirts, dresses, and precision-cut styles.",
+        image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop&q=80",
+        limited: false
+      },
+      {
+        id: "TFC-NH-005",
+        name: "Japanese Hemp Canvas",
+        category: "natural",
+        fiber: "Hemp",
+        origin: "Japan",
+        mill: "Kurabo Industries",
+        weight: "320gsm",
+        width: "148cm",
+        moq: "50m",
+        certifications: ["OEKO-TEX"],
+        description: "A robust yet refined hemp canvas with a slightly nubby texture. Naturally antibacterial and UV-resistant. Perfect for bags, outerwear, and structured garments.",
+        image: "https://images.unsplash.com/photo-1581075100757-a8bbeef0e10d?w=800&auto=format&fit=crop&q=80",
+        limited: false
+      },
+      {
+        id: "TFC-NS-019",
+        name: "Peace Silk Charmeuse",
+        category: "natural",
+        fiber: "Silk",
+        origin: "India",
+        mill: "Prakruti Silk Mills",
+        weight: "90gsm",
+        width: "140cm",
+        moq: "25m",
+        certifications: ["GOTS"],
+        description: "Ahimsa (peace) silk — produced without harming the silkworm. A luminous charmeuse with a fluid drape and subtle sheen. Exceptional for eveningwear and soft tailoring.",
+        image: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=800&auto=format&fit=crop&q=80",
+        limited: false
+      },
+      {
+        id: "TFC-NL-023",
+        name: "Irish Medium-Weight Linen",
+        category: "natural",
+        fiber: "Linen",
+        origin: "Ireland",
+        mill: "Thomas Ferguson & Co.",
+        weight: "240gsm",
+        width: "152cm",
+        moq: "40m",
+        certifications: ["OEKO-TEX"],
+        description: "A classic medium-weight Irish linen with a clean, structured hand. Heritage production with traceable fibre sourcing. Suited to tailoring, interiors, and premium workwear.",
+        image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&auto=format&fit=crop&q=80",
+        limited: false
+      },
+      {
+        id: "TFC-NC-031",
+        name: "Turkish Terry Towelling",
+        category: "natural",
+        fiber: "Cotton",
+        origin: "Turkey",
+        mill: "Ege Tekstil",
+        weight: "450gsm",
+        width: "148cm",
+        moq: "80m",
+        certifications: ["GOTS", "OEKO-TEX"],
+        description: "Plush, double-sided terry towelling in certified organic cotton. A signature fabric for contemporary loungewear, resort collections, and accessories.",
+        image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&auto=format&fit=crop&q=80",
+        limited: false
+      },
+      {
+        id: "TFC-NW-027",
+        name: "Regenerative Boiled Wool",
+        category: "natural",
+        fiber: "Wool",
+        origin: "Austria",
+        mill: "Steiner 1888",
+        weight: "490gsm",
+        width: "150cm",
+        moq: "30m",
+        certifications: ["OEKO-TEX", "Bluesign"],
+        description: "Boiled wool from regeneratively farmed Austrian sheep. Dense, felted structure with extraordinary warmth-to-weight ratio. Iconic for structured coats and jackets.",
+        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop&q=80",
+        limited: false
+      },
+
+      // NEXT-GEN
+      {
+        id: "TFC-NG-003",
+        name: "Mycelium Leather",
+        category: "nextgen",
+        fiber: "Mycelium",
+        origin: "Netherlands",
+        mill: "Ecovative / Grown.bio",
+        weight: "—",
+        width: "120cm",
+        moq: "20m",
+        certifications: [],
+        description: "Grown from mushroom mycelium, this leather alternative offers a supple, pliable surface with a distinctive organic texture. Fully biodegradable. Suited to accessories, bags, and footwear uppers.",
+        image: "https://images.unsplash.com/photo-1581075100757-a8bbeef0e10d?w=800&auto=format&fit=crop&q=80",
+        limited: true
+      },
+      {
+        id: "TFC-NG-007",
+        name: "Algae-Based Jersey",
+        category: "nextgen",
+        fiber: "Algae Biopolymer",
+        origin: "Germany",
+        mill: "AlgiKnit GmbH",
+        weight: "160gsm",
+        width: "155cm",
+        moq: "30m",
+        certifications: ["OEKO-TEX"],
+        description: "A smooth, lightweight jersey knit derived from seaweed biopolymers. Naturally antimicrobial, fully compostable. A pioneering choice for activewear and jersey basics.",
+        image: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=800&auto=format&fit=crop&q=80",
+        limited: false
+      },
+      {
+        id: "TFC-NG-011",
+        name: "Recycled Ocean Nylon",
+        category: "nextgen",
+        fiber: "Recycled Nylon",
+        origin: "Italy",
+        mill: "Aquafil (ECONYL®)",
+        weight: "200gsm",
+        width: "145cm",
+        moq: "50m",
+        certifications: ["GRS", "Bluesign"],
+        description: "ECONYL® regenerated nylon recovered from ocean plastic, ghost nets, and landfill waste. High performance, exceptional lustre. Ideal for swimwear, activewear, and linings.",
+        image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&auto=format&fit=crop&q=80",
+        limited: false
+      },
+      {
+        id: "TFC-NG-015",
+        name: "Bio-Based PET Woven",
+        category: "nextgen",
+        fiber: "Bio-PET",
+        origin: "Taiwan",
+        mill: "Far Eastern New Century",
+        weight: "175gsm",
+        width: "150cm",
+        moq: "100m",
+        certifications: ["GRS", "OEKO-TEX"],
+        description: "A crisp woven fabric made from plant-based PET derived from sugarcane. Drop-in replacement for conventional polyester with a 70% lower carbon footprint.",
+        image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&auto=format&fit=crop&q=80",
+        limited: false
+      },
+      {
+        id: "TFC-NG-020",
+        name: "Tencel™ Lyocell Twill",
+        category: "nextgen",
+        fiber: "Lyocell",
+        origin: "Austria",
+        mill: "Lenzing AG",
+        weight: "195gsm",
+        width: "148cm",
+        moq: "50m",
+        certifications: ["OEKO-TEX", "Bluesign"],
+        description: "Tencel™ lyocell in a fine twill weave. Exceptionally soft, moisture-wicking, and produced in a closed-loop solvent process. Versatile for workwear, casualwear, and dresses.",
+        image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop&q=80",
+        limited: false
+      },
+      {
+        id: "TFC-NG-024",
+        name: "Pineapple Fibre Non-Woven",
+        category: "nextgen",
+        fiber: "Piñatex",
+        origin: "Philippines / UK",
+        mill: "Ananas Anam",
+        weight: "—",
+        width: "110cm",
+        moq: "20m",
+        certifications: ["OEKO-TEX"],
+        description: "Piñatex® — a natural textile made from pineapple leaf fibres, a by-product of the pineapple harvest. Textural, distinctive surface ideal for footwear, bags, and accessories.",
+        image: "https://images.unsplash.com/photo-1594938298603-c8148c4c1b61?w=800&auto=format&fit=crop&q=80",
+        limited: true
+      },
+      {
+        id: "TFC-NG-028",
+        name: "Recycled Cashmere Knit",
+        category: "nextgen",
+        fiber: "Recycled Cashmere",
+        origin: "Italy",
+        mill: "Cariaggi Lanificio",
+        weight: "140gsm",
+        width: "155cm",
+        moq: "25m",
+        certifications: ["GRS", "OEKO-TEX"],
+        description: "Post-consumer cashmere, collected and re-spun in Prato, Italy's recycled textile hub. All the luxurious softness of virgin cashmere, with a fraction of the environmental cost.",
+        image: "https://images.unsplash.com/photo-1600185365778-46f7f9c3e024?w=800&auto=format&fit=crop&q=80",
+        limited: false
+      },
+      {
+        id: "TFC-NG-033",
+        name: "Hemp-Organic Cotton Blend",
+        category: "nextgen",
+        fiber: "Hemp / Cotton",
+        origin: "France",
+        mill: "Tissage Moutet",
+        weight: "260gsm",
+        width: "145cm",
+        moq: "40m",
+        certifications: ["GOTS"],
+        description: "A 55% hemp, 45% organic cotton blend with a beautiful texture that softens with each wash. Increasingly popular for premium denim-weight applications.",
+        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop&q=80",
+        limited: false
+      },
+
+      // DEADSTOCK
+      {
+        id: "TFC-DS-021",
+        name: "Selvedge Denim",
+        category: "deadstock",
+        fiber: "Cotton",
+        origin: "Japan",
+        mill: "Kaihara Mills",
+        weight: "340gsm",
+        width: "82cm",
+        moq: "10m",
+        certifications: [],
+        description: "A rare find — 340m of 14oz raw selvedge denim from Kaihara, one of Japan's most revered denim mills. Rich indigo, tight weave, and a beautiful natural slub. For serious denim designers only.",
+        image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop&q=80",
+        limited: true
+      },
+      {
+        id: "TFC-DS-014",
+        name: "Italian Double-Faced Wool",
+        category: "deadstock",
+        fiber: "Wool",
+        origin: "Italy",
+        mill: "Vitale Barberis Canonico",
+        weight: "580gsm",
+        width: "150cm",
+        moq: "15m",
+        certifications: ["OEKO-TEX"],
+        description: "85m of double-faced wool from VBC's archive collection. Midnight navy one side, camel the other. An extraordinary fabric for a limited coat run.",
+        image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&auto=format&fit=crop&q=80",
+        limited: true
+      },
+      {
+        id: "TFC-DS-018",
+        name: "French Jacquard Brocade",
+        category: "deadstock",
+        fiber: "Silk / Viscose",
+        origin: "France",
+        mill: "Tassinari & Chatel",
+        weight: "280gsm",
+        width: "130cm",
+        moq: "10m",
+        certifications: [],
+        description: "120m of a discontinued jacquard brocade from a storied Lyon mill. Floral pattern in dusty rose and gold on an ivory ground. Exceptional for eveningwear and statement pieces.",
+        image: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=800&auto=format&fit=crop&q=80",
+        limited: true
+      },
+      {
+        id: "TFC-DS-009",
+        name: "Portuguese Corduroy",
+        category: "deadstock",
+        fiber: "Cotton",
+        origin: "Portugal",
+        mill: "Coteminas",
+        weight: "380gsm",
+        width: "145cm",
+        moq: "30m",
+        certifications: ["OEKO-TEX"],
+        description: "220m of fine-wale cotton corduroy in a warm forest green. Dense, well-constructed pile with excellent colour vibrancy. Ideal for trousers, jackets, and accessories.",
+        image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&auto=format&fit=crop&q=80",
+        limited: false
+      },
+      {
+        id: "TFC-DS-025",
+        name: "Deadstock Silk Satin",
+        category: "deadstock",
+        fiber: "Silk",
+        origin: "China",
+        mill: "Wensli Group",
+        weight: "110gsm",
+        width: "140cm",
+        moq: "15m",
+        certifications: ["OEKO-TEX"],
+        description: "180m of a soft, champagne-toned silk satin with an exceptional drape. Archive stock from a premium mill. Available in a single colour — once it's gone, it's gone.",
+        image: "https://images.unsplash.com/photo-1594938298603-c8148c4c1b61?w=800&auto=format&fit=crop&q=80",
+        limited: true
+      },
+      {
+        id: "TFC-DS-030",
+        name: "Deadstock Technical Nylon",
+        category: "deadstock",
+        fiber: "Nylon",
+        origin: "South Korea",
+        mill: "Hyosung",
+        weight: "130gsm",
+        width: "148cm",
+        moq: "50m",
+        certifications: ["Bluesign"],
+        description: "400m of a matte, lightweight nylon ripstop in black. Originally produced for a large sportswear brand. Excellent construction, versatile for outerwear, bags, and technical garments.",
+        image: "https://images.unsplash.com/photo-1581075100757-a8bbeef0e10d?w=800&auto=format&fit=crop&q=80",
+        limited: false
+      },
+      {
+        id: "TFC-DS-035",
+        name: "Merino Flannel Archive",
+        category: "deadstock",
+        fiber: "Wool",
+        origin: "England",
+        mill: "Abraham Moon & Sons",
+        weight: "350gsm",
+        width: "150cm",
+        moq: "20m",
+        certifications: ["OEKO-TEX"],
+        description: "Soft, brushed merino flannel from a Yorkshire mill's archive. Classic charcoal grey with a fine herringbone weave. 160m remaining. A rare chance to work with a storied British fabric.",
+        image: "https://images.unsplash.com/photo-1600185365778-46f7f9c3e024?w=800&auto=format&fit=crop&q=80",
+        limited: true
+      },
+      {
+        id: "TFC-DS-040",
+        name: "Organic Cotton Gauze",
+        category: "deadstock",
+        fiber: "Cotton",
+        origin: "India",
+        mill: "Pratibha Syntex",
+        weight: "80gsm",
+        width: "145cm",
+        moq: "50m",
+        certifications: ["GOTS"],
+        description: "350m of delicate double gauze in organic cotton. An airy, open weave with beautiful translucency. Perfect for summer dresses, blouses, and layering pieces.",
+        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop&q=80",
+        limited: false
+      }
+    ];
+
+    // ── STATE ──────────────────────────────────────────────────────
+    let state = {
+      search: "",
+      category: "all",
+      certs: [],
+      fiber: "",
+      origin: "",
+      weight: ""
+    };
+
+    // ── FILTER & RENDER ───────────────────────────────────────────
+    function getFiltered() {
+      return FABRICS.filter(f => {
+        const q = state.search.toLowerCase();
+        const matchSearch = !q ||
+          f.name.toLowerCase().includes(q) ||
+          f.fiber.toLowerCase().includes(q) ||
+          f.origin.toLowerCase().includes(q) ||
+          f.mill.toLowerCase().includes(q) ||
+          f.description.toLowerCase().includes(q) ||
+          f.certifications.some(c => c.toLowerCase().includes(q));
+
+        const matchCat = state.category === "all" || f.category === state.category;
+
+        const matchCerts = state.certs.length === 0 ||
+          state.certs.every(c => f.certifications.includes(c));
+
+        const matchFiber = !state.fiber || f.fiber === state.fiber;
+        const matchOrigin = !state.origin || f.origin === state.origin;
+
+        let matchWeight = true;
+        if (state.weight) {
+          const w = parseInt(f.weight);
+          if (state.weight === "light")  matchWeight = !isNaN(w) && w < 150;
+          if (state.weight === "medium") matchWeight = !isNaN(w) && w >= 150 && w <= 280;
+          if (state.weight === "heavy")  matchWeight = !isNaN(w) && w > 280;
+        }
+
+        return matchSearch && matchCat && matchCerts && matchFiber && matchOrigin && matchWeight;
+      });
+    }
+
+    function badgeClass(cat) {
+      if (cat === "natural")   return "badge-natural";
+      if (cat === "nextgen")   return "badge-nextgen";
+      if (cat === "deadstock") return "badge-deadstock";
+      return "";
+    }
+
+    function badgeLabel(cat) {
+      if (cat === "natural")   return "Natural";
+      if (cat === "nextgen")   return "Next-Gen";
+      if (cat === "deadstock") return "Deadstock";
+      return "";
+    }
+
+    function renderGrid() {
+      const filtered = getFiltered();
+      const grid = document.getElementById("fabricGrid");
+      document.getElementById("resultsCount").textContent =
+        filtered.length + (filtered.length === 1 ? " Fabric" : " Fabrics");
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state">
+            <h3>No fabrics found</h3>
+            <p>Try adjusting your search or filters.</p>
+          </div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map((f, i) => `
+        <div class="fabric-card" onclick="openModal('${f.id}')">
+          <div class="card-img">
+            <img src="${f.image}" alt="${f.name}" loading="lazy" />
+            <span class="card-badge ${badgeClass(f.category)}">${badgeLabel(f.category)}</span>
+            ${f.limited ? '<span class="card-badge badge-limited" style="left:auto;right:0.75rem;">Limited</span>' : ""}
+          </div>
+          <div class="card-meta">
+            <p class="card-id">${f.id}</p>
+            <p class="card-name">${f.name}</p>
+            <p class="card-origin">${f.origin} — ${f.fiber}</p>
+            <div class="card-specs">
+              <div class="spec"><span>Weight</span>${f.weight}</div>
+              <div class="spec"><span>MOQ</span>${f.moq}</div>
+              <div class="spec"><span>Width</span>${f.width}</div>
+            </div>
+            <div class="card-certs">
+              ${f.certifications.map(c => `<span class="cert">${c}</span>`).join("")}
+            </div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    // ── SIDEBAR FACETS ────────────────────────────────────────────
+    function buildSidebar() {
+      const fibers  = [...new Set(FABRICS.map(f => f.fiber))].sort();
+      const origins = [...new Set(FABRICS.map(f => f.origin))].sort();
+
+      const fiberCounts = {};
+      const originCounts = {};
+      FABRICS.forEach(f => {
+        fiberCounts[f.fiber]   = (fiberCounts[f.fiber]  || 0) + 1;
+        originCounts[f.origin] = (originCounts[f.origin]|| 0) + 1;
+      });
+
+      document.getElementById("fiberOptions").innerHTML =
+        fibers.map(fib => `
+          <div class="sidebar-opt ${state.fiber === fib ? "active":""}"
+               onclick="setSidebarFilter('fiber','${fib}')">
+            ${fib}
+            <span class="sidebar-opt-count">${fiberCounts[fib]}</span>
+          </div>`).join("");
+
+      document.getElementById("originOptions").innerHTML =
+        origins.map(ori => `
+          <div class="sidebar-opt ${state.origin === ori ? "active":""}"
+               onclick="setSidebarFilter('origin','${ori}')">
+            ${ori}
+            <span class="sidebar-opt-count">${originCounts[ori]}</span>
+          </div>`).join("");
+
+      document.getElementById("weightOptions").innerHTML = [
+        { key: "light",  label: "Lightweight", sub: "< 150gsm" },
+        { key: "medium", label: "Midweight",   sub: "150–280gsm" },
+        { key: "heavy",  label: "Heavyweight", sub: "> 280gsm" }
+      ].map(w => `
+        <div class="sidebar-opt ${state.weight === w.key ? "active":""}"
+             onclick="setSidebarFilter('weight','${w.key}')">
+          ${w.label} <span style="color:var(--light);font-size:0.6em">${w.sub}</span>
+          <span class="sidebar-opt-count">${FABRICS.filter(f=>{
+            const g=parseInt(f.weight);
+            if(w.key==="light")  return !isNaN(g)&&g<150;
+            if(w.key==="medium") return !isNaN(g)&&g>=150&&g<=280;
+            if(w.key==="heavy")  return !isNaN(g)&&g>280;
+          }).length}</span>
+        </div>`).join("");
+    }
+
+    function setSidebarFilter(key, value) {
+      if (state[key] === value) { state[key] = ""; }
+      else { state[key] = value; }
+      buildSidebar();
+      renderActiveFilters();
+      renderGrid();
+      updateClearBtn();
+    }
+
+    // ── ACTIVE FILTER TAGS ────────────────────────────────────────
+    function renderActiveFilters() {
+      const wrap = document.getElementById("activeFilters");
+      const tags = [];
+
+      if (state.search) tags.push({ label: `"${state.search}"`, clear: () => { state.search = ""; document.getElementById("searchInput").value = ""; } });
+      if (state.category !== "all") tags.push({ label: badgeLabel(state.category), clear: () => { state.category = "all"; syncCategoryBtns(); } });
+      state.certs.forEach(c => tags.push({ label: c, clear: () => { state.certs = state.certs.filter(x => x !== c); syncCertBtns(); } }));
+      if (state.fiber)  tags.push({ label: state.fiber,  clear: () => { state.fiber = ""; buildSidebar(); } });
+      if (state.origin) tags.push({ label: state.origin, clear: () => { state.origin = ""; buildSidebar(); } });
+      if (state.weight) tags.push({ label: state.weight === "light" ? "Lightweight" : state.weight === "medium" ? "Midweight" : "Heavyweight",
+        clear: () => { state.weight = ""; buildSidebar(); } });
+
+      if (tags.length === 0) { wrap.classList.add("hidden"); return; }
+      wrap.classList.remove("hidden");
+      wrap.innerHTML = tags.map((t, i) => `
+        <span class="active-tag">
+          ${t.label}
+          <button onclick="removeTag(${i})">×</button>
+        </span>`).join("");
+      wrap._tags = tags;
+    }
+
+    window.removeTag = function(i) {
+      const wrap = document.getElementById("activeFilters");
+      wrap._tags[i].clear();
+      renderGrid();
+      renderActiveFilters();
+      updateClearBtn();
+    };
+
+    function updateClearBtn() {
+      const hasFilters = state.search || state.category !== "all" ||
+        state.certs.length || state.fiber || state.origin || state.weight;
+      document.getElementById("clearBtn").classList.toggle("hidden", !hasFilters);
+    }
+
+    // ── CONTROLS ──────────────────────────────────────────────────
+    document.getElementById("searchInput").addEventListener("input", e => {
+      state.search = e.target.value.trim();
+      renderGrid();
+      renderActiveFilters();
+      updateClearBtn();
+    });
+
+    document.querySelectorAll("[data-filter='category']").forEach(btn => {
+      btn.addEventListener("click", () => {
+        state.category = btn.dataset.value;
+        syncCategoryBtns();
+        renderGrid();
+        renderActiveFilters();
+        updateClearBtn();
+      });
+    });
+
+    function syncCategoryBtns() {
+      document.querySelectorAll("[data-filter='category']").forEach(b =>
+        b.classList.toggle("active", b.dataset.value === state.category));
+    }
+
+    document.querySelectorAll("[data-filter='cert']").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const v = btn.dataset.value;
+        if (state.certs.includes(v)) state.certs = state.certs.filter(c => c !== v);
+        else state.certs.push(v);
+        syncCertBtns();
+        renderGrid();
+        renderActiveFilters();
+        updateClearBtn();
+      });
+    });
+
+    function syncCertBtns() {
+      document.querySelectorAll("[data-filter='cert']").forEach(b =>
+        b.classList.toggle("active", state.certs.includes(b.dataset.value)));
+    }
+
+    document.getElementById("clearBtn").addEventListener("click", () => {
+      state = { search: "", category: "all", certs: [], fiber: "", origin: "", weight: "" };
+      document.getElementById("searchInput").value = "";
+      syncCategoryBtns();
+      syncCertBtns();
+      buildSidebar();
+      renderGrid();
+      renderActiveFilters();
+      updateClearBtn();
+    });
+
+    // ── MODAL ─────────────────────────────────────────────────────
+    window.openModal = function(id) {
+      const f = FABRICS.find(x => x.id === id);
+      if (!f) return;
+
+      document.getElementById("modalImg").src = f.image;
+      document.getElementById("modalImg").alt = f.name;
+      document.getElementById("modalId").textContent = f.id;
+      document.getElementById("modalName").textContent = f.name;
+      document.getElementById("modalDesc").textContent = f.description;
+
+      document.getElementById("modalSpecs").innerHTML = [
+        { label: "Fibre",   value: f.fiber },
+        { label: "Origin",  value: f.origin },
+        { label: "Mill",    value: f.mill },
+        { label: "Weight",  value: f.weight },
+        { label: "Width",   value: f.width },
+        { label: "MOQ",     value: f.moq },
+      ].map(s => `
+        <div class="modal-spec">
+          <span class="modal-spec-label">${s.label}</span>
+          <span class="modal-spec-value">${s.value}</span>
+        </div>`).join("");
+
+      document.getElementById("modalCerts").innerHTML = f.certifications.length
+        ? f.certifications.map(c => `<span class="cert">${c}</span>`).join("")
+        : `<span style="font-size:0.75rem;color:var(--light)">None listed</span>`;
+
+      document.getElementById("modalOverlay").classList.add("open");
+      document.body.style.overflow = "hidden";
+    };
+
+    window.closeModal = function(e) {
+      if (e.target === document.getElementById("modalOverlay")) {
+        document.getElementById("modalOverlay").classList.remove("open");
+        document.body.style.overflow = "";
+      }
+    };
+
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape") {
+        document.getElementById("modalOverlay").classList.remove("open");
+        document.body.style.overflow = "";
+      }
+    });
+
+    // ── INIT ──────────────────────────────────────────────────────
+    buildSidebar();
+    renderGrid();
+  </script>
+</body>
+</html>
