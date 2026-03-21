@@ -113,19 +113,47 @@
 
     /* ── HERO ── */
     .hero {
-      padding-top: 60px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      position: relative;
       min-height: 100svh;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .hero-left {
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      padding: 4rem var(--pad);
-      border-right: 1px solid var(--border);
+      justify-content: flex-end;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: var(--black);
+    }
+
+    .hero-bg iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 177.78vh;
+      height: 56.25vw;
+      min-width: 100%;
+      min-height: 100%;
+      border: none;
+      pointer-events: none;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: clamp(3rem, 6vw, 5rem) var(--pad);
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
     }
 
     .hero-top { display: flex; flex-direction: column; gap: 2.5rem; }
@@ -140,7 +168,7 @@
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: var(--black);
+      background: var(--white);
       animation: pulse 2s ease-in-out infinite;
     }
 
@@ -149,25 +177,28 @@
       50% { opacity: 0.3; }
     }
 
+    .hero-eyebrow .mono { color: rgba(255,255,255,0.5); }
+
     .hero-headline {
       font-family: var(--font-display);
-      font-size: clamp(3rem, 5.5vw, 6.5rem);
+      font-size: clamp(3.5rem, 7vw, 8rem);
       font-weight: 700;
       line-height: 1;
       letter-spacing: -0.03em;
       text-transform: uppercase;
+      color: var(--white);
     }
 
     .hero-headline .line-2 {
       display: inline;
-      color: var(--light);
+      color: rgba(255,255,255,0.4);
     }
 
     .hero-sub {
-      font-size: 0.88rem;
-      color: var(--mid);
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.65);
       line-height: 1.7;
-      max-width: 38ch;
+      max-width: 42ch;
       font-weight: 300;
     }
 
@@ -186,60 +217,29 @@
       font-size: 0.6rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      background: var(--black);
-      color: var(--white);
+      background: var(--white);
+      color: var(--black);
       padding: 0.85rem 1.75rem;
       transition: opacity 0.15s;
       white-space: nowrap;
     }
-    .btn-black:hover { opacity: 0.7; }
+    .btn-black:hover { opacity: 0.85; }
 
     .btn-border {
       font-family: var(--font-mono);
       font-size: 0.6rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      border: 1px solid var(--border);
-      color: var(--mid);
+      border: 1px solid rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.8);
       padding: 0.85rem 1.75rem;
       transition: border-color 0.15s, color 0.15s;
       white-space: nowrap;
     }
-    .btn-border:hover { border-color: var(--black); color: var(--black); }
+    .btn-border:hover { border-color: var(--white); color: var(--white); }
 
-    .hero-meta {
-      text-align: right;
-    }
-
-    .hero-right {
-      position: relative;
-      background: var(--black);
-      overflow: hidden;
-    }
-
-    .hero-right iframe {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 177.78vh;
-      height: 56.25vw;
-      min-width: 100%;
-      min-height: 100%;
-      border: none;
-      pointer-events: none;
-    }
-
-    .hero-img-label {
-      position: absolute;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      font-family: var(--font-mono);
-      font-size: 0.52rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-    }
+    .hero-meta { text-align: right; }
+    .hero-meta .mono { color: rgba(255,255,255,0.45); }
 
     /* ── MARQUEE ── */
     .marquee {
@@ -791,7 +791,7 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
       .hero { grid-template-columns: 1fr; }
-      .hero-right { min-height: 480px; }
+      .hero { min-height: 100svh; }
       .statement { grid-template-columns: 1fr; gap: 2rem; }
       .pillars-grid { grid-template-columns: 1fr; }
       .pillar { border-right: none; border-bottom: 1px solid var(--border); }
@@ -834,7 +834,16 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-left">
+    <div class="hero-bg">
+      <iframe
+        src="https://player.vimeo.com/video/1175794618?autoplay=1&loop=1&muted=1&background=1&controls=0"
+        allow="autoplay; fullscreen"
+        frameborder="0"
+      ></iframe>
+    </div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
       <div class="hero-top">
         <div class="hero-eyebrow">
           <div class="hero-dot"></div>
@@ -849,7 +858,7 @@
           The Fabric Connector is a curated fabric library and sourcing partner for design-driven, responsible fashion brands. Natural fibres, next-gen materials, and deadstock accessed through a single trusted source.
         </p>
       </div>
-      <div class="hero-bottom" style="margin-top:3rem;">
+      <div class="hero-bottom">
         <div class="hero-actions">
           <a href="contact.html" class="btn-black">Submit a fabric request</a>
           <a href="contact.html" class="btn-border">Work with us</a>
@@ -859,13 +868,6 @@
           <p class="mono" style="margin-top:0.3rem;">40+ Countries</p>
         </div>
       </div>
-    </div>
-    <div class="hero-right">
-      <iframe
-        src="https://player.vimeo.com/video/1175794618?autoplay=1&loop=1&muted=1&background=1&controls=0"
-        allow="autoplay; fullscreen"
-        frameborder="0"
-      ></iframe>
     </div>
   </section>
 
