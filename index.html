@@ -105,6 +105,12 @@
     }
     .nav-cta:hover { opacity: 0.75; }
 
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
     /* ── HERO ── */
     .hero {
       padding-top: 60px;
@@ -793,7 +799,7 @@
     }
 
     @media (max-width: 680px) {
-      .nav-links, .nav-cta { display: none; }
+      .nav-right { display: none; }
       .how-steps { grid-template-columns: 1fr; }
       .grid-4 { grid-template-columns: 1fr; }
       .values-grid { grid-template-columns: 1fr; }
@@ -809,11 +815,13 @@
   <!-- NAV -->
   <nav>
     <a href="index.html" class="nav-logo">The Fabric Connector</a>
-    <ul class="nav-links">
-      <li><a href="library.html">Library</a></li>
-      <li><a href="about.html">About</a></li>
-    </ul>
-    <a href="contact.html" class="nav-cta">Work With Us</a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="library.html">Library</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+      <a href="contact.html" class="nav-cta">Work With Us</a>
+    </div>
   </nav>
 
   <!-- HERO -->

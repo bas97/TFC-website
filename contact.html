@@ -90,6 +90,12 @@
     }
     .nav-cta:hover { opacity: 0.75; }
 
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
     /* ── PAGE LAYOUT ── */
     .contact-page {
       margin-top: 60px;
@@ -372,7 +378,8 @@
         border-bottom: 1px solid var(--border);
       }
       .form-row { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-right { display: none; }
       .footer-links { text-align: left; }
     }
   </style>
@@ -382,11 +389,13 @@
   <!-- NAV -->
   <nav>
     <a href="index.html" class="nav-logo">The Fabric Connector</a>
-    <ul class="nav-links">
-      <li><a href="library.html">Library</a></li>
-      <li><a href="about.html">About</a></li>
-    </ul>
-    <a href="contact.html" class="nav-cta active">Work With Us</a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="library.html">Library</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+      <a href="contact.html" class="nav-cta">Work With Us</a>
+    </div>
   </nav>
 
   <!-- CONTACT PAGE -->
@@ -485,12 +494,12 @@
       <p class="footer-tagline">A curated fabric library and sourcing partner for design-driven, responsible fashion brands. Natural fibres, next-gen materials, and deadstock — sourced with intention.</p>
       <p class="footer-tagline" style="margin-top:0.75rem;font-style:italic;">The right fabric is a brand statement.</p>
     </div>
-    <nav class="footer-links">
+    <div class="footer-links">
       <a href="library.html">Library</a>
       <a href="about.html">About</a>
       <a href="contact.html">Work With Us</a>
       <a href="mailto:info@fabric-connector.com">info@fabric-connector.com</a>
-    </nav>
+    </div>
     <p class="footer-legal">The Connector B.V. · KvK 89152220 · Amsterdamstestraatweg 45A, 1411AX Naarden</p>
   </footer>
 
