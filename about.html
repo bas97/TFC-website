@@ -160,41 +160,71 @@
 
     /* ── PAGE HERO ── */
     .page-hero {
-      margin-top: 60px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 70vh;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .hero-left {
-      padding: 5rem var(--pad);
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      border-right: 1px solid var(--border);
+      justify-content: flex-end;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
-    .hero-label { margin-bottom: 2rem; }
+    .hero-canvas-bg {
+      position: absolute;
+      inset: 0;
+      background: #09080a;
+    }
+
+    #heroCanvas {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      display: block;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.25);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: clamp(3rem, 6vw, 5rem) var(--pad);
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .hero-label {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 2rem;
+    }
 
     .hero-headline {
       font-family: var(--font-display);
-      font-size: clamp(3rem, 5.5vw, 6.5rem);
+      font-size: clamp(3rem, 6vw, 7rem);
       font-weight: 700;
       line-height: 1;
       letter-spacing: -0.03em;
       text-transform: uppercase;
+      color: var(--white);
     }
 
-    .hero-headline .dim { color: var(--light); }
+    .hero-headline .dim { color: rgba(255,255,255,0.4); }
 
     .hero-bottom {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(4, 1fr);
       gap: 2rem;
-      padding-top: 3rem;
-      border-top: 1px solid var(--border);
-      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.15);
     }
 
     .hero-stat-n {
@@ -203,40 +233,16 @@
       font-weight: 700;
       letter-spacing: -0.04em;
       line-height: 1;
+      color: var(--white);
     }
 
     .hero-stat-l {
       font-family: var(--font-mono);
       font-size: 0.52rem;
-      color: var(--light);
+      color: rgba(255,255,255,0.45);
       letter-spacing: 0.1em;
       text-transform: uppercase;
       margin-top: 0.3rem;
-    }
-
-    .hero-right {
-      background: var(--black);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .hero-right img {
-      filter: grayscale(15%);
-      opacity: 0.85;
-      transition: transform 8s ease;
-    }
-
-    .hero-right:hover img { transform: scale(1.03); }
-
-    .hero-img-label {
-      position: absolute;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      font-family: var(--font-mono);
-      font-size: 0.5rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
     }
 
     /* ── STORY ── */
@@ -668,8 +674,7 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
-      .page-hero { grid-template-columns: 1fr; }
-      .hero-right { min-height: 400px; }
+      .hero-bottom { grid-template-columns: 1fr 1fr; }
       .story { grid-template-columns: 1fr; }
       .story-content { border-left: none; border-top: 1px solid var(--border); }
       .approach-top { grid-template-columns: 1fr; gap: 2rem; }
@@ -727,7 +732,11 @@
 
   <!-- PAGE HERO -->
   <section class="page-hero">
-    <div class="hero-left">
+    <div class="hero-canvas-bg">
+      <canvas id="heroCanvas"></canvas>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
       <div>
         <p class="mono hero-label">About — The Fabric Connector</p>
         <h1 class="hero-headline">
@@ -755,14 +764,6 @@
           <p class="hero-stat-l">Countries sourced</p>
         </div>
       </div>
-    </div>
-    <div class="hero-right">
-      <img
-        src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1400&auto=format&fit=crop&q=85"
-        alt="Fabric samples at The Fabric Connector"
-        loading="eager"
-      />
-      <span class="hero-img-label">Material Library — Amsterdam</span>
     </div>
   </section>
 
@@ -1043,6 +1044,148 @@
       <p>Privacy · Terms</p>
     </div>
   </footer>
+
+  <script>
+    // ── Canvas hero animation ──────────────────────────────────────────
+    (function() {
+      const canvas = document.getElementById('heroCanvas');
+      const ctx = canvas.getContext('2d');
+      let W, H, EYE_X, EYE_Y, t = 0;
+
+      function resizeCanvas() {
+        W = canvas.offsetWidth;
+        H = canvas.offsetHeight;
+        canvas.width  = W;
+        canvas.height = H;
+        EYE_X = W * 0.5;
+        EYE_Y = H * 0.5;
+      }
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      function lerp(a, b, t) { return a + (b - a) * t; }
+      function bezier(p0, p1, p2, p3, t) {
+        const mt = 1 - t;
+        return {
+          x: mt*mt*mt*p0.x + 3*mt*mt*t*p1.x + 3*mt*t*t*p2.x + t*t*t*p3.x,
+          y: mt*mt*mt*p0.y + 3*mt*mt*t*p1.y + 3*mt*t*t*p2.y + t*t*t*p3.y
+        };
+      }
+
+      const THREADS = 7;
+
+      function draw() {
+        t += 0.006;
+        ctx.clearRect(0, 0, W, H);
+
+        ctx.fillStyle = '#09080a';
+        ctx.fillRect(0, 0, W, H);
+
+        const eyeGlow = ctx.createRadialGradient(EYE_X, EYE_Y, 0, EYE_X, EYE_Y, Math.min(W, H) * 0.35);
+        eyeGlow.addColorStop(0,   'rgba(210,195,165,0.10)');
+        eyeGlow.addColorStop(0.4, 'rgba(180,165,135,0.04)');
+        eyeGlow.addColorStop(1,   'transparent');
+        ctx.fillStyle = eyeGlow;
+        ctx.fillRect(0, 0, W, H);
+
+        for (let i = 0; i < THREADS; i++) {
+          const fi = i / (THREADS - 1);
+          const centerThread = Math.abs(fi - 0.5) < 0.15;
+          const spreadLeft  = (fi - 0.5) * H * 0.45;
+          const spreadRight = (fi - 0.5) * H * 0.35;
+
+          const p0 = { x: -20,    y: EYE_Y + spreadLeft  + Math.sin(t * 0.5 + fi * 2) * 8 };
+          const p1 = { x: W*0.22, y: EYE_Y + spreadLeft  * 0.5 + Math.sin(t * 0.6 + fi) * 5 };
+          const p2 = { x: W*0.78, y: EYE_Y + spreadRight * 0.5 + Math.sin(t * 0.55 + fi + 1) * 5 };
+          const p3 = { x: W+20,   y: EYE_Y + spreadRight + Math.sin(t * 0.5 + fi * 2 + 2) * 6 };
+
+          const STEPS = 120;
+
+          // Left half: raw, earthy
+          ctx.beginPath();
+          let started = false;
+          for (let s = 0; s <= STEPS / 2; s++) {
+            const frac = s / STEPS;
+            const pt = bezier(p0, p1, p2, p3, frac);
+            const jitter = (1 - frac * 2) * (centerThread ? 0.8 : 1.8);
+            const jx = pt.x + Math.sin(t * 3.1 + s * 0.7 + fi * 4) * jitter;
+            const jy = pt.y + Math.cos(t * 2.7 + s * 0.5 + fi * 3) * jitter;
+            if (!started) { ctx.moveTo(jx, jy); started = true; }
+            else ctx.lineTo(jx, jy);
+          }
+          const rawAlpha = centerThread ? 0.75 : 0.28 + fi * 0.18;
+          const rawR = centerThread ? 195 : lerp(160, 200, fi);
+          const rawG = centerThread ? 178 : lerp(145, 178, fi);
+          const rawB = centerThread ? 148 : lerp(110, 140, fi);
+          ctx.lineWidth = centerThread ? 1.4 : 0.7 + fi * 0.4;
+          ctx.strokeStyle = `rgba(${rawR},${rawG},${rawB},${rawAlpha})`;
+          ctx.lineCap = 'round';
+          ctx.stroke();
+
+          // Right half: refined, luminous
+          ctx.beginPath();
+          started = false;
+          for (let s = STEPS / 2; s <= STEPS; s++) {
+            const frac = s / STEPS;
+            const pt = bezier(p0, p1, p2, p3, frac);
+            if (!started) { ctx.moveTo(pt.x, pt.y); started = true; }
+            else ctx.lineTo(pt.x, pt.y);
+          }
+          const refAlpha = centerThread ? 0.82 : 0.22 + fi * 0.22;
+          const refR = centerThread ? 155 : lerp(130, 165, fi);
+          const refG = centerThread ? 185 : lerp(158, 188, fi);
+          const refB = centerThread ? 165 : lerp(135, 162, fi);
+          ctx.lineWidth = centerThread ? 1.2 : 0.6 + (1-fi) * 0.35;
+          ctx.strokeStyle = `rgba(${refR},${refG},${refB},${refAlpha})`;
+          ctx.stroke();
+        }
+
+        // Travelling pulse
+        const pulseT = (t * 0.22) % 1;
+        const pp = bezier(
+          {x:-20, y:EYE_Y}, {x:W*0.22, y:EYE_Y},
+          {x:W*0.78, y:EYE_Y}, {x:W+20, y:EYE_Y},
+          pulseT
+        );
+        const pastEye = pulseT > 0.5;
+        const pr = pastEye ? 155 : 200, pg = pastEye ? 200 : 175, pb = pastEye ? 175 : 140;
+        const pulse = ctx.createRadialGradient(pp.x, pp.y, 0, pp.x, pp.y, 18);
+        pulse.addColorStop(0,   `rgba(${pr},${pg},${pb},0.9)`);
+        pulse.addColorStop(0.3, `rgba(${pr},${pg},${pb},0.3)`);
+        pulse.addColorStop(1,   'transparent');
+        ctx.fillStyle = pulse;
+        ctx.fillRect(pp.x - 18, pp.y - 18, 36, 36);
+
+        // Eye line
+        const eyePulse = 0.5 + 0.5 * Math.sin(t * 1.4);
+        ctx.strokeStyle = `rgba(220,215,205,${0.08 + eyePulse * 0.1})`;
+        ctx.lineWidth = 0.5;
+        ctx.beginPath();
+        ctx.moveTo(EYE_X, EYE_Y - H * 0.22);
+        ctx.lineTo(EYE_X, EYE_Y + H * 0.22);
+        ctx.stroke();
+
+        // Vignette
+        const vig = ctx.createRadialGradient(EYE_X, EYE_Y, 60, EYE_X, EYE_Y, W * 0.75);
+        vig.addColorStop(0,   'transparent');
+        vig.addColorStop(0.6, 'rgba(0,0,0,0.15)');
+        vig.addColorStop(1,   'rgba(0,0,0,0.82)');
+        ctx.fillStyle = vig;
+        ctx.fillRect(0, 0, W, H);
+
+        // Edge fade
+        const dofL = ctx.createLinearGradient(0, 0, W*0.2, 0);
+        dofL.addColorStop(0, 'rgba(9,8,10,0.75)'); dofL.addColorStop(1, 'transparent');
+        ctx.fillStyle = dofL; ctx.fillRect(0, 0, W*0.2, H);
+        const dofR = ctx.createLinearGradient(W*0.8, 0, W, 0);
+        dofR.addColorStop(0, 'transparent'); dofR.addColorStop(1, 'rgba(9,8,10,0.75)');
+        ctx.fillStyle = dofR; ctx.fillRect(W*0.8, 0, W*0.2, H);
+
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+  </script>
 
   <script>
     document.getElementById('menuToggle').addEventListener('click', function() {
