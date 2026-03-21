@@ -159,7 +159,7 @@
     }
 
     .hero-headline .line-2 {
-      display: block;
+      display: inline;
       color: var(--light);
     }
 
@@ -175,9 +175,11 @@
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
     }
 
-    .hero-actions { display: flex; gap: 0.75rem; }
+    .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 
     .btn-black {
       font-family: var(--font-mono);
