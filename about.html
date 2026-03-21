@@ -169,17 +169,21 @@
       border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
-    .hero-canvas-bg {
-      position: absolute;
-      inset: 0;
-      background: #09080a;
-    }
-
-    #heroCanvas {
+    .hero-video-bg {
       position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      display: block;
+      overflow: hidden;
+      background: var(--black);
+    }
+
+    .hero-video-bg iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: none;
+      pointer-events: none;
     }
 
     .hero-overlay {
@@ -732,8 +736,12 @@
 
   <!-- PAGE HERO -->
   <section class="page-hero">
-    <div class="hero-canvas-bg">
-      <canvas id="heroCanvas"></canvas>
+    <div class="hero-video-bg">
+      <iframe
+        src="https://player.vimeo.com/video/1175802538?autoplay=1&loop=1&muted=1&background=1&controls=0"
+        allow="autoplay; fullscreen"
+        frameborder="0"
+      ></iframe>
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
@@ -1046,144 +1054,22 @@
   </footer>
 
   <script>
-    // ── Canvas hero animation ──────────────────────────────────────────
     (function() {
-      const canvas = document.getElementById('heroCanvas');
-      const ctx = canvas.getContext('2d');
-      let W, H, EYE_X, EYE_Y, t = 0;
-
-      function resizeCanvas() {
-        W = canvas.offsetWidth;
-        H = canvas.offsetHeight;
-        canvas.width  = W;
-        canvas.height = H;
-        EYE_X = W * 0.5;
-        EYE_Y = H * 0.5;
-      }
-      resizeCanvas();
-      window.addEventListener('resize', resizeCanvas);
-
-      function lerp(a, b, t) { return a + (b - a) * t; }
-      function bezier(p0, p1, p2, p3, t) {
-        const mt = 1 - t;
-        return {
-          x: mt*mt*mt*p0.x + 3*mt*mt*t*p1.x + 3*mt*t*t*p2.x + t*t*t*p3.x,
-          y: mt*mt*mt*p0.y + 3*mt*mt*t*p1.y + 3*mt*t*t*p2.y + t*t*t*p3.y
-        };
-      }
-
-      const THREADS = 7;
-
-      function draw() {
-        t += 0.006;
-        ctx.clearRect(0, 0, W, H);
-
-        ctx.fillStyle = '#09080a';
-        ctx.fillRect(0, 0, W, H);
-
-        const eyeGlow = ctx.createRadialGradient(EYE_X, EYE_Y, 0, EYE_X, EYE_Y, Math.min(W, H) * 0.35);
-        eyeGlow.addColorStop(0,   'rgba(210,195,165,0.10)');
-        eyeGlow.addColorStop(0.4, 'rgba(180,165,135,0.04)');
-        eyeGlow.addColorStop(1,   'transparent');
-        ctx.fillStyle = eyeGlow;
-        ctx.fillRect(0, 0, W, H);
-
-        for (let i = 0; i < THREADS; i++) {
-          const fi = i / (THREADS - 1);
-          const centerThread = Math.abs(fi - 0.5) < 0.15;
-          const spreadLeft  = (fi - 0.5) * H * 0.45;
-          const spreadRight = (fi - 0.5) * H * 0.35;
-
-          const p0 = { x: -20,    y: EYE_Y + spreadLeft  + Math.sin(t * 0.5 + fi * 2) * 8 };
-          const p1 = { x: W*0.22, y: EYE_Y + spreadLeft  * 0.5 + Math.sin(t * 0.6 + fi) * 5 };
-          const p2 = { x: W*0.78, y: EYE_Y + spreadRight * 0.5 + Math.sin(t * 0.55 + fi + 1) * 5 };
-          const p3 = { x: W+20,   y: EYE_Y + spreadRight + Math.sin(t * 0.5 + fi * 2 + 2) * 6 };
-
-          const STEPS = 120;
-
-          // Left half: raw, earthy
-          ctx.beginPath();
-          let started = false;
-          for (let s = 0; s <= STEPS / 2; s++) {
-            const frac = s / STEPS;
-            const pt = bezier(p0, p1, p2, p3, frac);
-            const jitter = (1 - frac * 2) * (centerThread ? 0.8 : 1.8);
-            const jx = pt.x + Math.sin(t * 3.1 + s * 0.7 + fi * 4) * jitter;
-            const jy = pt.y + Math.cos(t * 2.7 + s * 0.5 + fi * 3) * jitter;
-            if (!started) { ctx.moveTo(jx, jy); started = true; }
-            else ctx.lineTo(jx, jy);
-          }
-          const rawAlpha = centerThread ? 0.75 : 0.28 + fi * 0.18;
-          const rawR = centerThread ? 195 : lerp(160, 200, fi);
-          const rawG = centerThread ? 178 : lerp(145, 178, fi);
-          const rawB = centerThread ? 148 : lerp(110, 140, fi);
-          ctx.lineWidth = centerThread ? 1.4 : 0.7 + fi * 0.4;
-          ctx.strokeStyle = `rgba(${rawR},${rawG},${rawB},${rawAlpha})`;
-          ctx.lineCap = 'round';
-          ctx.stroke();
-
-          // Right half: refined, luminous
-          ctx.beginPath();
-          started = false;
-          for (let s = STEPS / 2; s <= STEPS; s++) {
-            const frac = s / STEPS;
-            const pt = bezier(p0, p1, p2, p3, frac);
-            if (!started) { ctx.moveTo(pt.x, pt.y); started = true; }
-            else ctx.lineTo(pt.x, pt.y);
-          }
-          const refAlpha = centerThread ? 0.82 : 0.22 + fi * 0.22;
-          const refR = centerThread ? 155 : lerp(130, 165, fi);
-          const refG = centerThread ? 185 : lerp(158, 188, fi);
-          const refB = centerThread ? 165 : lerp(135, 162, fi);
-          ctx.lineWidth = centerThread ? 1.2 : 0.6 + (1-fi) * 0.35;
-          ctx.strokeStyle = `rgba(${refR},${refG},${refB},${refAlpha})`;
-          ctx.stroke();
+      var iframe = document.querySelector('.hero-video-bg iframe');
+      if (!iframe) return;
+      function resizeVideo() {
+        var w = window.innerWidth;
+        var h = window.innerHeight;
+        if (w / h > 16 / 9) {
+          iframe.style.width  = (w * 1.06) + 'px';
+          iframe.style.height = (w * 1.06 * 9 / 16) + 'px';
+        } else {
+          iframe.style.height = (h * 1.06) + 'px';
+          iframe.style.width  = (h * 1.06 * 16 / 9) + 'px';
         }
-
-        // Travelling pulse
-        const pulseT = (t * 0.22) % 1;
-        const pp = bezier(
-          {x:-20, y:EYE_Y}, {x:W*0.22, y:EYE_Y},
-          {x:W*0.78, y:EYE_Y}, {x:W+20, y:EYE_Y},
-          pulseT
-        );
-        const pastEye = pulseT > 0.5;
-        const pr = pastEye ? 155 : 200, pg = pastEye ? 200 : 175, pb = pastEye ? 175 : 140;
-        const pulse = ctx.createRadialGradient(pp.x, pp.y, 0, pp.x, pp.y, 18);
-        pulse.addColorStop(0,   `rgba(${pr},${pg},${pb},0.9)`);
-        pulse.addColorStop(0.3, `rgba(${pr},${pg},${pb},0.3)`);
-        pulse.addColorStop(1,   'transparent');
-        ctx.fillStyle = pulse;
-        ctx.fillRect(pp.x - 18, pp.y - 18, 36, 36);
-
-        // Eye line
-        const eyePulse = 0.5 + 0.5 * Math.sin(t * 1.4);
-        ctx.strokeStyle = `rgba(220,215,205,${0.08 + eyePulse * 0.1})`;
-        ctx.lineWidth = 0.5;
-        ctx.beginPath();
-        ctx.moveTo(EYE_X, EYE_Y - H * 0.22);
-        ctx.lineTo(EYE_X, EYE_Y + H * 0.22);
-        ctx.stroke();
-
-        // Vignette
-        const vig = ctx.createRadialGradient(EYE_X, EYE_Y, 60, EYE_X, EYE_Y, W * 0.75);
-        vig.addColorStop(0,   'transparent');
-        vig.addColorStop(0.6, 'rgba(0,0,0,0.15)');
-        vig.addColorStop(1,   'rgba(0,0,0,0.82)');
-        ctx.fillStyle = vig;
-        ctx.fillRect(0, 0, W, H);
-
-        // Edge fade
-        const dofL = ctx.createLinearGradient(0, 0, W*0.2, 0);
-        dofL.addColorStop(0, 'rgba(9,8,10,0.75)'); dofL.addColorStop(1, 'transparent');
-        ctx.fillStyle = dofL; ctx.fillRect(0, 0, W*0.2, H);
-        const dofR = ctx.createLinearGradient(W*0.8, 0, W, 0);
-        dofR.addColorStop(0, 'transparent'); dofR.addColorStop(1, 'rgba(9,8,10,0.75)');
-        ctx.fillStyle = dofR; ctx.fillRect(W*0.8, 0, W*0.2, H);
-
-        requestAnimationFrame(draw);
       }
-      draw();
+      resizeVideo();
+      window.addEventListener('resize', resizeVideo);
     })();
   </script>
 
