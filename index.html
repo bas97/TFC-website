@@ -193,9 +193,7 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%) scale(1.06);
-      width: max(100vw, calc(100svh * 16 / 9));
-      height: max(100svh, calc(100vw * 9 / 16));
+      transform: translate(-50%, -50%);
       border: none;
       pointer-events: none;
     }
@@ -1287,6 +1285,25 @@
   </footer>
 
   <script>
+    // Size hero video to always cover the full viewport
+    (function() {
+      var iframe = document.querySelector('.hero-bg iframe');
+      if (!iframe) return;
+      function resizeVideo() {
+        var w = window.innerWidth;
+        var h = window.innerHeight;
+        if (w / h > 16 / 9) {
+          iframe.style.width  = (w * 1.06) + 'px';
+          iframe.style.height = (w * 1.06 * 9 / 16) + 'px';
+        } else {
+          iframe.style.height = (h * 1.06) + 'px';
+          iframe.style.width  = (h * 1.06 * 16 / 9) + 'px';
+        }
+      }
+      resizeVideo();
+      window.addEventListener('resize', resizeVideo);
+    })();
+
     function toggleMenu() {
       document.getElementById('menuToggle').classList.toggle('open');
       document.getElementById('mobileMenu').classList.toggle('open');
