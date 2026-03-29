@@ -574,31 +574,35 @@
   </footer>
 
   <script>
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
       e.preventDefault();
       const form = document.getElementById('contactForm');
       const success = document.getElementById('formSuccess');
+      const btn = form.querySelector('.submit-btn');
 
-      // Collect form data for mailto fallback
-      const data = new FormData(form);
-      const brandName  = data.get('brandName');
-      const yourName   = data.get('yourName');
-      const email      = data.get('email');
-      const lookingFor = data.get('lookingFor');
-      const orderQty   = data.get('orderQty');
-      const timeline   = data.get('timeline');
-      const howFound   = data.get('howFound');
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
 
-      const body = encodeURIComponent(
-        `Brand: ${brandName}\nName: ${yourName}\nEmail: ${email}\n\nLooking for:\n${lookingFor}\n\nQuantity: ${orderQty}\nTimeline: ${timeline}\nHow found: ${howFound}`
-      );
+      try {
+        const res = await fetch('https://formspree.io/f/mykbejqw', {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
 
-      // Open mailto as fallback (no backend)
-      window.location.href = `mailto:info@fabric-connector.com?subject=Fabric Request — ${encodeURIComponent(brandName)}&body=${body}`;
-
-      // Show success state
-      form.style.display = 'none';
-      success.classList.add('visible');
+        if (res.ok) {
+          form.style.display = 'none';
+          success.classList.add('visible');
+        } else {
+          btn.disabled = false;
+          btn.textContent = 'Send your request →';
+          alert('Something went wrong. Please try again or email us directly at orders@fabric-connector.com.');
+        }
+      } catch {
+        btn.disabled = false;
+        btn.textContent = 'Send your request →';
+        alert('Something went wrong. Please try again or email us directly at orders@fabric-connector.com.');
+      }
     }
   </script>
 
