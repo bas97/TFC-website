@@ -776,6 +776,10 @@
       <div class="sidebar-section">
         <p class="sidebar-title">Fibre Type</p>
         <div class="sidebar-options" id="fiberOptions"></div>
+        <div class="sidebar-opt" id="pureOnlyToggle" onclick="togglePureOnly()" style="margin-top:0.5rem;border-top:1px solid var(--border);padding-top:0.75rem;">
+          100% pure only
+          <span id="pureOnlyCheck" style="margin-left:auto;opacity:0.25;">✓</span>
+        </div>
       </div>
       <div class="sidebar-section">
         <p class="sidebar-title">Origin</p>
@@ -1210,7 +1214,8 @@
       certs: [],
       fiber: "",
       origin: "",
-      weight: ""
+      weight: "",
+      pureOnly: false
     };
 
     // ── FILTER & RENDER ───────────────────────────────────────────
@@ -1230,7 +1235,9 @@
         const matchCerts = state.certs.length === 0 ||
           state.certs.every(c => f.certifications.includes(c));
 
-        const matchFiber = !state.fiber || f.fiber === state.fiber;
+        const fiberParts = f.fiber.split(/[\/,&]/).map(s => s.trim()).filter(Boolean);
+        const matchFiber = !state.fiber || fiberParts.some(p => p.toLowerCase() === state.fiber.toLowerCase());
+        const matchPureOnly = !state.pureOnly || fiberParts.length === 1;
         const matchOrigin = !state.origin || f.origin === state.origin;
 
         let matchWeight = true;
@@ -1241,7 +1248,7 @@
           if (state.weight === "heavy")  matchWeight = !isNaN(w) && w > 280;
         }
 
-        return matchSearch && matchCat && matchCerts && matchFiber && matchOrigin && matchWeight;
+        return matchSearch && matchCat && matchCerts && matchFiber && matchPureOnly && matchOrigin && matchWeight;
       });
     }
 
@@ -1300,13 +1307,15 @@
 
     // ── SIDEBAR FACETS ────────────────────────────────────────────
     function buildSidebar() {
-      const fibers  = [...new Set(FABRICS.map(f => f.fiber))].sort();
+      const fibers  = [...new Set(FABRICS.flatMap(f => f.fiber.split(/[\/,&]/).map(s => s.trim()).filter(Boolean)))].sort();
       const origins = [...new Set(FABRICS.map(f => f.origin))].sort();
 
       const fiberCounts = {};
       const originCounts = {};
       FABRICS.forEach(f => {
-        fiberCounts[f.fiber]   = (fiberCounts[f.fiber]  || 0) + 1;
+        f.fiber.split(/[\/,&]/).map(s => s.trim()).filter(Boolean).forEach(fib => {
+          fiberCounts[fib] = (fiberCounts[fib] || 0) + 1;
+        });
         originCounts[f.origin] = (originCounts[f.origin]|| 0) + 1;
       });
 
@@ -1317,6 +1326,8 @@
             ${fib}
             <span class="sidebar-opt-count">${fiberCounts[fib]}</span>
           </div>`).join("");
+      document.getElementById("pureOnlyToggle").classList.toggle("active", state.pureOnly);
+      document.getElementById("pureOnlyCheck").style.opacity = state.pureOnly ? "1" : "0.25";
 
       document.getElementById("originOptions").innerHTML =
         origins.map(ori => `
@@ -1343,6 +1354,14 @@
         </div>`).join("");
     }
 
+    function togglePureOnly() {
+      state.pureOnly = !state.pureOnly;
+      buildSidebar();
+      renderActiveFilters();
+      renderGrid();
+      updateClearBtn();
+    }
+
     function setSidebarFilter(key, value) {
       if (state[key] === value) { state[key] = ""; }
       else { state[key] = value; }
@@ -1360,7 +1379,8 @@
       if (state.search) tags.push({ label: `"${state.search}"`, clear: () => { state.search = ""; document.getElementById("searchInput").value = ""; } });
       if (state.category !== "all") tags.push({ label: badgeLabel(state.category), clear: () => { state.category = "all"; syncCategoryBtns(); } });
       state.certs.forEach(c => tags.push({ label: c, clear: () => { state.certs = state.certs.filter(x => x !== c); syncCertBtns(); } }));
-      if (state.fiber)  tags.push({ label: state.fiber,  clear: () => { state.fiber = ""; buildSidebar(); } });
+      if (state.fiber)    tags.push({ label: state.fiber, clear: () => { state.fiber = ""; buildSidebar(); } });
+      if (state.pureOnly) tags.push({ label: "100% pure only", clear: () => { state.pureOnly = false; buildSidebar(); } });
       if (state.origin) tags.push({ label: state.origin, clear: () => { state.origin = ""; buildSidebar(); } });
       if (state.weight) tags.push({ label: state.weight === "light" ? "Lightweight" : state.weight === "medium" ? "Midweight" : "Heavyweight",
         clear: () => { state.weight = ""; buildSidebar(); } });
@@ -1385,7 +1405,7 @@
 
     function updateClearBtn() {
       const hasFilters = state.search || state.category !== "all" ||
-        state.certs.length || state.fiber || state.origin || state.weight;
+        state.certs.length || state.fiber || state.origin || state.weight || state.pureOnly;
       document.getElementById("clearBtn").classList.toggle("hidden", !hasFilters);
     }
 
@@ -1430,7 +1450,7 @@
     }
 
     document.getElementById("clearBtn").addEventListener("click", () => {
-      state = { search: "", category: "all", certs: [], fiber: "", origin: "", weight: "" };
+      state = { search: "", category: "all", certs: [], fiber: "", origin: "", weight: "", pureOnly: false };
       document.getElementById("searchInput").value = "";
       syncCategoryBtns();
       syncCertBtns();
