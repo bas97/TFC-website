@@ -1090,70 +1090,33 @@
       <p class="library-title">From the Library</p>
       <a href="library.html" class="mono" style="color:var(--mid);">View full library →</a>
     </div>
-    <div class="grid-4">
-
-      <div class="card">
-        <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1594938298603-c8148c4c1b61?w=600&auto=format&fit=crop&q=75" alt="Belgian Linen" loading="lazy" />
-        </div>
-        <div class="card-meta">
-          <p class="card-id">TFC-NL-001</p>
-          <p class="card-name">Belgian Stonewashed Linen</p>
-          <p class="card-origin">Belgium — Mill Direct</p>
-          <div class="card-tags">
-            <span class="tag">Natural</span>
-            <span class="tag">OEKO-TEX</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1600185365778-46f7f9c3e024?w=600&auto=format&fit=crop&q=75" alt="Organic Merino" loading="lazy" />
-        </div>
-        <div class="card-meta">
-          <p class="card-id">TFC-NW-008</p>
-          <p class="card-name">Organic Merino Wool</p>
-          <p class="card-origin">Italy — Certified Organic</p>
-          <div class="card-tags">
-            <span class="tag">Natural</span>
-            <span class="tag">GOTS</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1581075100757-a8bbeef0e10d?w=600&auto=format&fit=crop&q=75" alt="Next-Gen Material" loading="lazy" />
-        </div>
-        <div class="card-meta">
-          <p class="card-id">TFC-NG-003</p>
-          <p class="card-name">Plant-based fur Leather Alt.</p>
-          <p class="card-origin">Netherlands — Next-Gen</p>
-          <div class="card-tags">
-            <span class="tag">Next-Gen</span>
-            <span class="tag">Vegan</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&auto=format&fit=crop&q=75" alt="Deadstock Denim" loading="lazy" />
-        </div>
-        <div class="card-meta">
-          <p class="card-id">TFC-DS-021</p>
-          <p class="card-name">Deadstock Selvedge Denim</p>
-          <p class="card-origin">Japan — 340m Available</p>
-          <div class="card-tags">
-            <span class="tag">Deadstock</span>
-            <span class="tag">Limited</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
+    <div class="grid-4" id="libraryPreview"></div>
   </section>
+
+  <script>
+    fetch('fabrics.json?v=' + Date.now())
+      .then(r => r.json())
+      .then(data => {
+        const latest = data.slice(-4);
+        document.getElementById('libraryPreview').innerHTML = latest.map(f => `
+          <a href="library.html" class="card" style="text-decoration:none;color:inherit;">
+            <div class="card-img">
+              <img src="${f.image}" alt="${f.name}" loading="lazy" />
+            </div>
+            <div class="card-meta">
+              <p class="card-id">${f.id}</p>
+              <p class="card-name">${f.name}</p>
+              <p class="card-origin">${f.origin} — ${f.fiber}</p>
+              <div class="card-tags">
+                <span class="tag">${f.category === 'nextgen' ? 'Next-Gen' : f.category.charAt(0).toUpperCase() + f.category.slice(1)}</span>
+                ${f.certifications.slice(0, 1).map(c => `<span class="tag">${c}</span>`).join('')}
+                ${f.limited ? '<span class="tag">Limited</span>' : ''}
+              </div>
+            </div>
+          </a>
+        `).join('');
+      });
+  </script>
 
   <!-- ABOUT -->
   <section class="about" id="about">
