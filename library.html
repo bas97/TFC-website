@@ -180,7 +180,7 @@
       line-height: 1;
     }
 
-    .page-title .dim { color: #C6C7E2; }
+    .page-title .dim { color: #C6C7E2; font-size: 0.6em; }
 
     .page-desc {
       max-width: 36ch;
@@ -198,12 +198,16 @@
       display: flex;
       gap: 1rem;
       align-items: center;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
       background: var(--white);
       position: sticky;
       top: 60px;
       z-index: 50;
     }
+    .controls::-webkit-scrollbar { display: none; }
 
     .search-wrap {
       position: relative;
@@ -240,7 +244,7 @@
     .filter-group {
       display: flex;
       gap: 0.4rem;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
     }
 
     .filter-btn {
@@ -291,6 +295,36 @@
     }
     .clear-btn:hover { color: var(--black); }
     .clear-btn.hidden { display: none; }
+
+    /* ── PAGINATION ── */
+    .pag-wrap {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 2rem var(--pad);
+      border-top: 1px solid var(--border);
+      justify-content: center;
+    }
+    .pag-btn {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      background: var(--white);
+      color: var(--mid);
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .pag-btn:hover:not(:disabled) { border-color: var(--black); color: var(--black); }
+    .pag-btn:disabled { opacity: 0.3; cursor: default; }
+    .pag-info {
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      color: var(--light);
+      letter-spacing: 0.1em;
+    }
 
     /* ── ACTIVE FILTER TAGS ── */
     .active-filters {
@@ -794,6 +828,7 @@
     <!-- GRID -->
     <div class="grid-area">
       <div class="fabric-grid" id="fabricGrid"></div>
+      <div id="pagination"></div>
     </div>
   </div>
 
@@ -839,374 +874,6 @@
           '<div class="empty-state"><h3>Could not load fabrics</h3><p>Please try refreshing the page.</p></div>';
       });
 
-    // ── LEGACY INLINE DATA (unused, kept as fallback reference) ──────
-    const _FABRICS_BACKUP = [
-      {
-        id: "TFC-NL-001",
-        name: "Belgian Stonewashed Linen",
-        category: "natural",
-        fiber: "Linen",
-        origin: "Belgium",
-        mill: "Van Cleemputte",
-        weight: "185gsm",
-        width: "150cm",
-        moq: "50m",
-        certifications: ["OEKO-TEX"],
-        description: "A beautifully relaxed, stonewashed linen with exceptional drape and a lived-in texture. Ideal for shirts, trousers, and outerwear. One of our most consistently requested naturals.",
-        image: "https://images.unsplash.com/photo-1594938298603-c8148c4c1b61?w=800&auto=format&fit=crop&q=80",
-        limited: false
-      },
-      {
-        id: "TFC-NW-008",
-        name: "Organic Merino Wool",
-        category: "natural",
-        fiber: "Wool",
-        origin: "Italy",
-        mill: "Lanificio Cerruti",
-        weight: "210gsm",
-        width: "150cm",
-        moq: "30m",
-        certifications: ["GOTS", "OEKO-TEX"],
-        description: "Super-fine 18.5 micron merino, certified organic, from a renowned Biella mill. Incredibly soft handle with excellent recovery. Suited to tailoring, knitwear, and precision-cut separates.",
-        image: "https://images.unsplash.com/photo-1600185365778-46f7f9c3e024?w=800&auto=format&fit=crop&q=80",
-        limited: false
-      },
-      {
-        id: "TFC-NC-012",
-        name: "GOTS Organic Poplin",
-        category: "natural",
-        fiber: "Cotton",
-        origin: "Portugal",
-        mill: "Têxtil Manuel Gonçalves",
-        weight: "120gsm",
-        width: "145cm",
-        moq: "100m",
-        certifications: ["GOTS", "OEKO-TEX"],
-        description: "A crisp, lightweight organic cotton poplin. Excellent colour-fastness and a refined, smooth hand. Ideal for shirts, dresses, and precision-cut styles.",
-        image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop&q=80",
-        limited: false
-      },
-      {
-        id: "TFC-NH-005",
-        name: "Japanese Hemp Canvas",
-        category: "natural",
-        fiber: "Hemp",
-        origin: "Japan",
-        mill: "Kurabo Industries",
-        weight: "320gsm",
-        width: "148cm",
-        moq: "50m",
-        certifications: ["OEKO-TEX"],
-        description: "A robust yet refined hemp canvas with a slightly nubby texture. Naturally antibacterial and UV-resistant. Perfect for bags, outerwear, and structured garments.",
-        image: "https://images.unsplash.com/photo-1581075100757-a8bbeef0e10d?w=800&auto=format&fit=crop&q=80",
-        limited: false
-      },
-      {
-        id: "TFC-NS-019",
-        name: "Peace Silk Charmeuse",
-        category: "natural",
-        fiber: "Silk",
-        origin: "India",
-        mill: "Prakruti Silk Mills",
-        weight: "90gsm",
-        width: "140cm",
-        moq: "25m",
-        certifications: ["GOTS"],
-        description: "Ahimsa (peace) silk — produced without harming the silkworm. A luminous charmeuse with a fluid drape and subtle sheen. Exceptional for eveningwear and soft tailoring.",
-        image: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=800&auto=format&fit=crop&q=80",
-        limited: false
-      },
-      {
-        id: "TFC-NL-023",
-        name: "Irish Medium-Weight Linen",
-        category: "natural",
-        fiber: "Linen",
-        origin: "Ireland",
-        mill: "Thomas Ferguson & Co.",
-        weight: "240gsm",
-        width: "152cm",
-        moq: "40m",
-        certifications: ["OEKO-TEX"],
-        description: "A classic medium-weight Irish linen with a clean, structured hand. Heritage production with traceable fibre sourcing. Suited to tailoring, interiors, and premium workwear.",
-        image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&auto=format&fit=crop&q=80",
-        limited: false
-      },
-      {
-        id: "TFC-NC-031",
-        name: "Turkish Terry Towelling",
-        category: "natural",
-        fiber: "Cotton",
-        origin: "Turkey",
-        mill: "Ege Tekstil",
-        weight: "450gsm",
-        width: "148cm",
-        moq: "80m",
-        certifications: ["GOTS", "OEKO-TEX"],
-        description: "Plush, double-sided terry towelling in certified organic cotton. A signature fabric for contemporary loungewear, resort collections, and accessories.",
-        image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&auto=format&fit=crop&q=80",
-        limited: false
-      },
-      {
-        id: "TFC-NW-027",
-        name: "Regenerative Boiled Wool",
-        category: "natural",
-        fiber: "Wool",
-        origin: "Austria",
-        mill: "Steiner 1888",
-        weight: "490gsm",
-        width: "150cm",
-        moq: "30m",
-        certifications: ["OEKO-TEX", "Bluesign"],
-        description: "Boiled wool from regeneratively farmed Austrian sheep. Dense, felted structure with extraordinary warmth-to-weight ratio. Iconic for structured coats and jackets.",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop&q=80",
-        limited: false
-      },
-
-      // NEXT-GEN
-      {
-        id: "TFC-NG-003",
-        name: "Mycelium Leather",
-        category: "nextgen",
-        fiber: "Mycelium",
-        origin: "Netherlands",
-        mill: "Ecovative / Grown.bio",
-        weight: "—",
-        width: "120cm",
-        moq: "20m",
-        certifications: [],
-        description: "Grown from mushroom mycelium, this leather alternative offers a supple, pliable surface with a distinctive organic texture. Fully biodegradable. Suited to accessories, bags, and footwear uppers.",
-        image: "https://images.unsplash.com/photo-1581075100757-a8bbeef0e10d?w=800&auto=format&fit=crop&q=80",
-        limited: true
-      },
-      {
-        id: "TFC-NG-007",
-        name: "Algae-Based Jersey",
-        category: "nextgen",
-        fiber: "Algae Biopolymer",
-        origin: "Germany",
-        mill: "AlgiKnit GmbH",
-        weight: "160gsm",
-        width: "155cm",
-        moq: "30m",
-        certifications: ["OEKO-TEX"],
-        description: "A smooth, lightweight jersey knit derived from seaweed biopolymers. Naturally antimicrobial, fully compostable. A pioneering choice for activewear and jersey basics.",
-        image: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=800&auto=format&fit=crop&q=80",
-        limited: false
-      },
-      {
-        id: "TFC-NG-011",
-        name: "Recycled Ocean Nylon",
-        category: "nextgen",
-        fiber: "Recycled Nylon",
-        origin: "Italy",
-        mill: "Aquafil (ECONYL®)",
-        weight: "200gsm",
-        width: "145cm",
-        moq: "50m",
-        certifications: ["GRS", "Bluesign"],
-        description: "ECONYL® regenerated nylon recovered from ocean plastic, ghost nets, and landfill waste. High performance, exceptional lustre. Ideal for swimwear, activewear, and linings.",
-        image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&auto=format&fit=crop&q=80",
-        limited: false
-      },
-      {
-        id: "TFC-NG-015",
-        name: "Bio-Based PET Woven",
-        category: "nextgen",
-        fiber: "Bio-PET",
-        origin: "Taiwan",
-        mill: "Far Eastern New Century",
-        weight: "175gsm",
-        width: "150cm",
-        moq: "100m",
-        certifications: ["GRS", "OEKO-TEX"],
-        description: "A crisp woven fabric made from plant-based PET derived from sugarcane. Drop-in replacement for conventional polyester with a 70% lower carbon footprint.",
-        image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&auto=format&fit=crop&q=80",
-        limited: false
-      },
-      {
-        id: "TFC-NG-020",
-        name: "Tencel™ Lyocell Twill",
-        category: "nextgen",
-        fiber: "Lyocell",
-        origin: "Austria",
-        mill: "Lenzing AG",
-        weight: "195gsm",
-        width: "148cm",
-        moq: "50m",
-        certifications: ["OEKO-TEX", "Bluesign"],
-        description: "Tencel™ lyocell in a fine twill weave. Exceptionally soft, moisture-wicking, and produced in a closed-loop solvent process. Versatile for workwear, casualwear, and dresses.",
-        image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop&q=80",
-        limited: false
-      },
-      {
-        id: "TFC-NG-024",
-        name: "Pineapple Fibre Non-Woven",
-        category: "nextgen",
-        fiber: "Piñatex",
-        origin: "Philippines / UK",
-        mill: "Ananas Anam",
-        weight: "—",
-        width: "110cm",
-        moq: "20m",
-        certifications: ["OEKO-TEX"],
-        description: "Piñatex® — a natural textile made from pineapple leaf fibres, a by-product of the pineapple harvest. Textural, distinctive surface ideal for footwear, bags, and accessories.",
-        image: "https://images.unsplash.com/photo-1594938298603-c8148c4c1b61?w=800&auto=format&fit=crop&q=80",
-        limited: true
-      },
-      {
-        id: "TFC-NG-028",
-        name: "Recycled Cashmere Knit",
-        category: "nextgen",
-        fiber: "Recycled Cashmere",
-        origin: "Italy",
-        mill: "Cariaggi Lanificio",
-        weight: "140gsm",
-        width: "155cm",
-        moq: "25m",
-        certifications: ["GRS", "OEKO-TEX"],
-        description: "Post-consumer cashmere, collected and re-spun in Prato, Italy's recycled textile hub. All the luxurious softness of virgin cashmere, with a fraction of the environmental cost.",
-        image: "https://images.unsplash.com/photo-1600185365778-46f7f9c3e024?w=800&auto=format&fit=crop&q=80",
-        limited: false
-      },
-      {
-        id: "TFC-NG-033",
-        name: "Hemp-Organic Cotton Blend",
-        category: "nextgen",
-        fiber: "Hemp / Cotton",
-        origin: "France",
-        mill: "Tissage Moutet",
-        weight: "260gsm",
-        width: "145cm",
-        moq: "40m",
-        certifications: ["GOTS"],
-        description: "A 55% hemp, 45% organic cotton blend with a beautiful texture that softens with each wash. Increasingly popular for premium denim-weight applications.",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop&q=80",
-        limited: false
-      },
-
-      // DEADSTOCK
-      {
-        id: "TFC-DS-021",
-        name: "Selvedge Denim",
-        category: "deadstock",
-        fiber: "Cotton",
-        origin: "Japan",
-        mill: "Kaihara Mills",
-        weight: "340gsm",
-        width: "82cm",
-        moq: "10m",
-        certifications: [],
-        description: "A rare find — 340m of 14oz raw selvedge denim from Kaihara, one of Japan's most revered denim mills. Rich indigo, tight weave, and a beautiful natural slub. For serious denim designers only.",
-        image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop&q=80",
-        limited: true
-      },
-      {
-        id: "TFC-DS-014",
-        name: "Italian Double-Faced Wool",
-        category: "deadstock",
-        fiber: "Wool",
-        origin: "Italy",
-        mill: "Vitale Barberis Canonico",
-        weight: "580gsm",
-        width: "150cm",
-        moq: "15m",
-        certifications: ["OEKO-TEX"],
-        description: "85m of double-faced wool from VBC's archive collection. Midnight navy one side, camel the other. An extraordinary fabric for a limited coat run.",
-        image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&auto=format&fit=crop&q=80",
-        limited: true
-      },
-      {
-        id: "TFC-DS-018",
-        name: "French Jacquard Brocade",
-        category: "deadstock",
-        fiber: "Silk / Viscose",
-        origin: "France",
-        mill: "Tassinari & Chatel",
-        weight: "280gsm",
-        width: "130cm",
-        moq: "10m",
-        certifications: [],
-        description: "120m of a discontinued jacquard brocade from a storied Lyon mill. Floral pattern in dusty rose and gold on an ivory ground. Exceptional for eveningwear and statement pieces.",
-        image: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=800&auto=format&fit=crop&q=80",
-        limited: true
-      },
-      {
-        id: "TFC-DS-009",
-        name: "Portuguese Corduroy",
-        category: "deadstock",
-        fiber: "Cotton",
-        origin: "Portugal",
-        mill: "Coteminas",
-        weight: "380gsm",
-        width: "145cm",
-        moq: "30m",
-        certifications: ["OEKO-TEX"],
-        description: "220m of fine-wale cotton corduroy in a warm forest green. Dense, well-constructed pile with excellent colour vibrancy. Ideal for trousers, jackets, and accessories.",
-        image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&auto=format&fit=crop&q=80",
-        limited: false
-      },
-      {
-        id: "TFC-DS-025",
-        name: "Deadstock Silk Satin",
-        category: "deadstock",
-        fiber: "Silk",
-        origin: "China",
-        mill: "Wensli Group",
-        weight: "110gsm",
-        width: "140cm",
-        moq: "15m",
-        certifications: ["OEKO-TEX"],
-        description: "180m of a soft, champagne-toned silk satin with an exceptional drape. Archive stock from a premium mill. Available in a single colour — once it's gone, it's gone.",
-        image: "https://images.unsplash.com/photo-1594938298603-c8148c4c1b61?w=800&auto=format&fit=crop&q=80",
-        limited: true
-      },
-      {
-        id: "TFC-DS-030",
-        name: "Deadstock Technical Nylon",
-        category: "deadstock",
-        fiber: "Nylon",
-        origin: "South Korea",
-        mill: "Hyosung",
-        weight: "130gsm",
-        width: "148cm",
-        moq: "50m",
-        certifications: ["Bluesign"],
-        description: "400m of a matte, lightweight nylon ripstop in black. Originally produced for a large sportswear brand. Excellent construction, versatile for outerwear, bags, and technical garments.",
-        image: "https://images.unsplash.com/photo-1581075100757-a8bbeef0e10d?w=800&auto=format&fit=crop&q=80",
-        limited: false
-      },
-      {
-        id: "TFC-DS-035",
-        name: "Merino Flannel Archive",
-        category: "deadstock",
-        fiber: "Wool",
-        origin: "England",
-        mill: "Abraham Moon & Sons",
-        weight: "350gsm",
-        width: "150cm",
-        moq: "20m",
-        certifications: ["OEKO-TEX"],
-        description: "Soft, brushed merino flannel from a Yorkshire mill's archive. Classic charcoal grey with a fine herringbone weave. 160m remaining. A rare chance to work with a storied British fabric.",
-        image: "https://images.unsplash.com/photo-1600185365778-46f7f9c3e024?w=800&auto=format&fit=crop&q=80",
-        limited: true
-      },
-      {
-        id: "TFC-DS-040",
-        name: "Organic Cotton Gauze",
-        category: "deadstock",
-        fiber: "Cotton",
-        origin: "India",
-        mill: "Pratibha Syntex",
-        weight: "80gsm",
-        width: "145cm",
-        moq: "50m",
-        certifications: ["GOTS"],
-        description: "350m of delicate double gauze in organic cotton. An airy, open weave with beautiful translucency. Perfect for summer dresses, blouses, and layering pieces.",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop&q=80",
-        limited: false
-      }
-    ];
-
     // ── STATE ──────────────────────────────────────────────────────
     let state = {
       search: "",
@@ -1215,7 +882,8 @@
       fiber: "",
       origin: "",
       weight: "",
-      pureOnly: false
+      pureOnly: false,
+      page: 0
     };
 
     // ── FILTER & RENDER ───────────────────────────────────────────
@@ -1268,20 +936,26 @@
 
     function renderGrid() {
       const filtered = getFiltered();
+      const total = filtered.length;
+      const perPage = 25;
+      const totalPages = Math.max(1, Math.ceil(total / perPage));
+      if (state.page >= totalPages) state.page = 0;
+      const paginated = filtered.slice(state.page * perPage, (state.page + 1) * perPage);
       const grid = document.getElementById("fabricGrid");
       document.getElementById("resultsCount").textContent =
-        filtered.length + (filtered.length === 1 ? " Fabric" : " Fabrics");
+        total + (total === 1 ? " Fabric" : " Fabrics");
 
-      if (filtered.length === 0) {
+      if (total === 0) {
         grid.innerHTML = `
           <div class="empty-state">
             <h3>No fabrics found</h3>
             <p>Try adjusting your search or filters.</p>
           </div>`;
+        document.getElementById("pagination").innerHTML = "";
         return;
       }
 
-      grid.innerHTML = filtered.map((f, i) => `
+      grid.innerHTML = paginated.map((f, i) => `
         <div class="fabric-card" onclick="openModal('${f.id}')">
           <div class="card-img">
             <img src="${f.image}" alt="${f.name}" loading="lazy" />
@@ -1303,7 +977,25 @@
           </div>
         </div>
       `).join("");
+
+      const pag = document.getElementById("pagination");
+      if (totalPages <= 1) {
+        pag.innerHTML = "";
+      } else {
+        pag.innerHTML = `
+          <div class="pag-wrap">
+            <button class="pag-btn" onclick="changePage(${state.page - 1})" ${state.page === 0 ? "disabled" : ""}>← Prev</button>
+            <span class="pag-info">${state.page + 1} / ${totalPages}</span>
+            <button class="pag-btn" onclick="changePage(${state.page + 1})" ${state.page >= totalPages - 1 ? "disabled" : ""}>Next →</button>
+          </div>`;
+      }
     }
+
+    window.changePage = function(p) {
+      state.page = p;
+      renderGrid();
+      document.querySelector('.grid-area').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
 
     // ── SIDEBAR FACETS ────────────────────────────────────────────
     function buildSidebar() {
@@ -1356,6 +1048,7 @@
 
     function togglePureOnly() {
       state.pureOnly = !state.pureOnly;
+      state.page = 0;
       buildSidebar();
       renderActiveFilters();
       renderGrid();
@@ -1365,6 +1058,7 @@
     function setSidebarFilter(key, value) {
       if (state[key] === value) { state[key] = ""; }
       else { state[key] = value; }
+      state.page = 0;
       buildSidebar();
       renderActiveFilters();
       renderGrid();
@@ -1398,6 +1092,7 @@
     window.removeTag = function(i) {
       const wrap = document.getElementById("activeFilters");
       wrap._tags[i].clear();
+      state.page = 0;
       renderGrid();
       renderActiveFilters();
       updateClearBtn();
@@ -1412,6 +1107,7 @@
     // ── CONTROLS ──────────────────────────────────────────────────
     document.getElementById("searchInput").addEventListener("input", e => {
       state.search = e.target.value.trim();
+      state.page = 0;
       renderGrid();
       renderActiveFilters();
       updateClearBtn();
@@ -1420,6 +1116,7 @@
     document.querySelectorAll("[data-filter='category']").forEach(btn => {
       btn.addEventListener("click", () => {
         state.category = btn.dataset.value;
+        state.page = 0;
         syncCategoryBtns();
         renderGrid();
         renderActiveFilters();
@@ -1437,6 +1134,7 @@
         const v = btn.dataset.value;
         if (state.certs.includes(v)) state.certs = state.certs.filter(c => c !== v);
         else state.certs.push(v);
+        state.page = 0;
         syncCertBtns();
         renderGrid();
         renderActiveFilters();
@@ -1450,7 +1148,7 @@
     }
 
     document.getElementById("clearBtn").addEventListener("click", () => {
-      state = { search: "", category: "all", certs: [], fiber: "", origin: "", weight: "", pureOnly: false };
+      state = { search: "", category: "all", certs: [], fiber: "", origin: "", weight: "", pureOnly: false, page: 0 };
       document.getElementById("searchInput").value = "";
       syncCategoryBtns();
       syncCertBtns();
