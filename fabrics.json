@@ -5535,36 +5535,6 @@
     "limited": true
   },
   {
-    "id": "51565",
-    "name": "Wool Coating",
-    "category": "deadstock",
-    "fiber": "Wool",
-    "origin": "Germany",
-    "mill": "—",
-    "weight": "340gsm",
-    "width": "140cm",
-    "moq": "60m",
-    "certifications": [],
-    "description": "Composition: IWS | Colors: Navy | Available length: 60m | Price: €12/m",
-    "image": "images/51565.jpg",
-    "limited": true
-  },
-  {
-    "id": "51712",
-    "name": "Wool-Polyester Fabric",
-    "category": "deadstock",
-    "fiber": "Polyester / Wool",
-    "origin": "Germany",
-    "mill": "—",
-    "weight": "270gsm",
-    "width": "140cm",
-    "moq": "60m",
-    "certifications": [],
-    "description": "Composition: 45PES 38WV 15PA 2EA | Colors: Black, Red | Available length: 60m | Price: €10/m",
-    "image": "images/51712.jpg",
-    "limited": true
-  },
-  {
     "id": "51742",
     "name": "Wool Suiting",
     "category": "deadstock",
@@ -5832,21 +5802,6 @@
     "certifications": [],
     "description": "Composition: 54PES 44WV 2EA | Colors: Black | Available length: 125m | Price: €10/m",
     "image": "images/52636.jpg",
-    "limited": true
-  },
-  {
-    "id": "52659",
-    "name": "Wool-Cotton Fabric",
-    "category": "deadstock",
-    "fiber": "Wool / Cotton",
-    "origin": "Germany",
-    "mill": "—",
-    "weight": "540gsm",
-    "width": "155cm",
-    "moq": "50m",
-    "certifications": [],
-    "description": "Composition: 40WV 25CO 20PA 10PES 5PC | Colors: Black | Available length: 75m | Price: €11/m",
-    "image": "images/52659.jpg",
     "limited": true
   },
   {
@@ -6597,21 +6552,6 @@
     "certifications": [],
     "description": "Composition: 67CO 33PES | Colors: Navy | Available length: 145m | Price: €6/m",
     "image": "images/55161.jpg",
-    "limited": true
-  },
-  {
-    "id": "55166",
-    "name": "Cotton Canvas",
-    "category": "deadstock",
-    "fiber": "Cotton",
-    "origin": "Germany",
-    "mill": "—",
-    "weight": "310gsm",
-    "width": "140cm",
-    "moq": "50m",
-    "certifications": [],
-    "description": "Composition: 75CO 25PA | Available length: 1000m | Price: €6/m",
-    "image": "images/55166.jpg",
     "limited": true
   },
   {
@@ -7887,21 +7827,6 @@
     "certifications": [],
     "description": "Composition: 100 CO mit PU-Beschichtung | Colors: Black | Available length: 140m | Price: €6/m",
     "image": "images/57210.jpg",
-    "limited": true
-  },
-  {
-    "id": "57211",
-    "name": "Cotton Shell",
-    "category": "deadstock",
-    "fiber": "Cotton / Polyurethane",
-    "origin": "Germany",
-    "mill": "—",
-    "weight": "325gsm",
-    "width": "150cm",
-    "moq": "50m",
-    "certifications": [],
-    "description": "Composition: 100 CO mit PU-Beschichtung | Colors: Navy | Available length: 105m | Price: €6/m",
-    "image": "images/57211.jpg",
     "limited": true
   },
   {
@@ -12180,21 +12105,6 @@
     "limited": true
   },
   {
-    "id": "69470",
-    "name": "Cotton Canvas",
-    "category": "deadstock",
-    "fiber": "Cotton",
-    "origin": "Germany",
-    "mill": "—",
-    "weight": "310gsm",
-    "width": "140cm",
-    "moq": "50m",
-    "certifications": [],
-    "description": "Composition: 98CO 2EA | Available length: 142m | Price: €7/m",
-    "image": "images/69470.jpg",
-    "limited": true
-  },
-  {
     "id": "69484",
     "name": "Polyester Fabric",
     "category": "deadstock",
@@ -12627,21 +12537,6 @@
     "certifications": [],
     "description": "Composition: 41WV 24CV 18PES 17PAN | Colors: Grey | Available length: 80m | Price: €10/m",
     "image": "images/70587.jpg",
-    "limited": true
-  },
-  {
-    "id": "70827",
-    "name": "Cotton Canvas",
-    "category": "deadstock",
-    "fiber": "Cotton",
-    "origin": "Germany",
-    "mill": "—",
-    "weight": "315gsm",
-    "width": "148cm",
-    "moq": "50m",
-    "certifications": [],
-    "description": "Composition: 97CO 3EA | Available length: 50m | Price: €7/m",
-    "image": "images/70827.jpg",
     "limited": true
   },
   {
@@ -13752,21 +13647,6 @@
     "certifications": [],
     "description": "Composition: 96PES 4EA-bi | Colors: Black | Available length: 60m | Price: €7/m",
     "image": "images/73766.jpg",
-    "limited": true
-  },
-  {
-    "id": "73774",
-    "name": "Polyester Fabric",
-    "category": "deadstock",
-    "fiber": "Polyester",
-    "origin": "Germany",
-    "mill": "—",
-    "weight": "290gsm",
-    "width": "150cm",
-    "moq": "50m",
-    "certifications": [],
-    "description": "Composition: 67PES 39CV 4EA | Available length: 90m | Price: €7/m",
-    "image": "images/73774.jpg",
     "limited": true
   },
   {
@@ -15150,21 +15030,6 @@
     "limited": true
   },
   {
-    "id": "74804",
-    "name": "Cotton Canvas",
-    "category": "deadstock",
-    "fiber": "Cotton",
-    "origin": "Germany",
-    "mill": "—",
-    "weight": "270gsm",
-    "width": "130cm",
-    "moq": "50m",
-    "certifications": [],
-    "description": "Composition: 70CO 26PA 4EA | Colors: Blue, White | Available length: 90m | Price: €8/m",
-    "image": "images/74804.jpg",
-    "limited": true
-  },
-  {
     "id": "74805",
     "name": "Cotton Canvas",
     "category": "deadstock",
@@ -15960,21 +15825,6 @@
     "limited": true
   },
   {
-    "id": "76309",
-    "name": "Cotton Poplin",
-    "category": "deadstock",
-    "fiber": "Cotton",
-    "origin": "Germany",
-    "mill": "—",
-    "weight": "190gsm",
-    "width": "150cm",
-    "moq": "50m",
-    "certifications": [],
-    "description": "Composition: 90CO 10PA | Colors: Black | Available length: 135m | Price: €8/m",
-    "image": "images/76309.jpg",
-    "limited": true
-  },
-  {
     "id": "76353",
     "name": "Wool Suiting",
     "category": "deadstock",
@@ -16152,21 +16002,6 @@
     "certifications": [],
     "description": "Composition: 94WV 6EA | Colors: Green | Available length: 110m | Price: €12/m",
     "image": "images/76469.jpg",
-    "limited": true
-  },
-  {
-    "id": "76478",
-    "name": "Wool Suiting",
-    "category": "deadstock",
-    "fiber": "Wool",
-    "origin": "Germany",
-    "mill": "—",
-    "weight": "290gsm",
-    "width": "150cm",
-    "moq": "50m",
-    "certifications": [],
-    "description": "Composition: 96WV 4EA | Colors: Blue | Available length: 0m | Price: €12/m",
-    "image": "images/76478.jpg",
     "limited": true
   },
   {
@@ -16965,21 +16800,6 @@
     "limited": true
   },
   {
-    "id": "77300",
-    "name": "Cotton-Polyester Fabric",
-    "category": "deadstock",
-    "fiber": "Cotton / Polyester",
-    "origin": "Germany",
-    "mill": "—",
-    "weight": "410gsm",
-    "width": "140cm",
-    "moq": "52m",
-    "certifications": [],
-    "description": "Composition: 64CO 31PES 5EA-bi | Available length: 52m | Price: €7/m",
-    "image": "images/77300.jpg",
-    "limited": true
-  },
-  {
     "id": "77356",
     "name": "Polyester Fabric",
     "category": "deadstock",
@@ -17145,21 +16965,6 @@
     "limited": true
   },
   {
-    "id": "77408",
-    "name": "Polyester Fabric",
-    "category": "deadstock",
-    "fiber": "Polyester",
-    "origin": "Germany",
-    "mill": "—",
-    "weight": "430gsm",
-    "width": "135cm",
-    "moq": "50m",
-    "certifications": [],
-    "description": "Composition: 76PES 17CV 7EA-bi | Available length: 80m | Price: €8/m",
-    "image": "images/77408.jpg",
-    "limited": true
-  },
-  {
     "id": "77416",
     "name": "Viscose Fabric",
     "category": "deadstock",
@@ -17247,21 +17052,6 @@
     "certifications": [],
     "description": "Composition: IWS | Colors: Grey | Available length: 80m | Price: €12/m",
     "image": "images/77451.jpg",
-    "limited": true
-  },
-  {
-    "id": "77500",
-    "name": "Polyester Fabric",
-    "category": "deadstock",
-    "fiber": "Polyester",
-    "origin": "Germany",
-    "mill": "—",
-    "weight": "460gsm",
-    "width": "140cm",
-    "moq": "50m",
-    "certifications": [],
-    "description": "Composition: 61PES 26CV 7CO 6EA | Available length: 75m | Price: €8/m",
-    "image": "images/77500.jpg",
     "limited": true
   },
   {
@@ -17970,21 +17760,6 @@
     "limited": true
   },
   {
-    "id": "77891",
-    "name": "Cotton Canvas",
-    "category": "deadstock",
-    "fiber": "Cotton",
-    "origin": "Germany",
-    "mill": "—",
-    "weight": "240gsm",
-    "width": "145cm",
-    "moq": "50m",
-    "certifications": [],
-    "description": "Composition: 91CO 9EA | Available length: 310m | Price: €7/m",
-    "image": "images/77891.jpg",
-    "limited": true
-  },
-  {
     "id": "77892",
     "name": "Cotton Canvas",
     "category": "deadstock",
@@ -18507,51 +18282,6 @@
     "certifications": [],
     "description": "Composition: 100 WV | Colors: White, Red | Available length: 65m | Price: €12/m",
     "image": "images/78110.jpg",
-    "limited": true
-  },
-  {
-    "id": "34203D",
-    "name": "Cotton-Polyester Fabric",
-    "category": "deadstock",
-    "fiber": "Polyester / Cotton",
-    "origin": "Germany",
-    "mill": "—",
-    "weight": "225gsm",
-    "width": "145cm",
-    "moq": "50m",
-    "certifications": [],
-    "description": "Composition: 64PES 25CO 11AC | Colors: Black | Available length: 72m | Price: €6/m",
-    "image": "images/34203D.jpg",
-    "limited": true
-  },
-  {
-    "id": "43518D",
-    "name": "Wool Suiting",
-    "category": "deadstock",
-    "fiber": "Wool",
-    "origin": "Germany",
-    "mill": "—",
-    "weight": "240gsm",
-    "width": "155cm",
-    "moq": "50m",
-    "certifications": [],
-    "description": "Composition: 64WV 33PA 3EA | Available length: 72m | Price: €10/m",
-    "image": "images/43518D.jpg",
-    "limited": true
-  },
-  {
-    "id": "76478D",
-    "name": "Wool Suiting",
-    "category": "deadstock",
-    "fiber": "Wool",
-    "origin": "Germany",
-    "mill": "—",
-    "weight": "290gsm",
-    "width": "145cm",
-    "moq": "50m",
-    "certifications": [],
-    "description": "Composition: 96WV 4EA | Colors: Red | Available length: 155m | Price: €12/m",
-    "image": "images/76478D.jpg",
     "limited": true
   }
 ]
