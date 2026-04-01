@@ -1094,10 +1094,24 @@
   </section>
 
   <script>
+    function checkImage(src) {
+      return new Promise(resolve => {
+        const img = new Image();
+        img.onload  = () => resolve(true);
+        img.onerror = () => resolve(false);
+        img.src = src;
+      });
+    }
+
     fetch('fabrics.json?v=' + Date.now())
       .then(r => r.json())
-      .then(data => {
-        const latest = data.slice(-4);
+      .then(async data => {
+        const candidates = [...data].reverse();
+        const latest = [];
+        for (const f of candidates) {
+          if (latest.length >= 4) break;
+          if (await checkImage(f.image)) latest.push(f);
+        }
         document.getElementById('libraryPreview').innerHTML = latest.map(f => `
           <a href="library.html" class="card" style="text-decoration:none;color:inherit;">
             <div class="card-img">
