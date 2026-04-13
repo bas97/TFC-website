@@ -378,8 +378,37 @@
       padding: 2rem 1.5rem;
       position: sticky;
       top: calc(60px + 57px);
-      height: fit-content;
+      height: calc(100vh - 60px - 57px);
+      overflow-y: auto;
+      scrollbar-width: none;
     }
+    .sidebar::-webkit-scrollbar { display: none; }
+
+    .filter-toggle {
+      display: none;
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      background: var(--white);
+      color: var(--mid);
+      padding: 0.5rem 0.85rem;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .filter-toggle:hover { border-color: var(--black); color: var(--black); }
+    .filter-toggle.active { background: var(--black); color: var(--white); border-color: var(--black); }
+
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 149;
+    }
+    .sidebar-overlay.open { display: block; }
 
     .sidebar-section { margin-bottom: 2rem; }
 
@@ -716,7 +745,19 @@
     }
 
     @media (max-width: 860px) {
-      .sidebar { display: none; }
+      .filter-toggle { display: block; }
+      .sidebar {
+        position: fixed;
+        top: 0; left: 0; bottom: 0;
+        height: 100%;
+        z-index: 150;
+        background: var(--white);
+        box-shadow: 4px 0 24px rgba(0,0,0,0.12);
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+        padding-top: 80px;
+      }
+      .sidebar.open { transform: translateX(0); }
       .modal { grid-template-columns: 1fr; }
       .modal-img { min-height: 280px; }
     }
@@ -794,6 +835,7 @@
 
     <span class="results-count" id="resultsCount">24 Fabrics</span>
     <button class="clear-btn hidden" id="clearBtn">Clear All</button>
+    <button class="filter-toggle" id="filterToggle">Filters</button>
   </div>
 
   <!-- ACTIVE FILTER TAGS -->
@@ -804,6 +846,8 @@
     <p style="font-size:0.8rem;color:var(--mid);line-height:1.6;max-width:60ch;">Not everything we have is listed here — especially when it comes to deadstock. Our stock moves fast and we source continuously. The best way to find what you need is to leave a request. Tell us what you're looking for and we'll come back with options.</p>
     <a href="contact.html" style="font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.1em;text-transform:uppercase;border:1px solid var(--black);padding:0.65rem 1.25rem;color:var(--black);white-space:nowrap;transition:all 0.15s;" onmouseover="this.style.background='var(--black)';this.style.color='var(--white)';" onmouseout="this.style.background='transparent';this.style.color='var(--black)';">Submit a fabric request →</a>
   </div>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
   <!-- MAIN LAYOUT -->
   <div class="library-layout">
@@ -1245,6 +1289,28 @@
         this.scrollLeft += e.deltaY;
       }
     }, { passive: false });
+
+    // Mobile sidebar toggle
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    const filterToggle = document.getElementById('filterToggle');
+
+    function openSidebar() {
+      sidebar.classList.add('open');
+      sidebarOverlay.classList.add('open');
+      filterToggle.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeSidebar() {
+      sidebar.classList.remove('open');
+      sidebarOverlay.classList.remove('open');
+      filterToggle.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    filterToggle.addEventListener('click', () => {
+      sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+    });
+    sidebarOverlay.addEventListener('click', closeSidebar);
   </script>
 </body>
 </html>
