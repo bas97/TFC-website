@@ -823,6 +823,10 @@
         <p class="sidebar-title">Weight</p>
         <div class="sidebar-options" id="weightOptions"></div>
       </div>
+      <div class="sidebar-section">
+        <p class="sidebar-title">Color</p>
+        <div class="sidebar-options" id="colorOptions"></div>
+      </div>
     </aside>
 
     <!-- GRID -->
@@ -882,6 +886,7 @@
       fiber: "",
       origin: "",
       weight: "",
+      color: "",
       pureOnly: false,
       page: 0
     };
@@ -907,6 +912,7 @@
         const matchFiber = !state.fiber || fiberParts.some(p => p.toLowerCase() === state.fiber.toLowerCase());
         const matchPureOnly = !state.pureOnly || fiberParts.length === 1;
         const matchOrigin = !state.origin || f.origin === state.origin;
+        const matchColor = !state.color || (f.colors || []).includes(state.color);
 
         let matchWeight = true;
         if (state.weight) {
@@ -916,7 +922,7 @@
           if (state.weight === "heavy")  matchWeight = !isNaN(w) && w > 280;
         }
 
-        return matchSearch && matchCat && matchCerts && matchFiber && matchPureOnly && matchOrigin && matchWeight;
+        return matchSearch && matchCat && matchCerts && matchFiber && matchPureOnly && matchOrigin && matchWeight && matchColor;
       });
     }
 
@@ -1044,6 +1050,16 @@
             if(w.key==="heavy")  return !isNaN(g)&&g>280;
           }).length}</span>
         </div>`).join("");
+
+      const colors = [...new Set(FABRICS.flatMap(f => f.colors || []))].sort();
+      const colorCounts = {};
+      FABRICS.forEach(f => (f.colors || []).forEach(c => { colorCounts[c] = (colorCounts[c] || 0) + 1; }));
+      document.getElementById("colorOptions").innerHTML = colors.map(col => `
+        <div class="sidebar-opt ${state.color === col ? "active":""}"
+             onclick="setSidebarFilter('color','${col}')">
+          ${col}
+          <span class="sidebar-opt-count">${colorCounts[col]}</span>
+        </div>`).join("");
     }
 
     function togglePureOnly() {
@@ -1076,6 +1092,7 @@
       if (state.fiber)    tags.push({ label: state.fiber, clear: () => { state.fiber = ""; buildSidebar(); } });
       if (state.pureOnly) tags.push({ label: "100% pure only", clear: () => { state.pureOnly = false; buildSidebar(); } });
       if (state.origin) tags.push({ label: state.origin, clear: () => { state.origin = ""; buildSidebar(); } });
+      if (state.color)  tags.push({ label: state.color, clear: () => { state.color = ""; buildSidebar(); } });
       if (state.weight) tags.push({ label: state.weight === "light" ? "Lightweight" : state.weight === "medium" ? "Midweight" : "Heavyweight",
         clear: () => { state.weight = ""; buildSidebar(); } });
 
@@ -1100,7 +1117,7 @@
 
     function updateClearBtn() {
       const hasFilters = state.search || state.category !== "all" ||
-        state.certs.length || state.fiber || state.origin || state.weight || state.pureOnly;
+        state.certs.length || state.fiber || state.origin || state.weight || state.color || state.pureOnly;
       document.getElementById("clearBtn").classList.toggle("hidden", !hasFilters);
     }
 
@@ -1148,7 +1165,7 @@
     }
 
     document.getElementById("clearBtn").addEventListener("click", () => {
-      state = { search: "", category: "all", certs: [], fiber: "", origin: "", weight: "", pureOnly: false, page: 0 };
+      state = { search: "", category: "all", certs: [], fiber: "", origin: "", weight: "", color: "", pureOnly: false, page: 0 };
       document.getElementById("searchInput").value = "";
       syncCategoryBtns();
       syncCertBtns();
