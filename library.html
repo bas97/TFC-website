@@ -919,7 +919,6 @@
         FABRICS = [...data].reverse(); // newest uploads first
         buildSidebar();
         renderGrid();
-        updateCategoryCounts();
       })
       .catch(() => {
         document.getElementById('fabricGrid').innerHTML =
@@ -1162,20 +1161,6 @@
       renderActiveFilters();
       updateClearBtn();
     };
-
-    function updateCategoryCounts() {
-      const counts = { all: FABRICS.length, natural: 0, nextgen: 0, deadstock: 0 };
-      FABRICS.forEach(f => { if (counts[f.category] !== undefined) counts[f.category]++; });
-      document.querySelectorAll("[data-filter='category']").forEach(btn => {
-        const v = btn.dataset.value;
-        const n = counts[v];
-        if (n !== undefined) {
-          const existing = btn.querySelector('.cat-count');
-          if (existing) existing.textContent = n;
-          else btn.insertAdjacentHTML('beforeend', `<span class="cat-count" style="font-family:var(--font-mono);font-size:0.48rem;opacity:0.5;margin-left:0.35rem;">${n}</span>`);
-        }
-      });
-    }
 
     function updateClearBtn() {
       const hasFilters = state.search || state.category !== "all" ||
