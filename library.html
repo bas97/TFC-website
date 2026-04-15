@@ -916,7 +916,7 @@
     fetch('fabrics.json?v=' + Date.now())
       .then(r => r.json())
       .then(data => {
-        FABRICS = data;
+        FABRICS = [...data].reverse(); // newest uploads first
         buildSidebar();
         renderGrid();
       })

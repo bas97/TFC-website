@@ -22290,7 +22290,8 @@
     ],
     "description": "A beautiful stonewashed organic linen with excellent drape.",
     "image": "images/TFC-NL-041.jpg",
-    "limited": false
+    "limited": false,
+    "colors": []
   },
   {
     "id": "DL660/8",
@@ -22305,7 +22306,10 @@
     "certifications": [],
     "description": "A plant-based, plastic-free fur textile that mimics animal fur while being biodegradable and bio-based.",
     "image": "images/DL660-8.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Yellow"
+    ]
   },
   {
     "id": "YDY560/13",
@@ -22320,7 +22324,10 @@
     "certifications": [],
     "description": "A plant-based, plastic-free fur textile that mimics animal fur while being biodegradable and bio-based.",
     "image": "images/YDY560-13.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "White"
+    ]
   },
   {
     "id": "7899 BEAVER",
@@ -22335,7 +22342,10 @@
     "certifications": [],
     "description": "A plant-based, plastic-free fur textile that mimics animal fur while being biodegradable and bio-based.",
     "image": "images/7899 BEAVER.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Grey"
+    ]
   },
   {
     "id": "7894 MONGOLIAN-HC",
@@ -22350,7 +22360,10 @@
     "certifications": [],
     "description": "A plant-based, plastic-free fur textile that mimics animal fur while being biodegradable and bio-based.",
     "image": "images/7894 MONGOLIAN-HC.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Pink"
+    ]
   },
   {
     "id": "7901 WOLFY",
@@ -22365,7 +22378,10 @@
     "certifications": [],
     "description": "A plant-based, plastic-free fur textile that mimics animal fur while being biodegradable and bio-based.",
     "image": "images/7901 WOLFY.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Black"
+    ]
   },
   {
     "id": "7890 PONY",
@@ -22380,7 +22396,10 @@
     "certifications": [],
     "description": "A plant-based, plastic-free fur textile that mimics animal fur while being biodegradable and bio-based.",
     "image": "images/7890 PONY.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Dalmata"
+    ]
   },
   {
     "id": "8405 Fluff",
@@ -22395,7 +22414,10 @@
     "certifications": [],
     "description": "A plant-based, plastic-free fur textile that mimics animal fur while being biodegradable and bio-based.",
     "image": "images/8405 Fluff.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "White"
+    ]
   },
   {
     "id": "RDD1483",
@@ -22410,7 +22432,10 @@
     "certifications": [],
     "description": "Recycled jersey made from post-industrial and post-consumer waste",
     "image": "images/RDD1483.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Yellow"
+    ]
   },
   {
     "id": "RDD1428",
@@ -22425,7 +22450,10 @@
     "certifications": [],
     "description": "Recycled jersey made from post-industrial and post-consumer waste",
     "image": "images/RDD1428.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Green"
+    ]
   },
   {
     "id": "RDD1433",
@@ -22440,7 +22468,10 @@
     "certifications": [],
     "description": "Recycled jersey made from post-industrial and post-consumer waste",
     "image": "images/RDD1433.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Blue"
+    ]
   },
   {
     "id": "RDD1478",
@@ -22455,7 +22486,10 @@
     "certifications": [],
     "description": "Recycled jersey made from post-industrial and post-consumer waste",
     "image": "images/RDD1478.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Red"
+    ]
   },
   {
     "id": "MF8OI/MF8OE",
@@ -22474,7 +22508,10 @@
     ],
     "description": "a 100% GOTS?certified organic cotton that’s also designed for circular recycling",
     "image": "",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Black"
+    ]
   },
   {
     "id": "MF9OI/MF9OE",
@@ -22493,7 +22530,10 @@
     ],
     "description": "Organic fleece made from GOTS-certified cotton, designed for circularity and reduced environmental impact",
     "image": "",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Black"
+    ]
   },
   {
     "id": "MF12OI/MF12OE",
@@ -22512,7 +22552,10 @@
     ],
     "description": "a 100% GOTS?certified organic cotton that’s also designed for circular recycling",
     "image": "",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Red"
+    ]
   },
   {
     "id": "MF16OE",
@@ -22531,7 +22574,10 @@
     ],
     "description": "a 100% GOTS?certified organic cotton that’s also designed for circular recycling",
     "image": "images/MF16OE.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Green"
+    ]
   },
   {
     "id": "F4OI",
@@ -22550,7 +22596,10 @@
     ],
     "description": "a 100% GOTS?certified organic cotton that’s also designed for circular recycling",
     "image": "images/F4OI.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Black"
+    ]
   },
   {
     "id": "MF7OI/MF7OE",
@@ -22569,7 +22618,10 @@
     ],
     "description": "a 100% GOTS?certified organic cotton that’s also designed for circular recycling",
     "image": "",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "White"
+    ]
   },
   {
     "id": "F2E",
@@ -22588,7 +22640,10 @@
     ],
     "description": "a bio-based fiber made from renewable plant resources, offering a lightweight, breathable alternative to conventional synthetic materials.",
     "image": "images/F2E.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "White"
+    ]
   },
   {
     "id": "F14I/F14E",
@@ -22607,7 +22662,10 @@
     ],
     "description": "a durable synthetic fiber made from regenerated nylon waste, offering strength, elasticity, and reduced environmental impact",
     "image": "",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "White"
+    ]
   },
   {
     "id": "MF15I/MF15E",
@@ -22626,7 +22684,10 @@
     ],
     "description": "a durable synthetic fiber made from regenerated nylon waste, offering strength, elasticity, and reduced environmental impact",
     "image": "",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Black"
+    ]
   },
   {
     "id": "MF18E",
@@ -22645,7 +22706,10 @@
     ],
     "description": "a durable synthetic fiber made from regenerated nylon waste, offering strength, elasticity, and reduced environmental impact",
     "image": "images/MF18E.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Black"
+    ]
   },
   {
     "id": "RCS-PW-125",
@@ -22663,7 +22727,11 @@
     ],
     "description": "recycled cotton made with advanced RCO100™ technology, transforming textile waste into high-quality, fiber-preserving materials",
     "image": "images/RCS-PW-125.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Blue",
+      "White"
+    ]
   },
   {
     "id": "RCS-TW2/2S-245",
@@ -22681,7 +22749,10 @@
     ],
     "description": "recycled cotton made with advanced RCO100™ technology, transforming textile waste into high-quality, fiber-preserving materials",
     "image": "images/RCS-TW2-2S-245.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Blue"
+    ]
   },
   {
     "id": "RCW-PW-245",
@@ -22699,7 +22770,10 @@
     ],
     "description": "recycled cotton made with advanced RCO100™ technology, transforming textile waste into high-quality, fiber-preserving materials",
     "image": "images/RCW-PW-245.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Off-white"
+    ]
   },
   {
     "id": "RCW-PN2/2-200",
@@ -22717,7 +22791,10 @@
     ],
     "description": "recycled cotton made with advanced RCO100™ technology, transforming textile waste into high-quality, fiber-preserving materials",
     "image": "images/RCW-PN2-2-200.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Blue"
+    ]
   },
   {
     "id": "RCK-PQ-20R-03",
@@ -22735,7 +22812,10 @@
     ],
     "description": "recycled cotton made with advanced RCO100™ technology, transforming textile waste into high-quality, fiber-preserving materials",
     "image": "images/RCK-PQ-20R-03.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Black"
+    ]
   },
   {
     "id": "RCD-COEL-ASB-10.75",
@@ -22753,7 +22833,10 @@
     ],
     "description": "recycled cotton made with advanced RCO100™ technology, transforming textile waste into high-quality, fiber-preserving materials",
     "image": "images/RCD-COEL-ASB-10.75.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Blue"
+    ]
   },
   {
     "id": "RCD-CO-B9-13.75",
@@ -22771,7 +22854,10 @@
     ],
     "description": "recycled cotton made with advanced RCO100™ technology, transforming textile waste into high-quality, fiber-preserving materials",
     "image": "images/RCD-CO-B9-13.75.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Blue"
+    ]
   },
   {
     "id": "RCD-CORF-PB-ZW-13.5",
@@ -22789,7 +22875,10 @@
     ],
     "description": "recycled cotton made with advanced RCO100™ technology, transforming textile waste into high-quality, fiber-preserving materials",
     "image": "images/RCD-CORF-PB-ZW-13.5.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Blue"
+    ]
   },
   {
     "id": "RCD-CO-RB-ZW-12",
@@ -22807,7 +22896,10 @@
     ],
     "description": "recycled cotton made with advanced RCO100™ technology, transforming textile waste into high-quality, fiber-preserving materials",
     "image": "images/RCD-CO-RB-ZW-12.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Blue"
+    ]
   },
   {
     "id": "RCK-SJ-16E",
@@ -22825,7 +22917,10 @@
     ],
     "description": "recycled cotton made with advanced RCO100™ technology, transforming textile waste into high-quality, fiber-preserving materials",
     "image": "images/RCK-SJ-16E.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Blue"
+    ]
   },
   {
     "id": "RCW-TW2/2S-230",
@@ -22843,7 +22938,10 @@
     ],
     "description": "recycled cotton made with advanced RCO100™ technology, transforming textile waste into high-quality, fiber-preserving materials",
     "image": "images/RCW-TW2-2S-230.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Red"
+    ]
   },
   {
     "id": "RCK-SJ-16EW",
@@ -22861,7 +22959,10 @@
     ],
     "description": "recycled cotton made with advanced RCO100™ technology, transforming textile waste into high-quality, fiber-preserving materials",
     "image": "images/RCK-SJ-16EW.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "White"
+    ]
   },
   {
     "id": "RCK-SJ-24R",
@@ -22879,7 +22980,10 @@
     ],
     "description": "recycled cotton made with advanced RCO100™ technology, transforming textile waste into high-quality, fiber-preserving materials",
     "image": "images/RCK-SJ-24R.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "White"
+    ]
   },
   {
     "id": "RSK-SJ-30R",
@@ -22897,7 +23001,10 @@
     ],
     "description": "recycled cotton made with advanced RCO100™ technology, transforming textile waste into high-quality, fiber-preserving materials",
     "image": "images/RSK-SJ-30R.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "White"
+    ]
   },
   {
     "id": "RCK-FT-20E",
@@ -22915,7 +23022,10 @@
     ],
     "description": "recycled cotton made with advanced RCO100™ technology, transforming textile waste into high-quality, fiber-preserving materials",
     "image": "images/RCK-FT-20E.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "White"
+    ]
   },
   {
     "id": "RCK-SJ-20E",
@@ -22933,7 +23043,10 @@
     ],
     "description": "recycled cotton made with advanced RCO100™ technology, transforming textile waste into high-quality, fiber-preserving materials",
     "image": "images/RCK-SJ-20E.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "White"
+    ]
   },
   {
     "id": "RCS-PW-170",
@@ -22951,7 +23064,10 @@
     ],
     "description": "recycled cotton made with advanced RCO100™ technology, transforming textile waste into high-quality, fiber-preserving materials",
     "image": "images/RCS-PW-170.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "White"
+    ]
   },
   {
     "id": "RCK-SJ-30R",
@@ -22969,7 +23085,10 @@
     ],
     "description": "recycled cotton made with advanced RCO100™ technology, transforming textile waste into high-quality, fiber-preserving materials",
     "image": "images/RCK-SJ-30R.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "White"
+    ]
   },
   {
     "id": "BPLF03",
@@ -22984,7 +23103,10 @@
     "certifications": [],
     "description": "BioPuff loose fill is a next-generation insulation made from regenerative Typha fibres and recycled polyester",
     "image": "images/BPLF03.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Pink"
+    ]
   },
   {
     "id": "BPW80B",
@@ -22999,7 +23121,10 @@
     "certifications": [],
     "description": "BioPuff loose fill is a next-generation insulation made from regenerative Typha fibres and recycled polyester",
     "image": "images/BPW80B.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Beige"
+    ]
   },
   {
     "id": "BPW100D",
@@ -23014,7 +23139,10 @@
     "certifications": [],
     "description": "BioPuff loose fill is a next-generation insulation made from regenerative Typha fibres and recycled polyester",
     "image": "images/BPW100D.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Beige"
+    ]
   },
   {
     "id": "230 PLAIN",
@@ -23029,7 +23157,10 @@
     "certifications": [],
     "description": "cotton–hemp fabric blends the softness of cotton with the strength and breathability of hemp",
     "image": "images/230 PLAIN.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Red"
+    ]
   },
   {
     "id": "230 PLAIN WHITE",
@@ -23044,7 +23175,10 @@
     "certifications": [],
     "description": "cotton–hemp fabric blends the softness of cotton with the strength and breathability of hemp",
     "image": "images/230 PLAIN WHITE.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "White"
+    ]
   },
   {
     "id": "360 PANAMA",
@@ -23059,7 +23193,10 @@
     "certifications": [],
     "description": "cotton–hemp fabric blends the softness of cotton with the strength and breathability of hemp",
     "image": "images/360 PANAMA.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Beige"
+    ]
   },
   {
     "id": "360 PANAMA GREEN",
@@ -23074,7 +23211,10 @@
     "certifications": [],
     "description": "cotton–hemp fabric blends the softness of cotton with the strength and breathability of hemp",
     "image": "images/360 PANAMA GREEN",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Green"
+    ]
   },
   {
     "id": "360 PANAMA BLACK",
@@ -23089,7 +23229,10 @@
     "certifications": [],
     "description": "cotton–hemp fabric blends the softness of cotton with the strength and breathability of hemp",
     "image": "images/360 PANAMA BLACK",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Black"
+    ]
   },
   {
     "id": "360 PANAMA BEIGE.JPG",
@@ -23104,7 +23247,10 @@
     "certifications": [],
     "description": "cotton–hemp fabric blends the softness of cotton with the strength and breathability of hemp",
     "image": "images/360 PANAMA BEIGE.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Beige"
+    ]
   },
   {
     "id": "300 JACQUARD",
@@ -23119,7 +23265,10 @@
     "certifications": [],
     "description": "cotton–hemp fabric blends the softness of cotton with the strength and breathability of hemp",
     "image": "images/300 JACQUARD.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Beige"
+    ]
   },
   {
     "id": "LA935BLACK",
@@ -23137,7 +23286,10 @@
     ],
     "description": "durable felt textile made from 100% virgin wool",
     "image": "images/LA935BLACK.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Black"
+    ]
   },
   {
     "id": "LA934GREEN",
@@ -23155,7 +23307,10 @@
     ],
     "description": "durable felt textile made from 100% virgin wool",
     "image": "images/LA934GREEN.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Green"
+    ]
   },
   {
     "id": "LA934 Beige",
@@ -23173,7 +23328,10 @@
     ],
     "description": "durable felt textile made from 100% virgin wool",
     "image": "images/LA934 Beige.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Beige"
+    ]
   },
   {
     "id": "LA935BLUE",
@@ -23191,7 +23349,10 @@
     ],
     "description": "durable felt textile made from 100% virgin wool",
     "image": "images/LA935BLUE.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Blue"
+    ]
   },
   {
     "id": "LA 34Grey",
@@ -23209,7 +23370,10 @@
     ],
     "description": "durable felt textile made from 100% virgin wool",
     "image": "images/LA 34Grey.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Grey"
+    ]
   },
   {
     "id": "LA 34Brown",
@@ -23227,7 +23391,10 @@
     ],
     "description": "durable felt textile made from 100% virgin wool",
     "image": "images/LA 34Brown.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Brown"
+    ]
   },
   {
     "id": "LA 34LightGrey",
@@ -23245,7 +23412,10 @@
     ],
     "description": "durable felt textile made from 100% virgin wool",
     "image": "images/LA 34LightGrey.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Grey"
+    ]
   },
   {
     "id": "300 Kyem",
@@ -23260,7 +23430,11 @@
     "certifications": [],
     "description": "Handwoven cotton textiles crafted in Ghana",
     "image": "images/300 Kyem.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Yellow",
+      "Brown"
+    ]
   },
   {
     "id": "150 De Plain",
@@ -23275,7 +23449,10 @@
     "certifications": [],
     "description": "Handwoven cotton textiles crafted in Ghana",
     "image": "images/150 De Plain.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Off-white"
+    ]
   },
   {
     "id": "200 Plain Vein",
@@ -23290,7 +23467,10 @@
     "certifications": [],
     "description": "Handwoven cotton textiles crafted in Ghana",
     "image": "images/200 Plain Vein.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Off-white"
+    ]
   },
   {
     "id": "300 Brain Blue",
@@ -23305,7 +23485,10 @@
     "certifications": [],
     "description": "Handwoven cotton textiles crafted in Ghana",
     "image": "images/300 Brain Blue.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Blue"
+    ]
   },
   {
     "id": "300 Floral",
@@ -23320,7 +23503,10 @@
     "certifications": [],
     "description": "Handwoven cotton textiles crafted in Ghana",
     "image": "images/300 Floral.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Blue"
+    ]
   },
   {
     "id": "300 Anamon",
@@ -23335,7 +23521,10 @@
     "certifications": [],
     "description": "Handwoven cotton textiles crafted in Ghana",
     "image": "images/300 Anamon.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Blue"
+    ]
   },
   {
     "id": "300 Retromat",
@@ -23350,7 +23539,10 @@
     "certifications": [],
     "description": "Handwoven cotton textiles crafted in Ghana",
     "image": "images/300 Retromat.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Yellow"
+    ]
   },
   {
     "id": "300 Retangle",
@@ -23365,7 +23557,10 @@
     "certifications": [],
     "description": "Handwoven cotton textiles crafted in Ghana",
     "image": "images/300 Retangle.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Orange"
+    ]
   },
   {
     "id": "300 Kor",
@@ -23380,7 +23575,10 @@
     "certifications": [],
     "description": "Handwoven cotton textiles crafted in Ghana",
     "image": "images/300 Kor.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Blue"
+    ]
   },
   {
     "id": "400 Fortune",
@@ -23395,7 +23593,10 @@
     "certifications": [],
     "description": "Handwoven cotton textiles crafted in Ghana",
     "image": "images/400 Fortune.JPG",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Yellow"
+    ]
   },
   {
     "id": "F0079AR-013",
@@ -23410,7 +23611,8 @@
     "certifications": [],
     "description": "A soft, breathable knit fabric derived from wood-based cellulose fibers, known for its smooth hand feel, moisture absorption, and sustainable closed-loop production.",
     "image": "images/F0079AR-013.JPG",
-    "limited": true
+    "limited": true,
+    "colors": []
   },
   {
     "id": "F0110VU-012",
@@ -23425,7 +23627,8 @@
     "certifications": [],
     "description": "A soft, breathable knit fabric derived from wood-based cellulose fibers, known for its smooth hand feel, moisture absorption, and sustainable closed-loop production.",
     "image": "images/F0110VU-012.JPG",
-    "limited": true
+    "limited": true,
+    "colors": []
   },
   {
     "id": "F0944SP-023",
@@ -23440,7 +23643,8 @@
     "certifications": [],
     "description": "Tencel cotton jersey is a soft, breathable knit fabric that combines the natural strength of cotton with the smooth hand feel Tencel fibers",
     "image": "images/F0944SP-023.JPG",
-    "limited": true
+    "limited": true,
+    "colors": []
   },
   {
     "id": "F4000SP-021",
@@ -23455,7 +23659,8 @@
     "certifications": [],
     "description": "Tencel cotton jersey is a soft, breathable knit fabric that combines the natural strength of cotton with the smooth hand feel Tencel fibers",
     "image": "images/F4000SP-021.JPG",
-    "limited": true
+    "limited": true,
+    "colors": []
   },
   {
     "id": "F1365SP-007",
@@ -23470,7 +23675,10 @@
     "certifications": [],
     "description": "A soft, breathable knit fabric derived from wood-based cellulose fibers, known for its smooth hand feel, moisture absorption, and sustainable closed-loop production.",
     "image": "images/F1365SP-007.JPG",
-    "limited": true
+    "limited": true,
+    "colors": [
+      "Blue"
+    ]
   },
   {
     "id": "F0568IN-118",
@@ -23485,7 +23693,10 @@
     "certifications": [],
     "description": "Durable, lightweight, and designed for versatile textile applications",
     "image": "images/F0568IN-118.JPG",
-    "limited": true
+    "limited": true,
+    "colors": [
+      "Blue"
+    ]
   },
   {
     "id": "F0619SP-018",
@@ -23500,7 +23711,8 @@
     "certifications": [],
     "description": "Durable, lightweight, and designed for versatile textile applications",
     "image": "images/F0619SP-018.JPG",
-    "limited": true
+    "limited": true,
+    "colors": []
   },
   {
     "id": "61280SP-007",
@@ -23515,7 +23727,10 @@
     "certifications": [],
     "description": "A soft, responsible, and naturally breathable",
     "image": "images/61280SP-007.JPG",
-    "limited": true
+    "limited": true,
+    "colors": [
+      "Black"
+    ]
   },
   {
     "id": "REF. 100 RED",
@@ -23533,7 +23748,10 @@
     ],
     "description": "Cork leather is a fully biobased textile made from thin layers of cork bark bonded to natural fabric backings such as cotton, hemp, or denim. It is fully customizable in colour, pattern, and backing options.",
     "image": "images/REF. 100 RED.jpg",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Red"
+    ]
   },
   {
     "id": "REF. 100 Orange",
@@ -23551,7 +23769,10 @@
     ],
     "description": "Cork leather is a fully biobased textile made from thin layers of cork bark bonded to natural fabric backings such as cotton, hemp, or denim. It is fully customizable in colour, pattern, and backing options.",
     "image": "images/REF. 100 Orange.jpg",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Orange"
+    ]
   },
   {
     "id": "REF. 1500 Natural",
@@ -23569,7 +23790,10 @@
     ],
     "description": "Cork leather is a fully biobased textile made from thin layers of cork bark bonded to natural fabric backings such as cotton, hemp, or denim. It is fully customizable in colour, pattern, and backing options.",
     "image": "images/REF. 1500 Natural.jpg",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Brown"
+    ]
   },
   {
     "id": "REF. ROYAL BLUE WASHED EFFECT",
@@ -23587,7 +23811,10 @@
     ],
     "description": "Cork leather is a fully biobased textile made from thin layers of cork bark bonded to natural fabric backings such as cotton, hemp, or denim. It is fully customizable in colour, pattern, and backing options.",
     "image": "images/REF. ROYAL BLUE WASHED EFFECT.jpg",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Blue"
+    ]
   },
   {
     "id": "Ref. 100 Silver",
@@ -23605,7 +23832,10 @@
     ],
     "description": "Cork leather is a fully biobased textile made from thin layers of cork bark bonded to natural fabric backings such as cotton, hemp, or denim. It is fully customizable in colour, pattern, and backing options.",
     "image": "images/Ref. 100 Silver.jpg",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Silver"
+    ]
   },
   {
     "id": "original Haze",
@@ -23622,7 +23852,10 @@
     ],
     "description": "hemp textiles are durable, breathable, and biodegradable plant-based fabrics offering a low-impact alternative with customizable weave, weight, and blend",
     "image": "images/original Haze.jpg",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "White"
+    ]
   },
   {
     "id": "Grape Tropaya",
@@ -23639,7 +23872,10 @@
     ],
     "description": "hemp textiles are durable, breathable, and biodegradable plant-based fabrics offering a low-impact alternative with customizable weave, weight, and blend",
     "image": "images/Grape Tropaya.jpg",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Beige"
+    ]
   },
   {
     "id": "Cheesecake - Chai Tea",
@@ -23656,7 +23892,10 @@
     ],
     "description": "hemp textiles are durable, breathable, and biodegradable plant-based fabrics offering a low-impact alternative with customizable weave, weight, and blend",
     "image": "images/Cheesecake - Chai Tea.jpeg",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Brown"
+    ]
   },
   {
     "id": "Cheesecake - Poppy Red",
@@ -23673,7 +23912,10 @@
     ],
     "description": "hemp textiles are durable, breathable, and biodegradable plant-based fabrics offering a low-impact alternative with customizable weave, weight, and blend",
     "image": "images/Cheesecake - Poppy Red.jpeg",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Red"
+    ]
   },
   {
     "id": "moonstone-cheesecake",
@@ -23690,7 +23932,10 @@
     ],
     "description": "hemp textiles are durable, breathable, and biodegradable plant-based fabrics offering a low-impact alternative with customizable weave, weight, and blend",
     "image": "images/moonstone-cheesecake.jpeg",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Brown"
+    ]
   },
   {
     "id": "Cheesecake - Pesto",
@@ -23707,7 +23952,10 @@
     ],
     "description": "hemp textiles are durable, breathable, and biodegradable plant-based fabrics offering a low-impact alternative with customizable weave, weight, and blend",
     "image": "images/Cheesecake - Pesto.jpeg",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Green"
+    ]
   },
   {
     "id": "Cheesecake - White",
@@ -23724,7 +23972,10 @@
     ],
     "description": "hemp textiles are durable, breathable, and biodegradable plant-based fabrics offering a low-impact alternative with customizable weave, weight, and blend",
     "image": "images/Cheesecake - White.jpeg",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "White"
+    ]
   },
   {
     "id": "Illuminating - London Pie",
@@ -23741,7 +23992,10 @@
     ],
     "description": "hemp textiles are durable, breathable, and biodegradable plant-based fabrics offering a low-impact alternative with customizable weave, weight, and blend",
     "image": "images/Illuminating - London Pie.jpg",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "Yellow"
+    ]
   },
   {
     "id": "Sour Diesel",
@@ -23758,6 +24012,9 @@
     ],
     "description": "hemp textiles are durable, breathable, and biodegradable plant-based fabrics offering a low-impact alternative with customizable weave, weight, and blend",
     "image": "images/Sour Diesel.jpg",
-    "limited": false
+    "limited": false,
+    "colors": [
+      "White"
+    ]
   }
 ]
