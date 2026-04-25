@@ -990,7 +990,7 @@
     function renderGrid() {
       const filtered = getFiltered();
       const total = filtered.length;
-      const perPage = 25;
+      const perPage = 27;
       const totalPages = Math.max(1, Math.ceil(total / perPage));
       if (state.page >= totalPages) state.page = 0;
       const paginated = filtered.slice(state.page * perPage, (state.page + 1) * perPage);
