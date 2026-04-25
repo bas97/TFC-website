@@ -1,0 +1,23 @@
+name: Deploy to Mijndomein
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: 213.249.67.49
+          username: f_000b773f
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /httpdocs/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
