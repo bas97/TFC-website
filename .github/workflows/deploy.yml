@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -16,6 +19,7 @@ jobs:
           server: 213.249.67.49
           username: f_000b773f
           password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
           server-dir: /httpdocs/
           exclude: |
             **/.git*
