@@ -19,7 +19,7 @@ jobs:
           server: 213.249.67.49
           username: f_000b773f
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
+          protocol: ftps-legacy
           server-dir: /httpdocs/
           exclude: |
             **/.git*
