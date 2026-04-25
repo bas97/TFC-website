@@ -22275,25 +22275,6 @@
     ]
   },
   {
-    "id": "TFC-NL-041",
-    "name": "Belgian Organic Linen",
-    "category": "natural",
-    "fiber": "Linen",
-    "origin": "Belgium",
-    "mill": "Van Cleemputte",
-    "weight": "180gsm",
-    "width": "150cm",
-    "moq": "50m",
-    "certifications": [
-      "GOTS",
-      "OEKO-TEX"
-    ],
-    "description": "A beautiful stonewashed organic linen with excellent drape.",
-    "image": "images/TFC-NL-041.jpg",
-    "limited": false,
-    "colors": []
-  },
-  {
     "id": "DL660/8",
     "name": "Plant-based fur PONY",
     "category": "nextgen",
@@ -22558,50 +22539,6 @@
     ]
   },
   {
-    "id": "MF16OE",
-    "name": "Rib 1:1 100% GOTS?certified organic cotton",
-    "category": "nextgen",
-    "fiber": "Cotton",
-    "origin": "Czech Republic",
-    "mill": "NIL Textile",
-    "weight": "420gsm",
-    "width": "160cm",
-    "moq": "50m",
-    "certifications": [
-      "GOTS",
-      "OEKO-TEX",
-      "GRS"
-    ],
-    "description": "a 100% GOTS?certified organic cotton that’s also designed for circular recycling",
-    "image": "images/MF16OE.JPG",
-    "limited": false,
-    "colors": [
-      "Green"
-    ]
-  },
-  {
-    "id": "F4OI",
-    "name": "Terry Rib 1:1 100% GOTS?certified organic cotton",
-    "category": "nextgen",
-    "fiber": "Cotton",
-    "origin": "Czech Republic",
-    "mill": "NIL Textile",
-    "weight": "400gsm",
-    "width": "160cm",
-    "moq": "50m",
-    "certifications": [
-      "GOTS",
-      "OEKO-TEX",
-      "GRS"
-    ],
-    "description": "a 100% GOTS?certified organic cotton that’s also designed for circular recycling",
-    "image": "images/F4OI.JPG",
-    "limited": false,
-    "colors": [
-      "Black"
-    ]
-  },
-  {
     "id": "MF7OI/MF7OE",
     "name": "Single J. Rib 1:1 100% GOTS?certified organic cotton",
     "category": "nextgen",
@@ -22618,28 +22555,6 @@
     ],
     "description": "a 100% GOTS?certified organic cotton that’s also designed for circular recycling",
     "image": "",
-    "limited": false,
-    "colors": [
-      "White"
-    ]
-  },
-  {
-    "id": "F2E",
-    "name": "Bio-based fiber",
-    "category": "nextgen",
-    "fiber": "Polylactic Acid",
-    "origin": "Czech Republic",
-    "mill": "NIL Textile",
-    "weight": "160gsm",
-    "width": "160cm",
-    "moq": "50m",
-    "certifications": [
-      "GOTS",
-      "OEKO-TEX",
-      "GRS"
-    ],
-    "description": "a bio-based fiber made from renewable plant resources, offering a lightweight, breathable alternative to conventional synthetic materials.",
-    "image": "images/F2E.JPG",
     "limited": false,
     "colors": [
       "White"
@@ -22684,28 +22599,6 @@
     ],
     "description": "a durable synthetic fiber made from regenerated nylon waste, offering strength, elasticity, and reduced environmental impact",
     "image": "",
-    "limited": false,
-    "colors": [
-      "Black"
-    ]
-  },
-  {
-    "id": "MF18E",
-    "name": "Recycled durable synthetic fiber",
-    "category": "nextgen",
-    "fiber": "Recycled Polyamide 6 / Elastane",
-    "origin": "Czech Republic",
-    "mill": "NIL Textile",
-    "weight": "260gsm",
-    "width": "160cm",
-    "moq": "50m",
-    "certifications": [
-      "GOTS",
-      "OEKO-TEX",
-      "GRS"
-    ],
-    "description": "a durable synthetic fiber made from regenerated nylon waste, offering strength, elasticity, and reduced environmental impact",
-    "image": "images/MF18E.JPG",
     "limited": false,
     "colors": [
       "Black"
@@ -23210,7 +23103,7 @@
     "moq": "50m",
     "certifications": [],
     "description": "cotton–hemp fabric blends the softness of cotton with the strength and breathability of hemp",
-    "image": "images/360 PANAMA GREEN",
+    "image": "images/360 PANAMA GREEN.JPG",
     "limited": false,
     "colors": [
       "Green"
@@ -23228,7 +23121,7 @@
     "moq": "50m",
     "certifications": [],
     "description": "cotton–hemp fabric blends the softness of cotton with the strength and breathability of hemp",
-    "image": "images/360 PANAMA BLACK",
+    "image": "images/360 PANAMA BLACK.JPG",
     "limited": false,
     "colors": [
       "Black"
@@ -23596,140 +23489,6 @@
     "limited": false,
     "colors": [
       "Yellow"
-    ]
-  },
-  {
-    "id": "F0079AR-013",
-    "name": "30/30 TENCEL ARMÜRLÜ CARBON ZERO",
-    "category": "deadstock",
-    "fiber": "Tencel",
-    "origin": "Turkey",
-    "mill": "Yeneceri",
-    "weight": "185gsm",
-    "width": "165cm",
-    "moq": "50m",
-    "certifications": [],
-    "description": "A soft, breathable knit fabric derived from wood-based cellulose fibers, known for its smooth hand feel, moisture absorption, and sustainable closed-loop production.",
-    "image": "images/F0079AR-013.JPG",
-    "limited": true,
-    "colors": []
-  },
-  {
-    "id": "F0110VU-012",
-    "name": "60/60 68 TEL TENCEL VUAL",
-    "category": "deadstock",
-    "fiber": "Tencel",
-    "origin": "Turkey",
-    "mill": "Yeneceri",
-    "weight": "80gsm",
-    "width": "150cm",
-    "moq": "50m",
-    "certifications": [],
-    "description": "A soft, breathable knit fabric derived from wood-based cellulose fibers, known for its smooth hand feel, moisture absorption, and sustainable closed-loop production.",
-    "image": "images/F0110VU-012.JPG",
-    "limited": true,
-    "colors": []
-  },
-  {
-    "id": "F0944SP-023",
-    "name": "30/1 TENCEL PAMUK",
-    "category": "deadstock",
-    "fiber": "Tencel / Cotton",
-    "origin": "Turkey",
-    "mill": "Yeneceri",
-    "weight": "135gsm",
-    "width": "155cm",
-    "moq": "50m",
-    "certifications": [],
-    "description": "Tencel cotton jersey is a soft, breathable knit fabric that combines the natural strength of cotton with the smooth hand feel Tencel fibers",
-    "image": "images/F0944SP-023.JPG",
-    "limited": true,
-    "colors": []
-  },
-  {
-    "id": "F4000SP-021",
-    "name": "30/1 PENYE MODAL",
-    "category": "deadstock",
-    "fiber": "Tencel / Cotton",
-    "origin": "Turkey",
-    "mill": "Yeneceri",
-    "weight": "155gsm",
-    "width": "170cm",
-    "moq": "50m",
-    "certifications": [],
-    "description": "Tencel cotton jersey is a soft, breathable knit fabric that combines the natural strength of cotton with the smooth hand feel Tencel fibers",
-    "image": "images/F4000SP-021.JPG",
-    "limited": true,
-    "colors": []
-  },
-  {
-    "id": "F1365SP-007",
-    "name": "30/1 TENCEL LYC SUPREME",
-    "category": "deadstock",
-    "fiber": "Tencel / Elastane",
-    "origin": "Turkey",
-    "mill": "Yeneceri",
-    "weight": "205gsm",
-    "width": "170cm",
-    "moq": "50m",
-    "certifications": [],
-    "description": "A soft, breathable knit fabric derived from wood-based cellulose fibers, known for its smooth hand feel, moisture absorption, and sustainable closed-loop production.",
-    "image": "images/F1365SP-007.JPG",
-    "limited": true,
-    "colors": [
-      "Blue"
-    ]
-  },
-  {
-    "id": "F0568IN-118",
-    "name": "40/1 TENCEL/PES CILIKLI",
-    "category": "deadstock",
-    "fiber": "Tencel / Polyester",
-    "origin": "Turkey",
-    "mill": "Yeneceri",
-    "weight": "210gsm",
-    "width": "165cm",
-    "moq": "50m",
-    "certifications": [],
-    "description": "Durable, lightweight, and designed for versatile textile applications",
-    "image": "images/F0568IN-118.JPG",
-    "limited": true,
-    "colors": [
-      "Blue"
-    ]
-  },
-  {
-    "id": "F0619SP-018",
-    "name": "30/1 TENCEL LYC SUPREME",
-    "category": "deadstock",
-    "fiber": "Tencel / Elastane",
-    "origin": "Turkey",
-    "mill": "Yeneceri",
-    "weight": "180gsm",
-    "width": "180cm",
-    "moq": "50m",
-    "certifications": [],
-    "description": "Durable, lightweight, and designed for versatile textile applications",
-    "image": "images/F0619SP-018.JPG",
-    "limited": true,
-    "colors": []
-  },
-  {
-    "id": "61280SP-007",
-    "name": "30/1 ORGANIC PENYE",
-    "category": "deadstock",
-    "fiber": "Cotton",
-    "origin": "Turkey",
-    "mill": "Yeneceri",
-    "weight": "150gsm",
-    "width": "170cm",
-    "moq": "50m",
-    "certifications": [],
-    "description": "A soft, responsible, and naturally breathable",
-    "image": "images/61280SP-007.JPG",
-    "limited": true,
-    "colors": [
-      "Black"
     ]
   },
   {
